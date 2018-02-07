@@ -14,7 +14,7 @@ const CARETUP = <i className="uf uf-arrow-up"></i>;
 
 
 import Demo1 from "./demolist/Demo1";
-var DemoArray = [{"example":<Demo1 />,"title":" 应用组件名称","code":"/**\n *\n * @title 应用组件名称\n * @description 应用组件描述\n *\n */\n\nimport React, { Component } from 'react';\nimport Temp from '../../src/index';\n\n class Demo1 extends Component {\n    render () {\n        return (\n            <div className=\"demoPadding\">\n                <Temp >tools测试代码 111</Temp>\n            </div>\n        )\n    }\n}\n\n\n","desc":" 应用组件描述"}]
+var DemoArray = [{"example":<Demo1 />,"title":" 地区级联","code":"/**\n*\n* @title 地区级联\n* @description 中国地区级联\n*\n*/\n\nimport React, { Component } from 'react';\nimport ReactDOM from 'react-dom';\nimport CitySelect from 'app-component-templ';\n\nclass Demo1 extends Component {\n\tonChange=(obj)=>{\n\t\tconsole.log(obj)\n\t}\n\trender () {\n\t\treturn (\n\t\t\t<CitySelect ref='city' onChange={this.onChange} />\n\t\t)\n\t}\n}\n","desc":" 中国地区级联"}]
 
 
 class Demo extends Component {
