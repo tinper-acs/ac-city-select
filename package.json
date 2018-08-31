@@ -1,5 +1,5 @@
 {
-  "name": "ac-comp",
+  "name": "@yonyou/ac-city-select",
   "version": "0.0.1",
   "description": "",
   "main": "dist/index.js",
@@ -36,6 +36,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-1": "^6.24.1",
     "bee-button": "^1.0.6",
+    "bee-select": "^1.0.11",
     "css-loader": "^1.0.0",
     "eslint": "^5.4.0",
     "eslint-config-airbnb": "^17.1.0",
@@ -51,6 +52,7 @@
     "html-webpack-plugin": "^3.2.0",
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
+    "lodash.findindex": "^4.6.0",
     "markdown-styles": "^3.1.10",
     "mini-css-extract-plugin": "^0.4.2",
     "node-sass": "^4.9.3",
@@ -67,9 +69,7 @@
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.5",
     "webpack-merge": "^4.1.4",
-    "webpack-node-externals": "^1.7.2",
-    "bee-select": "^1.0.11",
-    "lodash.findindex": "^4.6.0"
+    "webpack-node-externals": "^1.7.2"
   },
   "peerDependencies": {
     "react": "^15.3.0 || ^16.0.0",
