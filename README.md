@@ -16,7 +16,7 @@ import CitySelect from '@yonyou/ac-city-select';
 ```
 
 
-## API
+### API
 
 |参数|说明|类型|返回值|是否必填|
 |:--|:---:|:--:|:---:|:---:|
@@ -25,7 +25,7 @@ import CitySelect from '@yonyou/ac-city-select';
 |onChange|下拉选择框的change的钩子函数|fun| object | 否 |
 
 
-#### 开发调试
+### 开发调试
 
 ```sh
 $ cd @yonyou/ac-city-select
