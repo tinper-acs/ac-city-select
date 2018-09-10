@@ -1,4 +1,4 @@
-## ac-input-locale
+## ac-city-select
 
 >  城市选择 组件 [进入示例](https://tinper-acs.github.io/ac-city-select/)
 
