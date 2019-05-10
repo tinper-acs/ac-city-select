@@ -6,7 +6,6 @@
 */
 
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import  Button  from 'bee-button';
 import ACCitySelect from '../../src';
 
