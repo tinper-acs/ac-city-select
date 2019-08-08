@@ -47,7 +47,8 @@ var propTypes = {
     disabled: _propTypes2["default"].bool, //设置组件是否被禁用；
     disabledProvinceArr: _propTypes2["default"].array, //设置禁用的省份
     disabledCityArr: _propTypes2["default"].array, //设置禁用的地级市
-    disabledAreaObj: _propTypes2["default"].object //设置不可用的区域；
+    disabledAreaObj: _propTypes2["default"].object, //设置不可用的区域；
+    allowClear: _propTypes2["default"].bool //设置城市选择框是否可以被清除；
 };
 var defaultProps = {
     defaultValue: _provinceData.zh.defaultValue,
@@ -56,6 +57,7 @@ var defaultProps = {
     provinceData: _provinceData.zh.provinceData,
     lang: 'zh_CN',
     disabled: false,
+    allowClear: false,
     disabledProvinceArr: [],
     disabledCityArr: [],
     disabledAreaObj: null
@@ -77,9 +79,9 @@ var CitySelect = function (_Component) {
             disabledAreaObj = props.disabledAreaObj,
             lang = props.lang;
 
-        if (props.lang == 'zh_TW') {
+        if (props.lang === 'zh_TW') {
             provinceData = _provinceData.tw.provinceData;
-        } else if (props.lang == 'en_US') {
+        } else if (props.lang === 'en_US') {
             provinceData = _provinceData.en.provinceData;
         }
         _this.state = {
@@ -105,10 +107,10 @@ var CitySelect = function (_Component) {
             disabledAreaObj = _props.disabledAreaObj;
 
         var provinceData = this.state.provinceData;
-        if (lang == 'zh_TW') {
+        if (lang === 'zh_TW') {
             provinceData = _provinceData.tw.provinceData;
             _defaultValue = _provinceData.tw.defaultValue;
-        } else if (lang == 'en_US') {
+        } else if (lang === 'en_US') {
             provinceData = _provinceData.en.provinceData;
             _defaultValue = _provinceData.en.defaultValue;
         }
@@ -232,6 +234,7 @@ var CitySelect = function (_Component) {
                     value: this.state.province,
                     className: 'province',
                     disabled: this.props.disabled,
+                    allowClear: this.props.allowClear,
                     onChange: this.handleProvinceChange },
                 provinceOptions
             ),
@@ -240,6 +243,7 @@ var CitySelect = function (_Component) {
                 {
                     value: this.state.secondCity,
                     disabled: this.props.disabled,
+                    allowClear: this.props.allowClear,
                     className: 'city',
                     onChange: this.handleCityChange },
                 cityOptions
@@ -249,6 +253,7 @@ var CitySelect = function (_Component) {
                 {
                     value: this.state.secondArea,
                     className: 'area',
+                    allowClear: this.props.allowClear,
                     disabled: this.props.disabled,
                     onChange: this.onSecondAreaChange },
                 areaOptions
@@ -262,16 +267,16 @@ var CitySelect = function (_Component) {
 var _initialiseProps = function _initialiseProps() {
     var _this2 = this;
 
-    this.buildInitDataArr = function (objoriginalArr, disabledCityArr, lang) {
-        var newDataArr = JSON.parse(JSON.stringify(objoriginalArr));
+    this.buildInitDataArr = function (originalArr, disabledCityArr, lang) {
+        var newDataArr = JSON.parse(JSON.stringify(originalArr));
         disabledCityArr = JSON.parse(JSON.stringify(disabledCityArr));
         newDataArr.forEach(function (newDataArr, index, obj) {
             newDataArr.disabled = false;
             var provinceName = newDataArr.name;
             if (disabledCityArr.length > 0) {
                 for (var i = 0; i < disabledCityArr.length; i++) {
-                    if (lang == "en_US") {
-                        if (provinceName.toLowerCase() == disabledCityArr[i].toLowerCase()) {
+                    if (lang === "en_US") {
+                        if (provinceName.toLowerCase() === disabledCityArr[i].toLowerCase()) {
                             newDataArr.disabled = true;
                         }
                     } else {
@@ -294,7 +299,7 @@ var _initialiseProps = function _initialiseProps() {
             if (disabledAreaObj != undefined && disabledAreaObj[cityName] != undefined) {
                 var disabledAreaArr = disabledAreaObj[cityName];
                 for (var j = 0; j < disabledAreaArr.length; j++) {
-                    if (lang == "en_US") {
+                    if (lang === "en_US") {
                         if (areaArr[i].toLowerCase() === disabledAreaArr[j].toLowerCase()) {
                             jsonItem.disabled = true;
                         }
@@ -319,27 +324,33 @@ var _initialiseProps = function _initialiseProps() {
                 return (0, _lodash2["default"])(provinceData, function (province) {
                     return province.name === name;
                 });
-                break;
             case 'city':
                 return (0, _lodash2["default"])(provinceData[provinceI].city, function (city) {
                     return city.name === name;
                 });
-                break;
         }
     };
 
     this.handleProvinceChange = function (value) {
-        var provinceData = _this2.state.provinceData;
-        var _props2 = _this2.props,
-            disabledCityArr = _props2.disabledCityArr,
-            disabledAreaObj = _props2.disabledAreaObj,
-            lang = _props2.lang;
+        value = value ? value : '';
+        var city = '',
+            area = '',
+            index = 0,
+            citesInitArr = [],
+            areasInitData = [];
+        if (value !== '') {
+            var provinceData = _this2.state.provinceData;
+            var _props2 = _this2.props,
+                disabledCityArr = _props2.disabledCityArr,
+                disabledAreaObj = _props2.disabledAreaObj,
+                lang = _props2.lang;
 
-        var index = _this2.getIndex('province', value);
-        var citesInitArr = _this2.buildInitDataArr(provinceData[index].city, disabledCityArr, lang);
-        var areasInitData = _this2.buildAreaInitData(citesInitArr[0].area, citesInitArr[0].name, disabledAreaObj, lang);
-        var city = citesInitArr[0].name;
-        var area = areasInitData[0].name;
+            index = _this2.getIndex('province', value);
+            citesInitArr = _this2.buildInitDataArr(provinceData[index].city, disabledCityArr, lang);
+            areasInitData = _this2.buildAreaInitData(citesInitArr[0].area, citesInitArr[0].name, disabledAreaObj, lang);
+            city = citesInitArr[0].name;
+            area = areasInitData[0].name;
+        }
         _this2.setState({
             province: value,
             cities: citesInitArr,
@@ -352,34 +363,47 @@ var _initialiseProps = function _initialiseProps() {
     };
 
     this.handleCityChange = function (value) {
-        var cities = _this2.state.cities;
+        value = value ? value : '';
+        var index = '',
+            area = '',
+            areasInitData = [];
+        var _state2 = _this2.state,
+            province = _state2.province,
+            cities = _state2.cities;
         var _props3 = _this2.props,
             disabledAreaObj = _props3.disabledAreaObj,
             lang = _props3.lang;
 
-        var index = _this2.getIndex('city', value);
-        var areasInitData = _this2.buildAreaInitData(cities[index].area, cities[index].name, disabledAreaObj, lang);
-        var area = areasInitData[0].name;
+        if (value !== '') {
+            index = _this2.getIndex('city', value);
+            areasInitData = _this2.buildAreaInitData(cities[index].area, cities[index].name, disabledAreaObj, lang);
+            area = areasInitData[0].name;
+        }
         _this2.setState({
             secondCity: value,
             areas: areasInitData,
             secondArea: area,
             cityIndex: value
         });
-        _this2.onChange(undefined, value, area);
+        _this2.onChange(province, value, area);
     };
 
     this.onSecondAreaChange = function (value) {
+        value = value ? value : '';
+        var _state3 = _this2.state,
+            province = _state3.province,
+            secondCity = _state3.secondCity;
+
         _this2.setState({
             secondArea: value
         });
-        _this2.onChange(undefined, undefined, value);
+        _this2.onChange(province, secondCity, value);
     };
 
     this.onChange = function (province, city, area) {
         _this2.props.onChange({
-            province: province || _this2.state.province,
-            city: city || _this2.state.secondCity,
+            province: province,
+            city: city,
             area: area
         });
     };
