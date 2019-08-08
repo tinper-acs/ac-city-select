@@ -42,6 +42,7 @@ ReactDom.render(<CitySelect />,document.getElementById('app'));
 |allowClear|组件控制是否可以被清空。组件预置默认值为false，设置属性为allowClear：true时，组件设置可以被清空， |bool|false|
 
 
+
 #### 开发调试
 
 ```sh
