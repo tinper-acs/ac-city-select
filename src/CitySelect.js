@@ -89,13 +89,16 @@ class CitySelect extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (!nextProps.value) return;
+        const { province:oldProvince, city:oldCity, area:oldArea } = this.props.value
         const { province, city, area } = nextProps.value;
-        this.setState({
-            province,
-            secondCity: city,
-            secondArea: area
-        });
-        this.handleProvinceChange(province);
+        if(province !== oldProvince || city !== oldCity || area !== oldArea) {
+            this.setState({
+                province,
+                secondCity: city,
+                secondArea: area
+            });
+            this.handleProvinceChange(province, city, area);
+        }
     }
 
     /**
@@ -174,7 +177,7 @@ class CitySelect extends Component {
                 });
         }
     };
-    handleProvinceChange = (value) => {
+    handleProvinceChange = (value, cityValue, areaValue) => {
         value = (value) ? value : '';
         let city = '',
             area = '',
@@ -187,8 +190,8 @@ class CitySelect extends Component {
             index = this.getIndex('province', value);
             citesInitArr = this.buildInitDataArr(provinceData[index].city, disabledCityArr, lang);
             areasInitData = this.buildAreaInitData(citesInitArr[0].area, citesInitArr[0].name, disabledAreaObj, lang);
-            city = citesInitArr[0].name;
-            area = areasInitData[0].name;
+            city = cityValue ? cityValue : citesInitArr[0].name;
+            area = areaValue ? areaValue : areasInitData[0].name;
         }
         this.setState({
             province: value,
@@ -259,7 +262,6 @@ class CitySelect extends Component {
                 return (<Option key={area.name} >{area.name}</Option>)
             }
         });
-
         return (
             <div className={classNames("u-city-select", this.props.className)}>
                 <Select
@@ -267,7 +269,7 @@ class CitySelect extends Component {
                     className="province"
                     disabled={this.props.disabled}
                     allowClear = {this.props.allowClear}
-                    onChange={this.handleProvinceChange}>
+                    onChange={(value) => this.handleProvinceChange(value)}>
                     {provinceOptions}
                 </Select>
                 <Select
@@ -275,7 +277,7 @@ class CitySelect extends Component {
                     disabled={this.props.disabled}
                     allowClear = {this.props.allowClear}
                     className="city"
-                    onChange={this.handleCityChange}>
+                    onChange={(value) => this.handleCityChange(value)}>
                     {cityOptions}
                 </Select>
                 <Select
@@ -283,7 +285,7 @@ class CitySelect extends Component {
                     className="area"
                     allowClear = {this.props.allowClear}
                     disabled={this.props.disabled}
-                    onChange={this.onSecondAreaChange}>
+                    onChange={(value) => this.onSecondAreaChange(value)}>
                     {areaOptions}
                 </Select>
             </div>
