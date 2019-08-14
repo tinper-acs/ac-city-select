@@ -268,14 +268,14 @@ class CitySelect extends Component {
                     value={this.state.province}
                     className="province"
                     disabled={this.props.disabled}
-                    allowClear = {this.props.allowClear}
+                    allowClear = {this.state.province && this.props.allowClear}
                     onChange={(value) => this.handleProvinceChange(value)}>
                     {provinceOptions}
                 </Select>
                 <Select
                     value={this.state.secondCity}
                     disabled={this.props.disabled}
-                    allowClear = {this.props.allowClear}
+                    allowClear = {this.state.secondCity && this.props.allowClear}
                     className="city"
                     onChange={(value) => this.handleCityChange(value)}>
                     {cityOptions}
@@ -283,7 +283,7 @@ class CitySelect extends Component {
                 <Select
                     value={this.state.secondArea}
                     className="area"
-                    allowClear = {this.props.allowClear}
+                    allowClear = {this.state.secondArea && this.props.allowClear}
                     disabled={this.props.disabled}
                     onChange={(value) => this.onSecondAreaChange(value)}>
                     {areaOptions}
