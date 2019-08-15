@@ -52,7 +52,7 @@ var propTypes = {
 };
 var defaultProps = {
     defaultValue: _provinceData.zh.defaultValue,
-    value: null,
+    value: _provinceData.zh.defaultValue,
     onChange: function onChange() {},
     provinceData: _provinceData.zh.provinceData,
     lang: 'zh_CN',
@@ -150,14 +150,32 @@ var CitySelect = function (_Component) {
             province = _nextProps$value.province,
             city = _nextProps$value.city,
             area = _nextProps$value.area;
+        // if(province !== oldProvince || city !== oldCity || area !== oldArea) {
+        //     this.setState({
+        //         province,
+        //         secondCity: city,
+        //         secondArea: area
+        //     });
+        //     this.handleProvinceChange(province, city, area);
+        // }
 
-        if (province !== oldProvince || city !== oldCity || area !== oldArea) {
+        if (province !== oldProvince) {
             this.setState({
-                province: province,
-                secondCity: city,
+                province: province
+            });
+            return this.handleProvinceChange(province, city, area);
+        }
+        if (city !== oldCity) {
+            this.setState({
+                secondCity: city
+            });
+            return this.handleCityChange(city);
+        }
+        if (area !== oldArea) {
+            this.setState({
                 secondArea: area
             });
-            this.handleProvinceChange(province, city, area);
+            this.onSecondAreaChange(area);
         }
     };
 
@@ -185,6 +203,7 @@ var CitySelect = function (_Component) {
             provinceData = _state.provinceData,
             cities = _state.cities,
             areas = _state.areas;
+
 
         var provinceOptions = provinceData.map(function (province, index) {
             if (province.disabled) {
@@ -241,7 +260,7 @@ var CitySelect = function (_Component) {
                     value: this.state.province,
                     className: 'province',
                     disabled: this.props.disabled,
-                    allowClear: this.props.allowClear,
+                    allowClear: this.state.province && this.props.allowClear,
                     onChange: function onChange(value) {
                         return _this2.handleProvinceChange(value);
                     } },
@@ -252,7 +271,7 @@ var CitySelect = function (_Component) {
                 {
                     value: this.state.secondCity,
                     disabled: this.props.disabled,
-                    allowClear: this.props.allowClear,
+                    allowClear: this.state.secondCity && this.props.allowClear,
                     className: 'city',
                     onChange: function onChange(value) {
                         return _this2.handleCityChange(value);
@@ -264,7 +283,7 @@ var CitySelect = function (_Component) {
                 {
                     value: this.state.secondArea,
                     className: 'area',
-                    allowClear: this.props.allowClear,
+                    allowClear: this.state.secondArea && this.props.allowClear,
                     disabled: this.props.disabled,
                     onChange: function onChange(value) {
                         return _this2.onSecondAreaChange(value);
