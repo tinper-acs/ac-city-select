@@ -258,7 +258,6 @@ class CitySelect extends Component {
     };
     render() {
         let { provinceData, cities, areas } = this.state;
-        console.log(this.props)
 
         const provinceOptions = provinceData.map((province, index) => {
             if (province.disabled) {
