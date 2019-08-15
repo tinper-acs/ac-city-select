@@ -21,7 +21,7 @@ const propTypes = {
 };
 const defaultProps = {
     defaultValue: zh.defaultValue,
-    value: null,
+    value: zh.defaultValue,
     onChange: () => { },
     provinceData: zh.provinceData,
     lang: 'zh_CN',
@@ -89,15 +89,33 @@ class CitySelect extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (!nextProps.value) return;
-        const { province:oldProvince, city:oldCity, area:oldArea } = this.props.value
+        const { province:oldProvince, city:oldCity, area:oldArea } = this.props.value;
         const { province, city, area } = nextProps.value;
-        if(province !== oldProvince || city !== oldCity || area !== oldArea) {
+        // if(province !== oldProvince || city !== oldCity || area !== oldArea) {
+        //     this.setState({
+        //         province,
+        //         secondCity: city,
+        //         secondArea: area
+        //     });
+        //     this.handleProvinceChange(province, city, area);
+        // }
+        if(province !== oldProvince) {
             this.setState({
                 province,
+            });
+            return this.handleProvinceChange(province, city, area);
+        }
+        if(city !== oldCity) {
+            this.setState({
                 secondCity: city,
+            });
+            return this.handleCityChange(city);
+        }
+        if(area !== oldArea) {
+            this.setState({
                 secondArea: area
             });
-            this.handleProvinceChange(province, city, area);
+            this.onSecondAreaChange(area);
         }
     }
 
@@ -240,6 +258,7 @@ class CitySelect extends Component {
     };
     render() {
         let { provinceData, cities, areas } = this.state;
+
         const provinceOptions = provinceData.map((province, index) => {
             if (province.disabled) {
                 return (<Option key={province.name} disabled>{province.name}</Option>);
@@ -268,14 +287,14 @@ class CitySelect extends Component {
                     value={this.state.province}
                     className="province"
                     disabled={this.props.disabled}
-                    allowClear = {this.props.allowClear}
+                    allowClear = {this.state.province && this.props.allowClear}
                     onChange={(value) => this.handleProvinceChange(value)}>
                     {provinceOptions}
                 </Select>
                 <Select
                     value={this.state.secondCity}
                     disabled={this.props.disabled}
-                    allowClear = {this.props.allowClear}
+                    allowClear = {this.state.secondCity && this.props.allowClear}
                     className="city"
                     onChange={(value) => this.handleCityChange(value)}>
                     {cityOptions}
@@ -283,7 +302,7 @@ class CitySelect extends Component {
                 <Select
                     value={this.state.secondArea}
                     className="area"
-                    allowClear = {this.props.allowClear}
+                    allowClear = {this.state.secondArea && this.props.allowClear}
                     disabled={this.props.disabled}
                     onChange={(value) => this.onSecondAreaChange(value)}>
                     {areaOptions}
