@@ -80,7 +80,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
-	var Demo1 = __webpack_require__(378);var Demo2 = __webpack_require__(379);var Demo3 = __webpack_require__(380);var Demo4 = __webpack_require__(381);var Demo5 = __webpack_require__(382);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 地区级联", "code": "/**\n*\n* @title 地区级联\n* @description 中国地区级联\n*\n*/\n\nimport React, { Component } from 'react';\nimport { Button  } from 'tinper-bee';\nimport ACCitySelect from \"ac-city-select\";\n\nclass Demo1 extends Component {\n\n\tconstructor() {\n\t\tsuper();\n\t\tthis.state = {\n\t\t\tdefaultValue:{ province:'北京',city:'北京',area:'东城区'},\n\t\t\tvalue:{ province:'北京',city:'北京',area:'东城区'}\n\t\t}\n\t}\n\n\tonChange=(obj)=>{\n\t\tconsole.log(obj)\n\t}\n\n\tbtnOnClick=()=>{\n\t\tthis.setState({\n\t\t\tvalue:{ province:'山西',city:'长治',area:'长治县'}\n\t\t})\n\t}\n\n\trender () {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<ACCitySelect ref='city' onChange={this.onChange} defaultValue={this.state.defaultValue} value={this.state.value}/>\n\t\t\t\t<Button shape=\"border\" onClick={this.btnOnClick} style={{marginTop:\"10px\"}}>代码设置数据</Button>\n\t\t\t</div>\n\t)}\n}\n", "desc": " 中国地区级联" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 切换语言", "code": "/**\n*\n* @title 切换语言\n* @description 目前支持三种语言  zh_CN 中文简体(默认)、zh_TW 中文繁体、en_US 英文\n*\n*/\n\nimport React, { Component } from 'react';\nimport { Button  } from 'tinper-bee';\nimport CitySelect from \"ac-city-select\";\n\nclass Demo2 extends Component {\n\n\tonChange=(obj)=>{\n\t\tconsole.log(obj)\n\t}\n\trender () {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<CitySelect lang='en_US' onChange={this.onChange}/>\n\t\t\t\t<div style={{'height':'20px'}}/>\n\t\t\t\t<CitySelect lang='zh_TW' onChange={this.onChange}/>\n\t\t\t</div>\n\t)}\n}\n", "desc": " 目前支持三种语言  zh_CN 中文简体(默认)、zh_TW 中文繁体、en_US 英文" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 设置不可用状态", "code": "/**\n*\n* @title 设置不可用状态\n* @description 设置属性disabled为布尔值，默认为false；\n*\n*/\nimport React, { Component } from 'react';\nimport {  } from 'tinper-bee';\nimport CitySelect from \"ac-city-select\";\n\nclass Demo3 extends Component {\n\tconstructor() {\n\t\tsuper();\n\t\tthis.state = {\n\t\t\tdefaultValue: { province: '北京', city: '北京', area: '东城区' },\n\t\t\tvalue: null,\n\t\t\tdisabled: true\n\t\t}\n\t}\n\tonChange = (obj) => {\n\t\tconsole.log(obj);\n\t}\n\trender() {\n\t\tlet { disabled } = this.state\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<CitySelect lang='zh_TW' disabled={disabled} onChange={this.onChange} />\n\t\t\t</div>\n\t\t)\n\t}\n}\n", "desc": " 设置属性disabled为布尔值，默认为false；" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 设置省市联动部分城市不可选择", "code": "/**\n* @title 设置省市联动部分城市不可选择\n* @description 设置属性disabled为布尔值，默认为false；\n*/\nimport React, { Component } from 'react';\nimport {  } from 'tinper-bee';\nimport CitySelect from \"ac-city-select\";\n\nclass Demo4 extends Component {\n\tconstructor() {\n\t\tsuper();\n\t\tthis.state = {\n\t\t\tdefaultValue: { province: '北京', city: '北京', area: '东城区' },\n\t\t\tvalue: null,\n\t\t\tdisabledProvinceArr: ['天津', '河北'],\n\t\t\tdisabledCityArr: [\"天津\", \"长春\", \"四平\", \"大连\"],\n\t\t\tdisabledAreaObj: {\n\t\t\t\t\"鞍山\": [\"铁东区\", \"铁西区\", \"立山区\"],\n\t\t\t\t\"抚顺\": [\"新抚区\", \"东洲区\", \"望花区\", \"抚顺县\"],\n\t\t\t\t\"北京\": [\"崇文区\", \"宣武区\", \"朝阳区\"]\n\t\t\t}\n\t\t}\n\t}\n\n\trender() {\n\t\tlet { disabledProvinceArr, disabledCityArr, disabledAreaObj } = this.state;\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<CitySelect\n\t\t\t\t\tlang='zh_CN'\n\t\t\t\t\tdisabledProvinceArr={disabledProvinceArr}\n\t\t\t\t\tdisabledCityArr={disabledCityArr}\n\t\t\t\t\tdisabledAreaObj={disabledAreaObj}\n\t\t\t\t\tonChange={this.onChange}\n\t\t\t\t/>\n\t\t\t</div>\n\t\t)\n\t}\n}\n", "desc": " 设置属性disabled为布尔值，默认为false；" }, { "example": _react2['default'].createElement(Demo5, null), "title": " 设置城市选择可以清空；", "code": "/**\n*\n* @title 设置城市选择可以清空；\n* @description 设置属性allowClear为布尔值，默认为false，设置allowClear: true时城市可以被清空；\n*\n*/\nimport React, { Component } from 'react';\nimport {  } from 'tinper-bee';\nimport CitySelect from \"ac-city-select\";\n\nclass Demo5 extends Component {\n\tconstructor() {\n\t\tsuper();\n\t\tthis.state = {\n\t\t\tdefaultValue: { province: '北京', city: '北京', area: '东城区' },\n\t\t\tvalue: null,\n\t\t\tdisabled: true\n\t\t}\n\t}\n\tonChange = (obj) => {\n\t\tconsole.log(obj);\n\t}\n\trender() {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<CitySelect lang='zh_TW' allowClear={true}  onChange={this.onChange} />\n\t\t\t</div>\n\t\t)\n\t}\n}\n", "desc": " 设置属性allowClear为布尔值，默认为false，设置allowClear: true时城市可以被清空；" }];
+	var Demo1 = __webpack_require__(378);var Demo2 = __webpack_require__(379);var Demo3 = __webpack_require__(380);var Demo4 = __webpack_require__(381);var Demo5 = __webpack_require__(382);var Demo6 = __webpack_require__(383);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 地区级联", "code": "/**\r\n*\r\n* @title 地区级联\r\n* @description 中国地区级联\r\n*\r\n*/\r\n\r\nimport React, { Component } from 'react';\nimport { Button  } from 'tinper-bee';\r\n\nimport ACCitySelect from \"ac-city-select\";\r\n\r\nclass Demo1 extends Component {\r\n\r\n\tconstructor() {\r\n\t\tsuper();\r\n\t\tthis.state = {\r\n\t\t\tdefaultValue:{ province:'北京',city:'北京',area:'东城区'},\r\n\t\t\tvalue:{ province:'北京',city:'北京',area:'东城区'}\r\n\t\t}\r\n\t}\r\n\r\n\tonChange=(obj)=>{\r\n\t\tconsole.log(obj)\r\n\t}\r\n\r\n\tbtnOnClick=()=>{\r\n\t\tthis.setState({\r\n\t\t\tvalue:{ province:'山西',city:'长治',area:'长治县'}\r\n\t\t})\r\n\t}\r\n\r\n\trender () {\r\n\t\treturn (\r\n\t\t\t<div>\r\n\t\t\t\t<ACCitySelect ref='city' onChange={this.onChange} defaultValue={this.state.defaultValue} value={this.state.value}/>\r\n\t\t\t\t<Button shape=\"border\" onClick={this.btnOnClick} style={{marginTop:\"10px\"}}>代码设置数据</Button>\r\n\t\t\t</div>\r\n\t)}\r\n}\r\n", "desc": " 中国地区级联" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 切换语言", "code": "/**\r\n*\r\n* @title 切换语言\r\n* @description 目前支持三种语言  zh_CN 中文简体(默认)、zh_TW 中文繁体、en_US 英文\r\n*\r\n*/\r\n\r\nimport React, { Component } from 'react';\nimport { Button  } from 'tinper-bee';\r\n\nimport CitySelect from \"ac-city-select\";\r\n\r\nclass Demo2 extends Component {\r\n\r\n\tonChange=(obj)=>{\r\n\t\tconsole.log(obj)\r\n\t}\r\n\trender () {\r\n\t\treturn (\r\n\t\t\t<div>\r\n\t\t\t\t<CitySelect lang='en_US' onChange={this.onChange}/>\r\n\t\t\t\t<div style={{'height':'20px'}}/>\r\n\t\t\t\t<CitySelect lang='zh_TW' onChange={this.onChange}/>\r\n\t\t\t</div>\r\n\t)}\r\n}\r\n", "desc": " 目前支持三种语言  zh_CN 中文简体(默认)、zh_TW 中文繁体、en_US 英文" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 设置不可用状态", "code": "/**\r\n*\r\n* @title 设置不可用状态\r\n* @description 设置属性disabled为布尔值，默认为false；\r\n*\r\n*/\r\nimport React, { Component } from 'react';\nimport {  } from 'tinper-bee';\r\nimport CitySelect from \"ac-city-select\";\r\n\r\nclass Demo3 extends Component {\r\n\tconstructor() {\r\n\t\tsuper();\r\n\t\tthis.state = {\r\n\t\t\tdefaultValue: { province: '北京', city: '北京', area: '东城区' },\r\n\t\t\tvalue: null,\r\n\t\t\tdisabled: true\r\n\t\t}\r\n\t}\r\n\tonChange = (obj) => {\r\n\t\tconsole.log(obj);\r\n\t}\r\n\trender() {\r\n\t\tlet { disabled } = this.state\r\n\t\treturn (\r\n\t\t\t<div>\r\n\t\t\t\t<CitySelect lang='zh_TW' disabled={disabled} onChange={this.onChange} />\r\n\t\t\t</div>\r\n\t\t)\r\n\t}\r\n}\r\n", "desc": " 设置属性disabled为布尔值，默认为false；" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 设置省市联动部分城市不可选择", "code": "/**\r\n* @title 设置省市联动部分城市不可选择\r\n* @description 设置属性disabled为布尔值，默认为false；\r\n*/\r\nimport React, { Component } from 'react';\nimport {  } from 'tinper-bee';\r\nimport CitySelect from \"ac-city-select\";\r\n\r\nclass Demo4 extends Component {\r\n\tconstructor() {\r\n\t\tsuper();\r\n\t\tthis.state = {\r\n\t\t\tdefaultValue: { province: '北京', city: '北京', area: '东城区' },\r\n\t\t\tvalue: null,\r\n\t\t\tdisabledProvinceArr: ['天津', '河北'],\r\n\t\t\tdisabledCityArr: [\"天津\", \"长春\", \"四平\", \"大连\"],\r\n\t\t\tdisabledAreaObj: {\r\n\t\t\t\t\"鞍山\": [\"铁东区\", \"铁西区\", \"立山区\"],\r\n\t\t\t\t\"抚顺\": [\"新抚区\", \"东洲区\", \"望花区\", \"抚顺县\"],\r\n\t\t\t\t\"北京\": [\"崇文区\", \"宣武区\", \"朝阳区\"]\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n\r\n\trender() {\r\n\t\tlet { disabledProvinceArr, disabledCityArr, disabledAreaObj } = this.state;\r\n\t\treturn (\r\n\t\t\t<div>\r\n\t\t\t\t<CitySelect\r\n\t\t\t\t\tlang='zh_CN'\r\n\t\t\t\t\tdisabledProvinceArr={disabledProvinceArr}\r\n\t\t\t\t\tdisabledCityArr={disabledCityArr}\r\n\t\t\t\t\tdisabledAreaObj={disabledAreaObj}\r\n\t\t\t\t\tonChange={this.onChange}\r\n\t\t\t\t/>\r\n\t\t\t</div>\r\n\t\t)\r\n\t}\r\n}\r\n", "desc": " 设置属性disabled为布尔值，默认为false；" }, { "example": _react2['default'].createElement(Demo5, null), "title": " 设置城市选择可以清空；", "code": "/**\r\n*\r\n* @title 设置城市选择可以清空；\r\n* @description 设置属性allowClear为布尔值，默认为false，设置allowClear: true时城市可以被清空；\r\n*\r\n*/\r\nimport React, { Component } from 'react';\nimport {  } from 'tinper-bee';\r\nimport CitySelect from \"ac-city-select\";\r\n\r\nclass Demo5 extends Component {\r\n\tconstructor() {\r\n\t\tsuper();\r\n\t\tthis.state = {\r\n\t\t\tdefaultValue: { province: '北京', city: '北京', area: '东城区' },\r\n\t\t\tvalue: null,\r\n\t\t\tdisabled: true\r\n\t\t}\r\n\t}\r\n\tonChange = (obj) => {\r\n\t\tconsole.log(obj);\r\n\t}\r\n\trender() {\r\n\t\treturn (\r\n\t\t\t<div>\r\n\t\t\t\t<CitySelect lang='zh_TW' allowClear={true}  onChange={this.onChange} />\r\n\t\t\t</div>\r\n\t\t)\r\n\t}\r\n}\r\n", "desc": " 设置属性allowClear为布尔值，默认为false，设置allowClear: true时城市可以被清空；" }, { "example": _react2['default'].createElement(Demo6, null), "title": " 应用到form表单；", "code": "/**\r\n*\r\n* @title 应用到form表单；\r\n* @description 在getFieldProps中设置initialValue以指定初始化值，若不需默认值只需设置initialValue：{ province:''}；\r\n*\r\n*/\r\nimport React, { Component } from 'react';\nimport { Form } from 'tinper-bee';\r\nimport CitySelect from \"ac-city-select\";\r\n\n\r\nclass Demo6 extends Component {\r\n\tconstructor() {\r\n\t\tsuper();\r\n\t\tthis.state = {\r\n\t\t\tvalue: { province:'山西',city:'长治',area:'长治县'},\r\n\t\t\t// value: { province:''},//设置空值\r\n\t\t\tdisabled: true\r\n\t\t}\r\n\t}\r\n\tonChange = (obj) => {\r\n\t\tconsole.log(obj);\r\n\t}\r\n\trender() {\r\n        const {getFieldProps,getFieldValue} = this.props.form;\r\n\t\treturn (\r\n\t\t\t<div>\r\n\t\t\t\t<CitySelect lang='zh_CN' allowClear={true} \r\n\t\t\t\t\t{...getFieldProps(\"areaInfo\")}\r\n\t\t\t\t/>\r\n\t\t\t</div>\r\n\t\t)\r\n\t}\r\n}\r\n", "desc": " 在getFieldProps中设置initialValue以指定初始化值，若不需默认值只需设置initialValue：{ province:''}；" }];
 	
 	var Demo = function (_Component) {
 	    _inherits(Demo, _Component);
@@ -6138,7 +6138,7 @@
 	    });
 	}
 	
-	function notice(content, duration_arg, type, onClose, position, style, keyboard, onEscapeKeyUp, showIcon) {
+	function notice(content, duration_arg, type, onClose, position, style, keyboard, onEscapeKeyUp, showIcon, icon) {
 	    if (positionType.findIndex(function (item) {
 	        return item === position;
 	    }) < 0) {
@@ -6177,7 +6177,7 @@
 	                showIcon ? _react2["default"].createElement(
 	                    'div',
 	                    { className: clsPrefix + '-notice-description-icon' },
-	                    _react2["default"].createElement('i', { className: (0, _classnames2["default"])(iconType) })
+	                    icon ? _react2["default"].createElement('i', { className: (0, _classnames2["default"])('uf ' + icon) }) : _react2["default"].createElement('i', { className: (0, _classnames2["default"])(iconType) })
 	                ) : null,
 	                _react2["default"].createElement(
 	                    'div',
@@ -6211,7 +6211,8 @@
 	        var position = obj.position || "top";
 	        var style = obj.style || {};
 	        var showIcon = obj.hasOwnProperty('showIcon') ? obj.showIcon : true;
-	        return notice(content, duration, color, onClose, position, style, obj.keyboard, obj.onEscapeKeyUp, showIcon);
+	        var icon = obj.hasOwnProperty('icon') ? obj.icon : false;
+	        return notice(content, duration, color, onClose, position, style, obj.keyboard, obj.onEscapeKeyUp, showIcon, icon);
 	    },
 	    config: function config(options) {
 	        if (options.top !== undefined) {
@@ -36873,7 +36874,7 @@
 	};
 	var defaultProps = {
 	    defaultValue: _provinceData.zh.defaultValue,
-	    value: null,
+	    value: _provinceData.zh.defaultValue,
 	    onChange: function onChange() {},
 	    provinceData: _provinceData.zh.provinceData,
 	    lang: 'zh_CN',
@@ -36971,14 +36972,32 @@
 	            province = _nextProps$value.province,
 	            city = _nextProps$value.city,
 	            area = _nextProps$value.area;
+	        // if(province !== oldProvince || city !== oldCity || area !== oldArea) {
+	        //     this.setState({
+	        //         province,
+	        //         secondCity: city,
+	        //         secondArea: area
+	        //     });
+	        //     this.handleProvinceChange(province, city, area);
+	        // }
 	
-	        if (province !== oldProvince || city !== oldCity || area !== oldArea) {
+	        if (province !== oldProvince) {
 	            this.setState({
-	                province: province,
-	                secondCity: city,
+	                province: province
+	            });
+	            return this.handleProvinceChange(province, city, area);
+	        }
+	        if (city !== oldCity) {
+	            this.setState({
+	                secondCity: city
+	            });
+	            return this.handleCityChange(city);
+	        }
+	        if (area !== oldArea) {
+	            this.setState({
 	                secondArea: area
 	            });
-	            this.handleProvinceChange(province, city, area);
+	            this.onSecondAreaChange(area);
 	        }
 	    };
 	
@@ -37006,6 +37025,7 @@
 	            provinceData = _state.provinceData,
 	            cities = _state.cities,
 	            areas = _state.areas;
+	
 	
 	        var provinceOptions = provinceData.map(function (province, index) {
 	            if (province.disabled) {
@@ -37062,7 +37082,7 @@
 	                    value: this.state.province,
 	                    className: 'province',
 	                    disabled: this.props.disabled,
-	                    allowClear: this.props.allowClear,
+	                    allowClear: this.state.province && this.props.allowClear,
 	                    onChange: function onChange(value) {
 	                        return _this2.handleProvinceChange(value);
 	                    } },
@@ -37073,7 +37093,7 @@
 	                {
 	                    value: this.state.secondCity,
 	                    disabled: this.props.disabled,
-	                    allowClear: this.props.allowClear,
+	                    allowClear: this.state.secondCity && this.props.allowClear,
 	                    className: 'city',
 	                    onChange: function onChange(value) {
 	                        return _this2.handleCityChange(value);
@@ -37085,7 +37105,7 @@
 	                {
 	                    value: this.state.secondArea,
 	                    className: 'area',
-	                    allowClear: this.props.allowClear,
+	                    allowClear: this.state.secondArea && this.props.allowClear,
 	                    disabled: this.props.disabled,
 	                    onChange: function onChange(value) {
 	                        return _this2.onSecondAreaChange(value);
@@ -54963,72 +54983,72 @@
 	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	            value: true
 	});
 	var provinceData = [{ "name": "Beijing", "city": [{ "name": "Beijing", "area": ["Dongcheng District", "Xicheng District", "Chongwen District", "Xuanwu District", "Chaoyang District", "Fengtai District", "Shijingshan District", "Haidian District", "Mentougou District", "Fangshan District", "Tongzhou District", "Shunyi District", "Changping District", "Daxing District", "Pinggu District", "Huairou District", "Miyun County", "Yanqing County"] }] }, { "name": "Tianjin", "city": [{ "name": "Tianjin", "area": ["Heping District", "Hedong District", "Hexi District", "Nankai District", "Hebei District", "Hongqiao District", "Tanggu District", "Hangu District", "Dagang District", "Dongli District", "Xiqing District", "Jinnan District", "Beichen District", "Wuqing District", "Baodi District", "Ninghe County", "Jinghai County", "Ji County"] }] }, {
-	    "name": "Hebei", "city": [{ "name": "Shijiazhuang", "area": ["Chang'an District", "Qiaodong District", "Qiaoxi District", "Xinhua District", "Suburb", "Jingxing Mining Area", "Jingxing County", "Zhengding County", "Luancheng County", "Xingtang County", "Lingshou County", "Gaoyi County", "Shenze County", "Zanhuang County", "Wuji County", "Pingshan County", "Yuanshi County", "Zhao County", "Xinji City", "Gao", "Jinzhou City", "Xinle City", "Luquan City"] }, { "name": "Tangshan", "area": ["Lunan District", "Lubei District", "Guye District", "Kaiping District", "New District", "Fengrun County", "Luan County", "Luannan County", "Laoting County", "Qianxi County", "Yutian County", "Tanghai County", "Zunhua City", "Fengnan City", "Qian'an City"] }, { "name": "Qinhuangdao", "area": ["Haigang District", "Shanhaiguan District", "Beidaihe District", "Qinglong Manchu Autonomous County", "Changli County", "Funing County", "Lulong County"] }, { "name": "Handan", "area": ["Hanshan District", "Congtai District", "Fuxing District", "Fengfeng Mining Area", "Handan County", "Linzhang County", "Cheng'an County", "Daming County", "She County", "Ci County", "Feixiang County", "Yongnian County", "Qiu County", "Jize County", "Guangping County", "Guantao County", "Wei County", "Quzhou County", "Wu'an City"] }, { "name": "Xingtai", "area": ["Qiaodong District", "Qiaoxi District", "Xingtai County", "Lincheng County", "Neiqiu County", "Baixiang County", "Longyao County", "Ren County", "Nanhe County", "Ningjin County", "Julu County", "Xinhe County", "Guangzong County", "Pingxiang County", "Wei County", "Qinghe County", "Linxi County", "Nangong City", "Shahe City"] }, { "name": "Baoding", "area": ["New Urban District", "North Urban District", "South Urban District", "Mancheng County", "Qingyuan County", "Laishui County", "Fuping County", "Xushui County", "Dingxing County", "Tang County", "Gaoyang County", "Rongcheng County", "Laiyuan County", "Wangdu County", "Anxin County", "Yi County", "Quyang County", "Li County", "Shunping County", "Boye", "Xiong County", "Zhuozhou City", "Dingzhou City", "Anguo City", "Gaobeidian City"] }, { "name": "Zhangjiakou", "area": ["Qiaodong District", "Qiaoxi District", "Xuanhua District", "Xiahuayuan District", "Xuanhua County", "Zhangbei County", "Kangbao County", "Guyuan County", "Shangyi County", "Yu County", "Yangyuan County", "Huai'an County", "Wanquan County", "Huailai County", "Zhuolu County", "Chicheng County", "Chongli County"] }, { "name": "Chengde", "area": ["Shuangqiao District", "Shuangluan District", "Yingshouyingzi Mining Area", "Chengde County", "Xinglong County", "Pingquan County", "Luanping County", "Longhua County", "Fengning Manchu Autonomous County", "Kuancheng Manchu Autonomous County", "Weichang Manchu Mongolian Autonomous County"] }, { "name": "Cangzhou", "area": ["Xinhua District", "Yunhe District", "Cang County", "Qing County", "Dongguang County", "Haixing County", "Yanshan County", "Suning County", "Nanpi County", "Wuqiao County", "Xian County", "Mengcun Hui Nationality Autonomous County", "Botou City", "Renqiu City", "Huanghua City", "Hejian City"] }, { "name": "Langfang", "area": ["Anci District", "Gu'an County", "Yongqing County", "Xianghe County", "Dacheng County", "Wen'an County", "Dachang Hui Nationality Autonomous County", "Bazhou City", "Sanhe City"] }, { "name": "Hengshui", "area": ["Taocheng District", "Zaoqiang County", "Wuyi County", "Wuqiang County", "Raoyang County", "Anping County", "Gucheng County", "Jing County", "Yucheng County", "Quzhou City", "Shenzhou City"] }]
+	            "name": "Hebei", "city": [{ "name": "Shijiazhuang", "area": ["Chang'an District", "Qiaodong District", "Qiaoxi District", "Xinhua District", "Suburb", "Jingxing Mining Area", "Jingxing County", "Zhengding County", "Luancheng County", "Xingtang County", "Lingshou County", "Gaoyi County", "Shenze County", "Zanhuang County", "Wuji County", "Pingshan County", "Yuanshi County", "Zhao County", "Xinji City", "Gao", "Jinzhou City", "Xinle City", "Luquan City"] }, { "name": "Tangshan", "area": ["Lunan District", "Lubei District", "Guye District", "Kaiping District", "New District", "Fengrun County", "Luan County", "Luannan County", "Laoting County", "Qianxi County", "Yutian County", "Tanghai County", "Zunhua City", "Fengnan City", "Qian'an City"] }, { "name": "Qinhuangdao", "area": ["Haigang District", "Shanhaiguan District", "Beidaihe District", "Qinglong Manchu Autonomous County", "Changli County", "Funing County", "Lulong County"] }, { "name": "Handan", "area": ["Hanshan District", "Congtai District", "Fuxing District", "Fengfeng Mining Area", "Handan County", "Linzhang County", "Cheng'an County", "Daming County", "She County", "Ci County", "Feixiang County", "Yongnian County", "Qiu County", "Jize County", "Guangping County", "Guantao County", "Wei County", "Quzhou County", "Wu'an City"] }, { "name": "Xingtai", "area": ["Qiaodong District", "Qiaoxi District", "Xingtai County", "Lincheng County", "Neiqiu County", "Baixiang County", "Longyao County", "Ren County", "Nanhe County", "Ningjin County", "Julu County", "Xinhe County", "Guangzong County", "Pingxiang County", "Wei County", "Qinghe County", "Linxi County", "Nangong City", "Shahe City"] }, { "name": "Baoding", "area": ["New Urban District", "North Urban District", "South Urban District", "Mancheng County", "Qingyuan County", "Laishui County", "Fuping County", "Xushui County", "Dingxing County", "Tang County", "Gaoyang County", "Rongcheng County", "Laiyuan County", "Wangdu County", "Anxin County", "Yi County", "Quyang County", "Li County", "Shunping County", "Boye", "Xiong County", "Zhuozhou City", "Dingzhou City", "Anguo City", "Gaobeidian City"] }, { "name": "Zhangjiakou", "area": ["Qiaodong District", "Qiaoxi District", "Xuanhua District", "Xiahuayuan District", "Xuanhua County", "Zhangbei County", "Kangbao County", "Guyuan County", "Shangyi County", "Yu County", "Yangyuan County", "Huai'an County", "Wanquan County", "Huailai County", "Zhuolu County", "Chicheng County", "Chongli County"] }, { "name": "Chengde", "area": ["Shuangqiao District", "Shuangluan District", "Yingshouyingzi Mining Area", "Chengde County", "Xinglong County", "Pingquan County", "Luanping County", "Longhua County", "Fengning Manchu Autonomous County", "Kuancheng Manchu Autonomous County", "Weichang Manchu Mongolian Autonomous County"] }, { "name": "Cangzhou", "area": ["Xinhua District", "Yunhe District", "Cang County", "Qing County", "Dongguang County", "Haixing County", "Yanshan County", "Suning County", "Nanpi County", "Wuqiao County", "Xian County", "Mengcun Hui Nationality Autonomous County", "Botou City", "Renqiu City", "Huanghua City", "Hejian City"] }, { "name": "Langfang", "area": ["Anci District", "Gu'an County", "Yongqing County", "Xianghe County", "Dacheng County", "Wen'an County", "Dachang Hui Nationality Autonomous County", "Bazhou City", "Sanhe City"] }, { "name": "Hengshui", "area": ["Taocheng District", "Zaoqiang County", "Wuyi County", "Wuqiang County", "Raoyang County", "Anping County", "Gucheng County", "Jing County", "Yucheng County", "Quzhou City", "Shenzhou City"] }]
 	}, {
-	    "name": "Shanxi", "city": [{ "name": "Taiyuan", "area": ["Xiaodian District", "Yingze District", "Xinghualing District", "Jiancaoping District", "Wanbolin District", "Jinyuan District", "Qingxu County", "Yangqu County", "Loufan County", "Gujiao City"] }, { "name": "Datong", "area": ["Urban Area", "Mining Area", "Southern Suburb", "Xinrong District", "Yanggao County", "Tianzhen County", "Guangling County", "Lingqiu County", "Wuyuan County", "Zuoyun County", "Datong County"] }, { "name": "Yangquan", "area": ["Urban Area", "Mining Area", "Suburbs", "Pingding County", "Yu County"] }, { "name": "Changzhi", "area": ["Urban Area", "Suburbs", "Changzhi County", "Xiangyuan County", "Tunliu County", "Pingshun County", "Licheng County", "Huguan County", "Changzi County", "Wuxiang County", "Qin County", "Qinyuan County", "Lucheng City"] }, { "name": "Jincheng", "area": ["Urban Area", "Qinshui County", "Yangcheng County", "Lingchuan County", "Zezhou County", "Gaoping City"] }, { "name": "Shuozhou", "area": ["Shuocheng District", "Pinglu District", "Shanyin County", "Ying County", "Youyu County", "Huairen County"] }, { "name": "Xinzhou", "area": ["Xinfu District", "Yuanping City", "Dingxiang County", "Wutai County", "Dai County", "Fanzhi County", "Ningwu County", "Jingle County", "Shenchi County", "Wuzhai County", "Kelan County", "Hequ County", "Baode County", "Pianguan County"] }, { "name": "Lvliang", "area": ["Lishi District", "Xiaoyi City", "Fenyang City", "Wenshui County", "Jiaocheng County", "Xing County", "Lin County", "Liulin County", "Shilou County", "Lan County", "Fangshan County", "Zhongyang County", "Jiaokou County"] }, { "name": "Jinzhong", "area": ["Yuci City", "Jiexiu City", "Yushe County", "Zuoquan County", "Heshun County", "Xiyang County", "Shouyang County", "Taigu County", "Qi County", "Pingyao County", "Lingshi County"] }, { "name": "Linyi", "area": ["Linyi City", "Houma City", "Huozhou City", "Quwo County", "Yicheng County", "Xiangfen County", "Hongdong County", "Gu county", "Anze County", "Fushan County", "Ji County", "Xiangning County", "Pu County", "Daning County", "Yonghe County", "Xi County", "Fenxi County"] }, { "name": "Yuncheng", "area": ["Yuncheng City", "Yongji City", "Hejin City", "Ruicheng County", "Linyi County", "Wanrong County", "Xinjiang County", "Jishan County", "Wenxi County", "Xia County", "Jiang County", "Pinglu County", "Yuanqu County"] }]
+	            "name": "Shanxi", "city": [{ "name": "Taiyuan", "area": ["Xiaodian District", "Yingze District", "Xinghualing District", "Jiancaoping District", "Wanbolin District", "Jinyuan District", "Qingxu County", "Yangqu County", "Loufan County", "Gujiao City"] }, { "name": "Datong", "area": ["Urban Area", "Mining Area", "Southern Suburb", "Xinrong District", "Yanggao County", "Tianzhen County", "Guangling County", "Lingqiu County", "Wuyuan County", "Zuoyun County", "Datong County"] }, { "name": "Yangquan", "area": ["Urban Area", "Mining Area", "Suburbs", "Pingding County", "Yu County"] }, { "name": "Changzhi", "area": ["Urban Area", "Suburbs", "Changzhi County", "Xiangyuan County", "Tunliu County", "Pingshun County", "Licheng County", "Huguan County", "Changzi County", "Wuxiang County", "Qin County", "Qinyuan County", "Lucheng City"] }, { "name": "Jincheng", "area": ["Urban Area", "Qinshui County", "Yangcheng County", "Lingchuan County", "Zezhou County", "Gaoping City"] }, { "name": "Shuozhou", "area": ["Shuocheng District", "Pinglu District", "Shanyin County", "Ying County", "Youyu County", "Huairen County"] }, { "name": "Xinzhou", "area": ["Xinfu District", "Yuanping City", "Dingxiang County", "Wutai County", "Dai County", "Fanzhi County", "Ningwu County", "Jingle County", "Shenchi County", "Wuzhai County", "Kelan County", "Hequ County", "Baode County", "Pianguan County"] }, { "name": "Lvliang", "area": ["Lishi District", "Xiaoyi City", "Fenyang City", "Wenshui County", "Jiaocheng County", "Xing County", "Lin County", "Liulin County", "Shilou County", "Lan County", "Fangshan County", "Zhongyang County", "Jiaokou County"] }, { "name": "Jinzhong", "area": ["Yuci City", "Jiexiu City", "Yushe County", "Zuoquan County", "Heshun County", "Xiyang County", "Shouyang County", "Taigu County", "Qi County", "Pingyao County", "Lingshi County"] }, { "name": "Linyi", "area": ["Linyi City", "Houma City", "Huozhou City", "Quwo County", "Yicheng County", "Xiangfen County", "Hongdong County", "Gu county", "Anze County", "Fushan County", "Ji County", "Xiangning County", "Pu County", "Daning County", "Yonghe County", "Xi County", "Fenxi County"] }, { "name": "Yuncheng", "area": ["Yuncheng City", "Yongji City", "Hejin City", "Ruicheng County", "Linyi County", "Wanrong County", "Xinjiang County", "Jishan County", "Wenxi County", "Xia County", "Jiang County", "Pinglu County", "Yuanqu County"] }]
 	}, {
-	    "name": "Inner Mongolia", "city": [{ "name": "Hohhot", "area": ["New Urban Area", "Huimin District", "Yuquan District", "Suburbs", "Tumut Left Banner", "Tokto County", "Horinger County", "Qingshuihe County", "Wuchuan County"] }, { "name": "Baotou", "area": ["Donghe District", "Kundulun District", "Qingshan District", "Shiguai Mining Area", "Baiyun Mining Area", "Suburbs", "Tumut Right Banner", "Guyang County", "Dalhan Maomingan United Banner"] }, { "name": "Wuhai", "area": ["Haibowan District", "Hainan District", "Wuda District"] }, { "name": "Chifeng", "area": ["Hongshan District", "Yuanbaoshan Area", "Songshan District", "Aruker Banner", "Bahrain Left Banner", "Bahrain Right Banner", "Linxi County", "Keshiketeng Banner", "Weng Niute Banner", "Kalaqin Banner", "Ningcheng County", "Aohan Banner"] }, { "name": "Hulunbeier", "area": ["Hailar City", "Manzhouli City", "Zhalantun City", "Yakeshi City", "Genhe City", "Ergun City", "Arong Banner", "Molidawada Muir Autonomous Banner", "Oroqen Autonomous Banner", "Ewenki Autonomous Banner", "New Barr Right Banner", "New Bay Tiger Left Banner", "Chen Baerhu Banner"] }, { "name": "Xing'an League", "area": ["Ulanhot City", "Aershan", "Horqin Right Wing Front Banner", "Horqin Right Wing Middle Banner", "Zhabit Banner", "Tuquan County"] }, { "name": "Tongliao", "area": ["Horqin District", "Hollingol City", "Kerqin Left Wing Middle Banner", "Horqin Left Wing Back Banner", "Kailu County", "Kulun Banner", "Naiman Banner", "Zalute Banner"] }, { "name": "Xilin Gol League", "area": ["Erlianhot City", "Xilinhot City", "Abaqi Banner", "Sunite Left Banner", "Sunite Right Banner", "East Ujimqin Banner", "Xiwuzhumuqi Banner", "Taipu Temple Banner", "Xianghuang Banner", "Zhengxiangbai Banner", "Zhenglan Banner", "Duolun County"] }, { "name": "Ulanchabu League", "area": ["Jining City", "Fengzhen City", "Zhuozi County", "Huade County", "Shangdu County", "Xinghe County", "Liangcheng County", "Chahar Right Front Banner", "Chahar Right Wing Middle Banner", "Chahar Right Back Banner", "Siziwang Banner"] }, { "name": "Ikezhao League", "area": ["Dongsheng City", "Dalat Banner", "Zhungeer Banner", "Etuokeqian Banner", "Etuoke Banner", "Hangjin Banner", "Wushen Banner", "Yijinhuoluo Banner"] }, { "name": "Bayannaoer League", "area": ["Linhe City", "Wuyuan County", "Dengkou County", "Urad Front Banner", "Urad Middle Banner", "Urad Back Banner", "Hangjin Back Banner"] }, { "name": "Alxa League", "area": ["Alxa Left Banner", "Alxa Right Banner", "Ejina Banner"] }]
+	            "name": "Inner Mongolia", "city": [{ "name": "Hohhot", "area": ["New Urban Area", "Huimin District", "Yuquan District", "Suburbs", "Tumut Left Banner", "Tokto County", "Horinger County", "Qingshuihe County", "Wuchuan County"] }, { "name": "Baotou", "area": ["Donghe District", "Kundulun District", "Qingshan District", "Shiguai Mining Area", "Baiyun Mining Area", "Suburbs", "Tumut Right Banner", "Guyang County", "Dalhan Maomingan United Banner"] }, { "name": "Wuhai", "area": ["Haibowan District", "Hainan District", "Wuda District"] }, { "name": "Chifeng", "area": ["Hongshan District", "Yuanbaoshan Area", "Songshan District", "Aruker Banner", "Bahrain Left Banner", "Bahrain Right Banner", "Linxi County", "Keshiketeng Banner", "Weng Niute Banner", "Kalaqin Banner", "Ningcheng County", "Aohan Banner"] }, { "name": "Hulunbeier", "area": ["Hailar City", "Manzhouli City", "Zhalantun City", "Yakeshi City", "Genhe City", "Ergun City", "Arong Banner", "Molidawada Muir Autonomous Banner", "Oroqen Autonomous Banner", "Ewenki Autonomous Banner", "New Barr Right Banner", "New Bay Tiger Left Banner", "Chen Baerhu Banner"] }, { "name": "Xing'an League", "area": ["Ulanhot City", "Aershan", "Horqin Right Wing Front Banner", "Horqin Right Wing Middle Banner", "Zhabit Banner", "Tuquan County"] }, { "name": "Tongliao", "area": ["Horqin District", "Hollingol City", "Kerqin Left Wing Middle Banner", "Horqin Left Wing Back Banner", "Kailu County", "Kulun Banner", "Naiman Banner", "Zalute Banner"] }, { "name": "Xilin Gol League", "area": ["Erlianhot City", "Xilinhot City", "Abaqi Banner", "Sunite Left Banner", "Sunite Right Banner", "East Ujimqin Banner", "Xiwuzhumuqi Banner", "Taipu Temple Banner", "Xianghuang Banner", "Zhengxiangbai Banner", "Zhenglan Banner", "Duolun County"] }, { "name": "Ulanchabu League", "area": ["Jining City", "Fengzhen City", "Zhuozi County", "Huade County", "Shangdu County", "Xinghe County", "Liangcheng County", "Chahar Right Front Banner", "Chahar Right Wing Middle Banner", "Chahar Right Back Banner", "Siziwang Banner"] }, { "name": "Ikezhao League", "area": ["Dongsheng City", "Dalat Banner", "Zhungeer Banner", "Etuokeqian Banner", "Etuoke Banner", "Hangjin Banner", "Wushen Banner", "Yijinhuoluo Banner"] }, { "name": "Bayannaoer League", "area": ["Linhe City", "Wuyuan County", "Dengkou County", "Urad Front Banner", "Urad Middle Banner", "Urad Back Banner", "Hangjin Back Banner"] }, { "name": "Alxa League", "area": ["Alxa Left Banner", "Alxa Right Banner", "Ejina Banner"] }]
 	}, {
-	    "name": "Liaoning", "city": [{ "name": "Shenyang", "area": ["Shenhe District", "Huanggu District", "Heping District", "Dadong District", "Tiexi District", "Sujiatun District", "Dongling District", "Yuhong District", "Xinmin City", "Faku County", "Liaozhong County", "Kangping County", "Xinchengzi District", "Other"] }, { "name": "Dalian", "area": ["Xigang District", "Zhongshan District", "Shahekou District", "Ganjingzi District", "Lvshunkou District", "Jinzhou District", "Wafangdian City", "Pulandian City", "Zhuanghe City", "Changhai County", "Other"] }, { "name": "Anshan", "area": ["Tiedong District", "Tiexi District", "Lishan District", "Qianshan District", "Haicheng city", "Tai'an County", "Xiuyan Manchu Autonomous County", "Other"] }, { "name": "Fushun", "area": ["Shuncheng District", "Xinfu District", "Dongzhou District", "Wanghua District", "Fushun County", "Qingyuan Manchu Autonomous County", "Xinbin Manchu Autonomous County", "Other"] }, { "name": "Benxi", "area": ["Pingshan District", "Mingshan District", "Xihu District", "Nanfen District", "Benxi Manchu Autonomous County", "Huanren Manchu Autonomous County", "Other"] }, { "name": "Dandong", "area": ["Zhenxing District", "Yuanbao District", "Zhen'an District", "Donggang City", "Fengcheng", "Kuandian Manchu Autonomous County", "Other"] }, { "name": "Jinzhou", "area": ["Taihe District", "Guta District", "Linghe District", "Linghai City", "Heishan County", "Yi County", "Beining City", "Other"] }, { "name": "Yingkou", "area": ["Zhanqian District", "West Urban District", "Bayuquan District", "Laobian District", "Dashiqiao City", "Gaizhou City", "Other"] }, { "name": "Fuxin", "area": ["Haizhou District", "Xinqiu District", "Taiping District", "Qinghemen District", "Xihe District", "Zhangwu County", "Fuxin Mongolian Autonomous County", "Other"] }, { "name": "Liaoyang", "area": ["Baita District", "Wensheng District", "Hongwei District", "Taizihe District", "Gongchangling District", "Dengta City", "Liaoyang County", "Other"] }, { "name": "Panjin", "area": ["Shuangtaizi District", "Xinglongtai District", "Panshan County", "Dawa County", "Other"] }, { "name": "Tieling", "area": ["Yinzhou District", "Qinghe District", "Diaobingshan City", "Kaiyuan City", "Tieling County", "Changtu County", "Xifeng County", "Other"] }, { "name": "Chaoyang", "area": ["Shuangta District", "Longcheng District", "Lingyuan City", "Beipiao City", "Chaoyang County", "Jianping County", "Karachi Left Mongolian Autonomous County", "Other"] }, { "name": "Huludao", "area": ["Longgang District", "Nanpiao District", "Lianshan District", "Xingcheng City", "Suizhong County", "Jianchang County", "Other"] }, { "name": "Other", "area": ["Other"] }]
+	            "name": "Liaoning", "city": [{ "name": "Shenyang", "area": ["Shenhe District", "Huanggu District", "Heping District", "Dadong District", "Tiexi District", "Sujiatun District", "Dongling District", "Yuhong District", "Xinmin City", "Faku County", "Liaozhong County", "Kangping County", "Xinchengzi District", "Other"] }, { "name": "Dalian", "area": ["Xigang District", "Zhongshan District", "Shahekou District", "Ganjingzi District", "Lvshunkou District", "Jinzhou District", "Wafangdian City", "Pulandian City", "Zhuanghe City", "Changhai County", "Other"] }, { "name": "Anshan", "area": ["Tiedong District", "Tiexi District", "Lishan District", "Qianshan District", "Haicheng city", "Tai'an County", "Xiuyan Manchu Autonomous County", "Other"] }, { "name": "Fushun", "area": ["Shuncheng District", "Xinfu District", "Dongzhou District", "Wanghua District", "Fushun County", "Qingyuan Manchu Autonomous County", "Xinbin Manchu Autonomous County", "Other"] }, { "name": "Benxi", "area": ["Pingshan District", "Mingshan District", "Xihu District", "Nanfen District", "Benxi Manchu Autonomous County", "Huanren Manchu Autonomous County", "Other"] }, { "name": "Dandong", "area": ["Zhenxing District", "Yuanbao District", "Zhen'an District", "Donggang City", "Fengcheng", "Kuandian Manchu Autonomous County", "Other"] }, { "name": "Jinzhou", "area": ["Taihe District", "Guta District", "Linghe District", "Linghai City", "Heishan County", "Yi County", "Beining City", "Other"] }, { "name": "Yingkou", "area": ["Zhanqian District", "West Urban District", "Bayuquan District", "Laobian District", "Dashiqiao City", "Gaizhou City", "Other"] }, { "name": "Fuxin", "area": ["Haizhou District", "Xinqiu District", "Taiping District", "Qinghemen District", "Xihe District", "Zhangwu County", "Fuxin Mongolian Autonomous County", "Other"] }, { "name": "Liaoyang", "area": ["Baita District", "Wensheng District", "Hongwei District", "Taizihe District", "Gongchangling District", "Dengta City", "Liaoyang County", "Other"] }, { "name": "Panjin", "area": ["Shuangtaizi District", "Xinglongtai District", "Panshan County", "Dawa County", "Other"] }, { "name": "Tieling", "area": ["Yinzhou District", "Qinghe District", "Diaobingshan City", "Kaiyuan City", "Tieling County", "Changtu County", "Xifeng County", "Other"] }, { "name": "Chaoyang", "area": ["Shuangta District", "Longcheng District", "Lingyuan City", "Beipiao City", "Chaoyang County", "Jianping County", "Karachi Left Mongolian Autonomous County", "Other"] }, { "name": "Huludao", "area": ["Longgang District", "Nanpiao District", "Lianshan District", "Xingcheng City", "Suizhong County", "Jianchang County", "Other"] }, { "name": "Other", "area": ["Other"] }]
 	}, {
-	    "name": "Jilin", "city": [{ "name": "Changchun", "area": ["Chaoyang District", "Kuancheng District", "Erdao District", "Nanguan District", "Lvyuan District", "Shuangyang District", "Jiutai City", "Yushu City", "Dehui City", "Nong'an County", "Other"] }, { "name": "Jilin", "area": ["Chuanying District", "Changyi District", "Longtan District", "Fengman District", "Shulan City", "Huadian City", "Jiaohe City", "Panshi City", "Yongji County", "Other"] }, { "name": "Siping", "area": ["Tiexi District", "Tiedong District", "Gongzhuling City", "Shuangliao City", "Lishu County", "Yitong Manchu Autonomous County", "Other"] }, { "name": "Liaoyuan", "area": ["Longshan District", "Xi'an District", "Dongliao County", "Dongfeng County", "Other"] }, { "name": "Tonghua", "area": ["Dongchang District", "Erdaojiang District", "Meihekou City", "Ji'an City", "Tonghua County", "Huinan County", "Liuhe County", "Other"] }, { "name": "Baishan", "area": ["Badaojiang District", "Jiangyuan District", "Linjiang City", "Jingyu County", "Fusong County", "Changbai Korean Autonomous County", "Other"] }, { "name": "Songyuan", "area": ["Ningjiang District", "Qian'an County", "Changling County", "Fuyu County", "Qianguoerluosi Mongolian Autonomous County", "Other"] }, { "name": "Baicheng", "area": ["Taobei District", "Da'an City", "Taonan City", "Zhenlai County", "Tongyu County", "Other"] }, { "name": "Yanbian Korean Autonomous Prefecture", "area": ["Yanji City", "Tumen City", "Dunhua City", "Longjing City", "Hunchun City", "Helong City", "Antu County", "Wangqing County", "Other"] }, { "name": "Other", "area": ["Other"] }]
+	            "name": "Jilin", "city": [{ "name": "Changchun", "area": ["Chaoyang District", "Kuancheng District", "Erdao District", "Nanguan District", "Lvyuan District", "Shuangyang District", "Jiutai City", "Yushu City", "Dehui City", "Nong'an County", "Other"] }, { "name": "Jilin", "area": ["Chuanying District", "Changyi District", "Longtan District", "Fengman District", "Shulan City", "Huadian City", "Jiaohe City", "Panshi City", "Yongji County", "Other"] }, { "name": "Siping", "area": ["Tiexi District", "Tiedong District", "Gongzhuling City", "Shuangliao City", "Lishu County", "Yitong Manchu Autonomous County", "Other"] }, { "name": "Liaoyuan", "area": ["Longshan District", "Xi'an District", "Dongliao County", "Dongfeng County", "Other"] }, { "name": "Tonghua", "area": ["Dongchang District", "Erdaojiang District", "Meihekou City", "Ji'an City", "Tonghua County", "Huinan County", "Liuhe County", "Other"] }, { "name": "Baishan", "area": ["Badaojiang District", "Jiangyuan District", "Linjiang City", "Jingyu County", "Fusong County", "Changbai Korean Autonomous County", "Other"] }, { "name": "Songyuan", "area": ["Ningjiang District", "Qian'an County", "Changling County", "Fuyu County", "Qianguoerluosi Mongolian Autonomous County", "Other"] }, { "name": "Baicheng", "area": ["Taobei District", "Da'an City", "Taonan City", "Zhenlai County", "Tongyu County", "Other"] }, { "name": "Yanbian Korean Autonomous Prefecture", "area": ["Yanji City", "Tumen City", "Dunhua City", "Longjing City", "Hunchun City", "Helong City", "Antu County", "Wangqing County", "Other"] }, { "name": "Other", "area": ["Other"] }]
 	}, {
-	    "name": "Heilongjiang", "city": [{ "name": "Harbin", "area": ["Songbei District", "Daoli District", "Nangang District", "Pingfang District", "Xiangfang District", "Daowai District", "Hulan District", "Acheng District", "Shuangcheng City", "Shangzhi City", "Wuchang City", "Bin County", "Fangzheng County", "Tonghe County", "Bayan County", "Yanshou County", "Mulan County", "Yilan County", "Other"] }, { "name": "Qiqihar", "area": ["Longsha District", "Ang'angxi District", "Tiefeng District", "Jianhua District", "Fulaerki District", "Nianzishan District", "Merisda Daur District", "Nehe City", "Fuyu County", "Baiquan County", "Gannan County", "Yi'an County", "Keshan County", "Tailai County", "Kedong County", "Longjiang County", "Other"] }, { "name": "Hegang", "area": ["Xingshan District", "Gongnong District", "Nanshan District", "Xing'an District", "Xiangyang District", "Dongshan District", "Luobei County", "Suibin County", "Other"] }, { "name": "Shuangyashan", "area": ["Jianshan District", "Lingdong District", "Sifangtai District", "Baoshan District", "Jixian County", "Baoqing County", "Youyi County", "Raohe County", "Other"] }, { "name": "Jixi", "area": ["Jiguan District", "Hengshan District", "Chengzihe District", "Didao District", "Lishu District", "Mashan District", "Mishan City", "Hulin City", "Jidong County", "Other"] }, { "name": "Daqing", "area": ["Saltu District", "Honggang District", "Longfeng District", "Ranghulu District", "Datong District", "Lindian County", "Zhaozhou County", "Zhaoyuan County", "Durbert Mongolian Autonomous County", "Other"] }, { "name": "Yichun", "area": ["Yichun District", "Dailing District", "Nancha District", "Jinshanyu District", "Xilin District", "Meixi District", "Wumahe District", "Cuiyu District", "Youhao District", "Shangganling District", "Wuying District", "Hongxing District", "Xinqing District", "Tangwanghe District", "Wuyiling District", "Tieli City", "Jiayin County", "Other"] }, { "name": "Mudanjiang", "area": ["Aimin District", "Dong'an District", "Yangming District", "Xi'an District", "Suifenhe City", "Ning'an City", "Hailin City", "Muling City", "Linkou County", "Dongning County", "Other"] }, { "name": "Jiamusi", "area": ["Xiangyang District", "Qianjin District", "Dongfeng District", "Suburbs", "Tongjiang City", "Fujin City", "Huachuan County", "Fuyuan County", "Huanan County", "Tangyuan County", "Other"] }, { "name": "Qitaihe", "area": ["Taoshan District", "Xinxing District", "Qiezihe District", "Boli County", "Other"] }, { "name": "Heihe", "area": ["Aihui District", "Bei'an City", "Wudalianchi City", "Xunke County", "Nenjiang County", "Sun Wu County", "Other"] }, { "name": "Suihua", "area": ["Beilin District", "Anda City", "Zhaodong City", "Hailun City", "Suiling County", "Lanxi County", "Mingshui County", "Qinggang County", "Qing'an County", "Wangkui County", "Other"] }, { "name": "Daxing'anling area", "area": ["Huma County", "Tahe County", "Mohe County", "Daxing'anling District", "Other"] }, { "name": "Other", "area": ["Other"] }]
+	            "name": "Heilongjiang", "city": [{ "name": "Harbin", "area": ["Songbei District", "Daoli District", "Nangang District", "Pingfang District", "Xiangfang District", "Daowai District", "Hulan District", "Acheng District", "Shuangcheng City", "Shangzhi City", "Wuchang City", "Bin County", "Fangzheng County", "Tonghe County", "Bayan County", "Yanshou County", "Mulan County", "Yilan County", "Other"] }, { "name": "Qiqihar", "area": ["Longsha District", "Ang'angxi District", "Tiefeng District", "Jianhua District", "Fulaerki District", "Nianzishan District", "Merisda Daur District", "Nehe City", "Fuyu County", "Baiquan County", "Gannan County", "Yi'an County", "Keshan County", "Tailai County", "Kedong County", "Longjiang County", "Other"] }, { "name": "Hegang", "area": ["Xingshan District", "Gongnong District", "Nanshan District", "Xing'an District", "Xiangyang District", "Dongshan District", "Luobei County", "Suibin County", "Other"] }, { "name": "Shuangyashan", "area": ["Jianshan District", "Lingdong District", "Sifangtai District", "Baoshan District", "Jixian County", "Baoqing County", "Youyi County", "Raohe County", "Other"] }, { "name": "Jixi", "area": ["Jiguan District", "Hengshan District", "Chengzihe District", "Didao District", "Lishu District", "Mashan District", "Mishan City", "Hulin City", "Jidong County", "Other"] }, { "name": "Daqing", "area": ["Saltu District", "Honggang District", "Longfeng District", "Ranghulu District", "Datong District", "Lindian County", "Zhaozhou County", "Zhaoyuan County", "Durbert Mongolian Autonomous County", "Other"] }, { "name": "Yichun", "area": ["Yichun District", "Dailing District", "Nancha District", "Jinshanyu District", "Xilin District", "Meixi District", "Wumahe District", "Cuiyu District", "Youhao District", "Shangganling District", "Wuying District", "Hongxing District", "Xinqing District", "Tangwanghe District", "Wuyiling District", "Tieli City", "Jiayin County", "Other"] }, { "name": "Mudanjiang", "area": ["Aimin District", "Dong'an District", "Yangming District", "Xi'an District", "Suifenhe City", "Ning'an City", "Hailin City", "Muling City", "Linkou County", "Dongning County", "Other"] }, { "name": "Jiamusi", "area": ["Xiangyang District", "Qianjin District", "Dongfeng District", "Suburbs", "Tongjiang City", "Fujin City", "Huachuan County", "Fuyuan County", "Huanan County", "Tangyuan County", "Other"] }, { "name": "Qitaihe", "area": ["Taoshan District", "Xinxing District", "Qiezihe District", "Boli County", "Other"] }, { "name": "Heihe", "area": ["Aihui District", "Bei'an City", "Wudalianchi City", "Xunke County", "Nenjiang County", "Sun Wu County", "Other"] }, { "name": "Suihua", "area": ["Beilin District", "Anda City", "Zhaodong City", "Hailun City", "Suiling County", "Lanxi County", "Mingshui County", "Qinggang County", "Qing'an County", "Wangkui County", "Other"] }, { "name": "Daxing'anling area", "area": ["Huma County", "Tahe County", "Mohe County", "Daxing'anling District", "Other"] }, { "name": "Other", "area": ["Other"] }]
 	}, {
-	    "name": "Shanghai", "city": [{ "name": "Shanghai", "area": ["Huangpu District", "Luwan District", "Xuhui District", "Changning District", "Jing'an District", "Putuo District", "Zhabei District", "Hongkou District", "Yangpu District", "Baoshan District", "Minhang District", "Jiading District", "Songjiang District", "Jinshan District", "Qingpu District", "Nanhui District", "Fengxian District", "Pudong New District", "Chongming County", "Other"] }]
+	            "name": "Shanghai", "city": [{ "name": "Shanghai", "area": ["Huangpu District", "Luwan District", "Xuhui District", "Changning District", "Jing'an District", "Putuo District", "Zhabei District", "Hongkou District", "Yangpu District", "Baoshan District", "Minhang District", "Jiading District", "Songjiang District", "Jinshan District", "Qingpu District", "Nanhui District", "Fengxian District", "Pudong New District", "Chongming County", "Other"] }]
 	}, {
-	    "name": "Jiangsu", "city": [{ "name": "Nanjing", "area": ["Xuanwu District", "White area", "Qinhuai District", "Jianye District", "Gulou District", "Xiaguan District", "Qixia District", "Yuhuatai District", "Pukou District", "Jiangning District", "Liuhe District", "Lishui County", "Gaochun County", "Other"] }, { "name": "Suzhou", "area": ["Jinchang District", "Pingjiang District", "Canglang District", "Huqiu District", "Wuzhong District", "Xiangcheng District", "Changshu City", "Zhangjiagang City", "Kunshan City", "Wujiang City", "Taicang City", "Other"] }, { "name": "Wuxi", "area": ["Chong'an District", "Nanchang District", "Beitang District", "Binhu District", "Xishan District", "Huishan District", "Jiangyin City", "Yixing City", "Other"] }, { "name": "Changzhou", "area": ["Zhonglou District", "Tianning District", "Qishuyan District", "Xinbei District", "Wujin District", "Jintan City", "Liyang City", "Other"] }, { "name": "Zhenjiang", "area": ["Jingkou District", "Runzhou District", "Dantu District", "Danyang City", "Yangzhong City", "Jurong City", "Other"] }, { "name": "Nantong", "area": ["Chongchuan District", "Gangzha District", "Tongzhou City", "Rugao City", "Haimen City", "Qidong City", "Hai'an County", "Rudong County", "Other"] }, { "name": "Taizhou", "area": ["Hailing District", "Gaogang District", "Jiangyan City", "Taixing City", "Jingjiang City", "Xinghua City", "Other"] }, { "name": "Yangzhou", "area": ["Guangling District", "Weiyang District", "Hanjiang District", "Jiangdu City", "Yizheng City", "Gaoyou City", "Baoying County", "Other"] }, { "name": "Yancheng", "area": ["Tinghu District", "Yandu District", "Dafeng City", "Dongtai City", "Jianhu County", "Sheyang County", "Funing County", "Binhai County", "Xiangshui County", "Other"] }, { "name": "Lianyungang", "area": ["Xinpu District", "Haizhou District", "Lianyun District", "Donghai County", "Guanyun County", "Ganyu County", "Guannan County", "Other"] }, { "name": "Xuzhou", "area": ["Yunlong District", "Gulou District", "Jiuli District", "Quanshan District", "Jiawang District", "Pizhou City", "Xinyi City", "Tongshan County", "Suining County", "Pei County", "Feng County", "Other"] }, { "name": "Huai'an", "area": ["Qinghe District", "Qingpu District", "Chuzhou District", "Huaiyin District", "Yishui County", "Hongze County", "Jinhu County", "Xuyi County", "Other"] }, { "name": "Suqian", "area": ["Sucheng District", "Suyu District", "Shuyang County", "Siyang County", "Sihong County", "Other"] }, { "name": "Other", "area": ["Other"] }]
+	            "name": "Jiangsu", "city": [{ "name": "Nanjing", "area": ["Xuanwu District", "White area", "Qinhuai District", "Jianye District", "Gulou District", "Xiaguan District", "Qixia District", "Yuhuatai District", "Pukou District", "Jiangning District", "Liuhe District", "Lishui County", "Gaochun County", "Other"] }, { "name": "Suzhou", "area": ["Jinchang District", "Pingjiang District", "Canglang District", "Huqiu District", "Wuzhong District", "Xiangcheng District", "Changshu City", "Zhangjiagang City", "Kunshan City", "Wujiang City", "Taicang City", "Other"] }, { "name": "Wuxi", "area": ["Chong'an District", "Nanchang District", "Beitang District", "Binhu District", "Xishan District", "Huishan District", "Jiangyin City", "Yixing City", "Other"] }, { "name": "Changzhou", "area": ["Zhonglou District", "Tianning District", "Qishuyan District", "Xinbei District", "Wujin District", "Jintan City", "Liyang City", "Other"] }, { "name": "Zhenjiang", "area": ["Jingkou District", "Runzhou District", "Dantu District", "Danyang City", "Yangzhong City", "Jurong City", "Other"] }, { "name": "Nantong", "area": ["Chongchuan District", "Gangzha District", "Tongzhou City", "Rugao City", "Haimen City", "Qidong City", "Hai'an County", "Rudong County", "Other"] }, { "name": "Taizhou", "area": ["Hailing District", "Gaogang District", "Jiangyan City", "Taixing City", "Jingjiang City", "Xinghua City", "Other"] }, { "name": "Yangzhou", "area": ["Guangling District", "Weiyang District", "Hanjiang District", "Jiangdu City", "Yizheng City", "Gaoyou City", "Baoying County", "Other"] }, { "name": "Yancheng", "area": ["Tinghu District", "Yandu District", "Dafeng City", "Dongtai City", "Jianhu County", "Sheyang County", "Funing County", "Binhai County", "Xiangshui County", "Other"] }, { "name": "Lianyungang", "area": ["Xinpu District", "Haizhou District", "Lianyun District", "Donghai County", "Guanyun County", "Ganyu County", "Guannan County", "Other"] }, { "name": "Xuzhou", "area": ["Yunlong District", "Gulou District", "Jiuli District", "Quanshan District", "Jiawang District", "Pizhou City", "Xinyi City", "Tongshan County", "Suining County", "Pei County", "Feng County", "Other"] }, { "name": "Huai'an", "area": ["Qinghe District", "Qingpu District", "Chuzhou District", "Huaiyin District", "Yishui County", "Hongze County", "Jinhu County", "Xuyi County", "Other"] }, { "name": "Suqian", "area": ["Sucheng District", "Suyu District", "Shuyang County", "Siyang County", "Sihong County", "Other"] }, { "name": "Other", "area": ["Other"] }]
 	}, {
-	    "name": "Zhejiang", "city": [{ "name": "Hangzhou", "area": ["Gongshu District", "West Lake District", "Up Urban Area", "Down Urban Area", "Jianggan District", "Binjiang District", "Yuhang District", "Xiaoshan Strict", "Jiande City", "Fuyang City", "Lin'an City", "Tonglu County", "Chun'an County", "Other"] }, { "name": "Ningbo", "area": ["Haishu District", "Jiangdong District", "Jiangbei District", "Zhenhai District", "Beilun District", "Yinzhou District", "Yuyao City", "Cixi City", "Fenghua City", "Ninghai County", "Xiangshan County", "Other"] }, { "name": "Wenzhou", "area": ["Lucheng District", "Longwan District", "Ouhai District", "Ruian City", "Yueqing City", "Yongjia County", "Dongtou County", "Pingyang County", "Cangnan County", "Wencheng County", "Taishun County", "Other"] }, { "name": "Jiaxing", "area": ["Xiucheng District", "Xiuzhou District", "Haining City", "Pinghu City", "Tongxiang City", "Jiashan County", "Haiyan County", "Other"] }, { "name": "Huzhou", "area": ["Wuxing District", "Nanxun District", "Changxing County", "Deqing County", "Anji County", "Other"] }, { "name": "Shaoxing", "area": ["Yuecheng District", "Zhuji City", "Shangyu City", "Shengzhou City", "Shaoxing County", "Xinchang County", "Other"] }, { "name": "Jinhua", "area": ["Wucheng District", "Jindong District", "Lanxi City", "Yiwu City", "Dongyang City", "Yongkang City", "Wuyi County", "Pujiang County", "Pan'an County", "Other"] }, { "name": "Quzhou", "area": ["Kecheng District", "Qujiang District", "Jiangshan City", "Longyou County", "Changshan County", "Kaihua County", "Other"] }, { "name": "Zhoushan", "area": ["Dinghai District", "Putuo District", "Daishan County", "Shengsi County", "Other"] }, { "name": "Taizhou", "area": ["Jiaojiang District", "Huangyan District", "Luqiao District", "Linhai City", "Wenling City", "Yuhuan County", "Tiantai County", "Xianju County", "Sanmen County", "Other"] }, { "name": "Lishui", "area": ["Liandu District", "Longquan City", "Jinyun County", "Qingtian County", "Yunhe County", "Suichang County", "Songyang County", "Qingyuan County", "Jingning Yi Autonomous County", "Other"] }, { "name": "Other", "area": ["Other"] }]
+	            "name": "Zhejiang", "city": [{ "name": "Hangzhou", "area": ["Gongshu District", "West Lake District", "Up Urban Area", "Down Urban Area", "Jianggan District", "Binjiang District", "Yuhang District", "Xiaoshan Strict", "Jiande City", "Fuyang City", "Lin'an City", "Tonglu County", "Chun'an County", "Other"] }, { "name": "Ningbo", "area": ["Haishu District", "Jiangdong District", "Jiangbei District", "Zhenhai District", "Beilun District", "Yinzhou District", "Yuyao City", "Cixi City", "Fenghua City", "Ninghai County", "Xiangshan County", "Other"] }, { "name": "Wenzhou", "area": ["Lucheng District", "Longwan District", "Ouhai District", "Ruian City", "Yueqing City", "Yongjia County", "Dongtou County", "Pingyang County", "Cangnan County", "Wencheng County", "Taishun County", "Other"] }, { "name": "Jiaxing", "area": ["Xiucheng District", "Xiuzhou District", "Haining City", "Pinghu City", "Tongxiang City", "Jiashan County", "Haiyan County", "Other"] }, { "name": "Huzhou", "area": ["Wuxing District", "Nanxun District", "Changxing County", "Deqing County", "Anji County", "Other"] }, { "name": "Shaoxing", "area": ["Yuecheng District", "Zhuji City", "Shangyu City", "Shengzhou City", "Shaoxing County", "Xinchang County", "Other"] }, { "name": "Jinhua", "area": ["Wucheng District", "Jindong District", "Lanxi City", "Yiwu City", "Dongyang City", "Yongkang City", "Wuyi County", "Pujiang County", "Pan'an County", "Other"] }, { "name": "Quzhou", "area": ["Kecheng District", "Qujiang District", "Jiangshan City", "Longyou County", "Changshan County", "Kaihua County", "Other"] }, { "name": "Zhoushan", "area": ["Dinghai District", "Putuo District", "Daishan County", "Shengsi County", "Other"] }, { "name": "Taizhou", "area": ["Jiaojiang District", "Huangyan District", "Luqiao District", "Linhai City", "Wenling City", "Yuhuan County", "Tiantai County", "Xianju County", "Sanmen County", "Other"] }, { "name": "Lishui", "area": ["Liandu District", "Longquan City", "Jinyun County", "Qingtian County", "Yunhe County", "Suichang County", "Songyang County", "Qingyuan County", "Jingning Yi Autonomous County", "Other"] }, { "name": "Other", "area": ["Other"] }]
 	}, {
-	    "name": "Anhui", "city": [{ "name": "Hefei", "area": ["Luyang District", "Yaohai District", "Laoshan District", "Baohe District", "Changfeng County", "Feidong County", "Feixi County", "Other"] }, { "name": "Wuhu", "area": ["Jinghu District", "Yijiang District", "Jiujiang District", "Sanshan District", "Wuhu County", "Nanling County", "Fanchang County", "Other"] }, { "name": "Bengbu", "area": ["Bengshan District", "Longzihu District", "Yuhui District", "Huaishang District", "Huaiyuan County", "Guzhen County", "Wuhe County", "Other"] }, { "name": "Huainan", "area": ["Tianjia'an District", "Datong District", "Xiejiaji District", "Bagongshan District", "Panji District", "Fengtai County", "Other"] }, { "name": "Ma'anshan", "area": ["Yushan District", "Huashan District", "Jinjiazhuang District", "Dangtu County", "Other"] }, { "name": "Huaibei", "area": ["Xiangshan", "Duji District", "Lieshan District", "Suixi County", "Other"] }, { "name": "Tongling", "area": ["Tongguanshan District", "Shizishan District", "Suburbs", "Tongling County", "Other"] }, { "name": "Anqing", "area": ["Yingjiang District", "Daguan District", "Yixiu District", "Tongcheng City", "Susong County", "Zongyang County", "Taihu County", "Huaining County", "Yuexi County", "Wangjiang County", "Qianshan County", "Other"] }, { "name": "Huangshan", "area": ["Tunxi District", "Huangshan District", "Huizhou District", "Xiuning County", "She County", "Qimen County", "Ji County", "Other"] }, { "name": "Chuzhou District", "area": ["Langya District", "Nanqiao District", "Tianchang City", "Mingguang City", "Quanjiao County", "Lai'an County", "Dingyuan County", "Fengyang County", "Other"] }, { "name": "Fuyang", "area": ["Yingzhou District", "Yingdong District", "Yingquan District", "Jieshou City", "Linquan County", "Yingshang County", "Funan County", "Taihe County", "Other"] }, { "name": "Suzhou", "area": ["Yongqiao District", "Xiao County", "Si County", "Dangshan County", "Lingbi County", "Other"] }, { "name": "Chaohu", "area": ["Juchao District", "Hanshan County", "Wuwei County", "Lujiang County", "He county", "Other"] }, { "name": "Lu'an", "area": ["Jin'an District", "Yu'an District", "Shou County", "Huoshan County", "Huoqiu County", "Shucheng County", "Jinzhai County", "Other"] }, { "name": "Bozhou", "area": ["Qiaocheng District", "Lixin County", "Woyang County", "Mengcheng County", "Other"] }, { "name": "Chizhou", "area": ["Guichi District", "Dongzhi County", "Shitai County", "Qingyang County", "Other"] }, { "name": "Xuancheng", "area": ["Xuanzhou District", "Ningguo City", "Guangde County", "Langxi County", "Jing County", "Jingde County", "Jixi County", "Other"] }, { "name": "Other", "area": ["Other"] }]
+	            "name": "Anhui", "city": [{ "name": "Hefei", "area": ["Luyang District", "Yaohai District", "Laoshan District", "Baohe District", "Changfeng County", "Feidong County", "Feixi County", "Other"] }, { "name": "Wuhu", "area": ["Jinghu District", "Yijiang District", "Jiujiang District", "Sanshan District", "Wuhu County", "Nanling County", "Fanchang County", "Other"] }, { "name": "Bengbu", "area": ["Bengshan District", "Longzihu District", "Yuhui District", "Huaishang District", "Huaiyuan County", "Guzhen County", "Wuhe County", "Other"] }, { "name": "Huainan", "area": ["Tianjia'an District", "Datong District", "Xiejiaji District", "Bagongshan District", "Panji District", "Fengtai County", "Other"] }, { "name": "Ma'anshan", "area": ["Yushan District", "Huashan District", "Jinjiazhuang District", "Dangtu County", "Other"] }, { "name": "Huaibei", "area": ["Xiangshan", "Duji District", "Lieshan District", "Suixi County", "Other"] }, { "name": "Tongling", "area": ["Tongguanshan District", "Shizishan District", "Suburbs", "Tongling County", "Other"] }, { "name": "Anqing", "area": ["Yingjiang District", "Daguan District", "Yixiu District", "Tongcheng City", "Susong County", "Zongyang County", "Taihu County", "Huaining County", "Yuexi County", "Wangjiang County", "Qianshan County", "Other"] }, { "name": "Huangshan", "area": ["Tunxi District", "Huangshan District", "Huizhou District", "Xiuning County", "She County", "Qimen County", "Ji County", "Other"] }, { "name": "Chuzhou District", "area": ["Langya District", "Nanqiao District", "Tianchang City", "Mingguang City", "Quanjiao County", "Lai'an County", "Dingyuan County", "Fengyang County", "Other"] }, { "name": "Fuyang", "area": ["Yingzhou District", "Yingdong District", "Yingquan District", "Jieshou City", "Linquan County", "Yingshang County", "Funan County", "Taihe County", "Other"] }, { "name": "Suzhou", "area": ["Yongqiao District", "Xiao County", "Si County", "Dangshan County", "Lingbi County", "Other"] }, { "name": "Chaohu", "area": ["Juchao District", "Hanshan County", "Wuwei County", "Lujiang County", "He county", "Other"] }, { "name": "Lu'an", "area": ["Jin'an District", "Yu'an District", "Shou County", "Huoshan County", "Huoqiu County", "Shucheng County", "Jinzhai County", "Other"] }, { "name": "Bozhou", "area": ["Qiaocheng District", "Lixin County", "Woyang County", "Mengcheng County", "Other"] }, { "name": "Chizhou", "area": ["Guichi District", "Dongzhi County", "Shitai County", "Qingyang County", "Other"] }, { "name": "Xuancheng", "area": ["Xuanzhou District", "Ningguo City", "Guangde County", "Langxi County", "Jing County", "Jingde County", "Jixi County", "Other"] }, { "name": "Other", "area": ["Other"] }]
 	}, {
-	    "name": "Fujian", "city": [{ "name": "Fuzhou", "area": ["Gulou District", "Taijiang District", "Cangshan District", "Mawei District", "Jin'an District", "Fuqing City", "Changle City", "Minhou County", "Minqing County", "Yongtai County", "Lianjiang County", "Luoyuan County", "Pingtan County", "Other"] }, { "name": "Xiamen", "area": ["Siming District", "Haishu District", "Huli District", "Jimei District", "Tong'an District", "Xiang'an District", "Other"] }, { "name": "Putian", "area": ["Chengxiang District", "Hanjiang District", "Licheng District", "Xiuyu District", "Xianyou County", "Other"] }, { "name": "Sanming", "area": ["Meilie District", "Sanyuan District", "Yong'an City", "Mingxi County", "Jiangle County", "Datian County", "Ninghua County", "Jianning County", "Sha County", "Youxi County", "Qingliu County", "Taining County", "Other"] }, { "name": "Quanzhou", "area": ["Licheng District", "Fengze District", "Luojiang District", "Quangang District", "Shishi City", "Jinjiang City", "Nan'an City", "Hui'an County", "Yongchun County", "Anxi County", "Dehua County", "Jinmen County", "Other"] }, { "name": "Zhangzhou", "area": ["Xiangcheng District", "Longwen District", "Longhai City", "Pinghe County", "Nanjing County", "Zhao'an County", "Zhangpu County", "Hua'an County", "Dongshan County", "Changtai County", "Yunxiao County", "Other"] }, { "name": "Nanping", "area": ["Yanping District", "Jian'ou City", "Shaowu City", "Wuyishan City", "Jianyang City", "Songxi County", "Guangze County", "Shunchang County", "Pucheng County", "Zhenghe County", "Other"] }, { "name": "Longyan", "area": ["Xinluo District", "Zhangping City", "Changting County", "Wuping County", "Shanghang County", "Yongding County", "Liancheng County", "Other"] }, { "name": "Ningde", "area": ["Jiaocheng District", "Fu'an City", "Fuding City", "Shouning County", "Xiapu County", "Zherong County", "Pingnan County", "Gutian County", "Zhouning County", "Other"] }, { "name": "Other", "area": ["Other"] }]
+	            "name": "Fujian", "city": [{ "name": "Fuzhou", "area": ["Gulou District", "Taijiang District", "Cangshan District", "Mawei District", "Jin'an District", "Fuqing City", "Changle City", "Minhou County", "Minqing County", "Yongtai County", "Lianjiang County", "Luoyuan County", "Pingtan County", "Other"] }, { "name": "Xiamen", "area": ["Siming District", "Haishu District", "Huli District", "Jimei District", "Tong'an District", "Xiang'an District", "Other"] }, { "name": "Putian", "area": ["Chengxiang District", "Hanjiang District", "Licheng District", "Xiuyu District", "Xianyou County", "Other"] }, { "name": "Sanming", "area": ["Meilie District", "Sanyuan District", "Yong'an City", "Mingxi County", "Jiangle County", "Datian County", "Ninghua County", "Jianning County", "Sha County", "Youxi County", "Qingliu County", "Taining County", "Other"] }, { "name": "Quanzhou", "area": ["Licheng District", "Fengze District", "Luojiang District", "Quangang District", "Shishi City", "Jinjiang City", "Nan'an City", "Hui'an County", "Yongchun County", "Anxi County", "Dehua County", "Jinmen County", "Other"] }, { "name": "Zhangzhou", "area": ["Xiangcheng District", "Longwen District", "Longhai City", "Pinghe County", "Nanjing County", "Zhao'an County", "Zhangpu County", "Hua'an County", "Dongshan County", "Changtai County", "Yunxiao County", "Other"] }, { "name": "Nanping", "area": ["Yanping District", "Jian'ou City", "Shaowu City", "Wuyishan City", "Jianyang City", "Songxi County", "Guangze County", "Shunchang County", "Pucheng County", "Zhenghe County", "Other"] }, { "name": "Longyan", "area": ["Xinluo District", "Zhangping City", "Changting County", "Wuping County", "Shanghang County", "Yongding County", "Liancheng County", "Other"] }, { "name": "Ningde", "area": ["Jiaocheng District", "Fu'an City", "Fuding City", "Shouning County", "Xiapu County", "Zherong County", "Pingnan County", "Gutian County", "Zhouning County", "Other"] }, { "name": "Other", "area": ["Other"] }]
 	}, {
-	    "name": "Jiangxi", "city": [{ "name": "Nanchang", "area": ["Donghu District", "Xihu District", "Qingyunpu District", "Wanli District", "Qingshanhu District", "Xinjian County", "Nanchang County", "Jinxian County", "Anyi County", "Other"] }, { "name": "Jingdezhen", "area": ["Zhushan District", "Changjiang District", "Leping City", "Fuliang County", "Other"] }, { "name": "Pingxiang", "area": ["Anyuan District", "Xiangdong District", "Lianhua County", "Shangli County", "Luxi County", "Other"] }, { "name": "Jiujiang", "area": ["Xunyang District", "Lushan District", "Ruichang City", "Jiujiang County", "Xingzi County", "Wuning County", "Pengze County", "Yongxiu County", "Xiushui County", "Hukou County", "De'an County", "Duchang County", "Other"] }, { "name": "Xinyu", "area": ["Yushui District", "Fenyi County", "Other"] }, { "name": "Yingtan", "area": ["Yuehu District", "Guixi City", "Yujiang County", "Other"] }, { "name": "Ganzhou", "area": ["Zhanggong District", "Ruijin City", "Nankang City", "Shicheng County", "Anyuan County", "Gan County", "Ningdu County", "Xunwu County", "Xingguo County", "Dingnan County", "Shangyou County", "Yudu County", "Longnan County", "Chongyi County", "Xinfeng County", "Quannan County", "Dayu County", "Huichang County", "Other"] }, { "name": "Ji'an", "area": ["Jizhou District", "Qingyuan District", "Jinggangshan City", "Ji'an County", "Yongfeng County", "Yongxin County", "Xingan County", "Taihe County", "Xiajiang County", "Suichuan County", "Anfu County", "Jishui County", "Wan'an County", "Other"] }, { "name": "Yichun", "area": ["Yuanzhou District", "Fengcheng City", "Zhangshu City", "Gao'an City", "Tonggu County", "Jing'an County", "Yifeng County", "Fengxin County", "Wanzai County", "Shanggao County", "Other"] }, { "name": "Fuzhou", "area": ["Linchuan District", "Nanfeng County", "Le'an County", "Jinxi County", "Nancheng County", "Dongxiang County", "Zixi County", "Yihuang County", "Guangchang County", "Lichuan County", "Chongren County", "Other"] }, { "name": "Shangrao", "area": ["Xinzhou District", "Dexing City", "Shangrao County", "Guangfeng County", "Poyang County", "Wuyuan County", "Qianshan County", "Yugan County", "Hengfeng County", "Yiyang County", "Yushan County", "Wannian County", "Other"] }, { "name": "Other", "area": ["Other"] }]
+	            "name": "Jiangxi", "city": [{ "name": "Nanchang", "area": ["Donghu District", "Xihu District", "Qingyunpu District", "Wanli District", "Qingshanhu District", "Xinjian County", "Nanchang County", "Jinxian County", "Anyi County", "Other"] }, { "name": "Jingdezhen", "area": ["Zhushan District", "Changjiang District", "Leping City", "Fuliang County", "Other"] }, { "name": "Pingxiang", "area": ["Anyuan District", "Xiangdong District", "Lianhua County", "Shangli County", "Luxi County", "Other"] }, { "name": "Jiujiang", "area": ["Xunyang District", "Lushan District", "Ruichang City", "Jiujiang County", "Xingzi County", "Wuning County", "Pengze County", "Yongxiu County", "Xiushui County", "Hukou County", "De'an County", "Duchang County", "Other"] }, { "name": "Xinyu", "area": ["Yushui District", "Fenyi County", "Other"] }, { "name": "Yingtan", "area": ["Yuehu District", "Guixi City", "Yujiang County", "Other"] }, { "name": "Ganzhou", "area": ["Zhanggong District", "Ruijin City", "Nankang City", "Shicheng County", "Anyuan County", "Gan County", "Ningdu County", "Xunwu County", "Xingguo County", "Dingnan County", "Shangyou County", "Yudu County", "Longnan County", "Chongyi County", "Xinfeng County", "Quannan County", "Dayu County", "Huichang County", "Other"] }, { "name": "Ji'an", "area": ["Jizhou District", "Qingyuan District", "Jinggangshan City", "Ji'an County", "Yongfeng County", "Yongxin County", "Xingan County", "Taihe County", "Xiajiang County", "Suichuan County", "Anfu County", "Jishui County", "Wan'an County", "Other"] }, { "name": "Yichun", "area": ["Yuanzhou District", "Fengcheng City", "Zhangshu City", "Gao'an City", "Tonggu County", "Jing'an County", "Yifeng County", "Fengxin County", "Wanzai County", "Shanggao County", "Other"] }, { "name": "Fuzhou", "area": ["Linchuan District", "Nanfeng County", "Le'an County", "Jinxi County", "Nancheng County", "Dongxiang County", "Zixi County", "Yihuang County", "Guangchang County", "Lichuan County", "Chongren County", "Other"] }, { "name": "Shangrao", "area": ["Xinzhou District", "Dexing City", "Shangrao County", "Guangfeng County", "Poyang County", "Wuyuan County", "Qianshan County", "Yugan County", "Hengfeng County", "Yiyang County", "Yushan County", "Wannian County", "Other"] }, { "name": "Other", "area": ["Other"] }]
 	}, {
-	    "name": "Shandong", "city": [{ "name": "Jinan", "area": ["Central District", "Lixia District", "Tianqiao District", "Huaiyin District", "Licheng District", "Changqing District", "Zhangqiu City", "Pingyin County", "Jiyang County", "Shanghe County", "Other"] }, { "name": "Qingdao", "area": ["City Southern District", "City Northern District", "Chengyang District", "Sifang District", "Licang District", "Huangdao District", "Laoshan District", "Jiaonan City", "Jiaozhou City", "Pingdu City", "Laixi City", "Jimo City", "Other"] }, { "name": "Zibo", "area": ["Zhangdian District", "Linzi District", "Zichuan District", "Boshan District", "Zhoucun District", "Huantai County", "Gaoqing County", "Yiyuan County", "Other"] }, { "name": "Zaozhuang", "area": ["Central District", "Shanting District", "Yicheng District", "Taierzhuang District", "Xuecheng District", "Tengzhou City", "Other"] }, { "name": "Dongying", "area": ["Dongying District", "Hekou District", "Kenli County", "Guangrao County", "Lijin County", "Other"] }, { "name": "Yantai", "area": ["Zhifu District", "Fushan District", "Muping District", "Laishan District", "Longkou City", "Laiyang City", "Laizhou City", "Zhaoyuan City", "Penglai City", "Qixia City", "Haiyang City", "Long Island County", "Other"] }, { "name": "Weifang", "area": ["Weicheng Qu", "Hanting District", "Fangzi District", "Kuiwen District", "Qingzhou City", "Zhucheng", "Shouguang City", "Anqiu City", "Gaomi City", "Changyi City", "Changle County", "Linqu County", "Other"] }, { "name": "Jining", "area": ["Central District", "Rencheng District", "Qufu City", "Yanzhou City", "Zoucheng City", "Yutai County", "Jinxiang County", "Jiaxiang County", "Weishan County", "Wenshang County", "Yishui County", "Liangshan County", "Other"] }, { "name": "Taian", "area": ["Taishan District", "Daiyue District", "Xintai City", "Feicheng city", "Ningyang County", "Dongping County", "Other"] }, { "name": "Weihai", "area": ["Huancui District", "Rushan City", "Wendeng City", "Rongcheng City", "Other"] }, { "name": "Rizhao", "area": ["Donggang District", "Lanshan District", "Wulian County", "Ju County", "Other"] }, { "name": "Laiwu", "area": ["Laicheng District", "Tongcheng District", "Other"] }, { "name": "Linyi", "area": ["Lanshan District", "Luozhuang District", "Hedong District", "Yinan County", "Tancheng County", "Yishui County", "Cangshan County", "Fei County", "Pingyi County", "Junan County", "Mengyin County", "Linshu County", "Other"] }, { "name": "Dezhou", "area": ["Decheng District", "Leling City", "Yucheng city", "Ling County", "Ningjin County", "Qihe County", "Wucheng County", "Qingyun County", "Pingyuan County", "Xiajin County", "Linyi County", "Other"] }, { "name": "Liaocheng", "area": ["Dongchangfu District", "Linqing City", "Gaotang County", "Yanggu County", "Chiping County", "Shen County", "Dong'a County", "Guan County", "Other"] }, { "name": "Binzhou", "area": ["Bincheng District", "Zouping County", "Zhanhua County", "Huimin County", "Boxing County", "Yangxin County", "Wudi County", "Other"] }, { "name": "Heze", "area": ["Mudan District", "Juancheng County", "Shan county", "Yuncheng County", "Cao County", "Dingtao County", "Juye County", "Dongming County", "Chengwu County", "Other"] }, { "name": "Other", "area": ["Other"] }]
+	            "name": "Shandong", "city": [{ "name": "Jinan", "area": ["Central District", "Lixia District", "Tianqiao District", "Huaiyin District", "Licheng District", "Changqing District", "Zhangqiu City", "Pingyin County", "Jiyang County", "Shanghe County", "Other"] }, { "name": "Qingdao", "area": ["City Southern District", "City Northern District", "Chengyang District", "Sifang District", "Licang District", "Huangdao District", "Laoshan District", "Jiaonan City", "Jiaozhou City", "Pingdu City", "Laixi City", "Jimo City", "Other"] }, { "name": "Zibo", "area": ["Zhangdian District", "Linzi District", "Zichuan District", "Boshan District", "Zhoucun District", "Huantai County", "Gaoqing County", "Yiyuan County", "Other"] }, { "name": "Zaozhuang", "area": ["Central District", "Shanting District", "Yicheng District", "Taierzhuang District", "Xuecheng District", "Tengzhou City", "Other"] }, { "name": "Dongying", "area": ["Dongying District", "Hekou District", "Kenli County", "Guangrao County", "Lijin County", "Other"] }, { "name": "Yantai", "area": ["Zhifu District", "Fushan District", "Muping District", "Laishan District", "Longkou City", "Laiyang City", "Laizhou City", "Zhaoyuan City", "Penglai City", "Qixia City", "Haiyang City", "Long Island County", "Other"] }, { "name": "Weifang", "area": ["Weicheng Qu", "Hanting District", "Fangzi District", "Kuiwen District", "Qingzhou City", "Zhucheng", "Shouguang City", "Anqiu City", "Gaomi City", "Changyi City", "Changle County", "Linqu County", "Other"] }, { "name": "Jining", "area": ["Central District", "Rencheng District", "Qufu City", "Yanzhou City", "Zoucheng City", "Yutai County", "Jinxiang County", "Jiaxiang County", "Weishan County", "Wenshang County", "Yishui County", "Liangshan County", "Other"] }, { "name": "Taian", "area": ["Taishan District", "Daiyue District", "Xintai City", "Feicheng city", "Ningyang County", "Dongping County", "Other"] }, { "name": "Weihai", "area": ["Huancui District", "Rushan City", "Wendeng City", "Rongcheng City", "Other"] }, { "name": "Rizhao", "area": ["Donggang District", "Lanshan District", "Wulian County", "Ju County", "Other"] }, { "name": "Laiwu", "area": ["Laicheng District", "Tongcheng District", "Other"] }, { "name": "Linyi", "area": ["Lanshan District", "Luozhuang District", "Hedong District", "Yinan County", "Tancheng County", "Yishui County", "Cangshan County", "Fei County", "Pingyi County", "Junan County", "Mengyin County", "Linshu County", "Other"] }, { "name": "Dezhou", "area": ["Decheng District", "Leling City", "Yucheng city", "Ling County", "Ningjin County", "Qihe County", "Wucheng County", "Qingyun County", "Pingyuan County", "Xiajin County", "Linyi County", "Other"] }, { "name": "Liaocheng", "area": ["Dongchangfu District", "Linqing City", "Gaotang County", "Yanggu County", "Chiping County", "Shen County", "Dong'a County", "Guan County", "Other"] }, { "name": "Binzhou", "area": ["Bincheng District", "Zouping County", "Zhanhua County", "Huimin County", "Boxing County", "Yangxin County", "Wudi County", "Other"] }, { "name": "Heze", "area": ["Mudan District", "Juancheng County", "Shan county", "Yuncheng County", "Cao County", "Dingtao County", "Juye County", "Dongming County", "Chengwu County", "Other"] }, { "name": "Other", "area": ["Other"] }]
 	}, {
-	    "name": "Henan", "city": [{ "name": "Zhengzhou", "area": ["Zhongyuan District", "Jinshui District", "Erqi District", "Guancheng Hui Nationality District", "Shangxin District", "Huiji District", "Gongyi City", "Xinzheng City", "Xinmi City", "Dengfeng City", "Xingyang City", "Zhongmu County", "Other"] }, { "name": "Kaifeng", "area": ["Gulou District", "Longting District", "Shunhe Hui Nationality District", "Wangwangtai District", "Jinming District", "Kaifeng County", "Weishi County", "Lankao County", "Qi County", "Tongxu County", "Other"] }, { "name": "Luoyang", "area": ["Xigong District", "Laocheng District", "Jianxi District", "Chanhe Hui Nationality Area", "Luolong District", "Jili District", "Yanshi City", "Mengjin County", "Ruyang County", "Yichuan County", "Luoning County", "Song County", "Yiyang County", "Xin'an County", "Luanchuan County", "Other"] }, { "name": "Pingdingshan", "area": ["Xinhua District", "Weidong District", "Zhanhe District", "Shilong District", "Ruzhou City", "Wugang City", "Baofeng County", "Ye County", "Jia County", "Lushan County", "Other"] }, { "name": "Anyang", "area": ["Beiguan District", "Wenfeng District", "Yindu District", "Long'an District", "Linzhou City", "Anyang County", "Hua County", "Neihuang County", "Tangyin County", "Other"] }, { "name": "Hebi", "area": ["Qibin District", "Shancheng District", "Heshan District", "Xun County", "Qi County", "Other"] }, { "name": "Xinxiang", "area": ["Weibin District", "Hongqi District", "Fengquan District", "Muye District", "Weihui City", "Huixian City", "Xinxiang County", "Huojia County", "Yuanyang County", "Changyuan County", "Fengqiu County", "Yanjin County", "Other"] }, { "name": "Jiaozuo", "area": ["Jiefang District", "Zhongzhan District", "Macun District", "Shanyang District", "Qinyang City", "Mengzhou City", "Xiuwu County", "Wen County", "Wuzhi County", "Bo'ai County", "Other"] }, { "name": "Puyang", "area": ["Hualong District", "Shuyang County", "Nanle County", "Taiqian County", "Qingfeng County", "Fan County", "Other"] }, { "name": "Xu Chang", "area": ["Weidu District", "Yuzhou City", "Changge City", "Xuchang County", "Yanling County", "Xiangcheng County", "Other"] }, { "name": "Luohe", "area": ["Yuanhui District", "Yancheng District", "Zhaoling District", "Linying County", "Wuyang County", "Other"] }, { "name": "Sanmenxia", "area": ["Hubin District", "Yima City", "Lingbao City", "Mianchi County", "Lushi County", "Shan County", "Other"] }, { "name": "Nanyang", "area": ["Wolong District", "Wancheng District", "Dengzhou City", "Tongbai County", "Fangcheng County", "Xichuan County", "Zhenping County", "Tanghe County", "Nanzhao County", "Neixiang County", "Xinye County", "Sheqi County", "Xixia County", "Other"] }, { "name": "Shangqiu", "area": ["Liangyuan District", "Suiyang District", "Yongcheng City", "Ningling County", "Yucheng County", "Minquan County", "Xiayi County", "Zhecheng County", "Sui County", "Other"] }, { "name": "Xinyang", "area": ["Shihe District", "Pingqiao District", "Huangchuan County", "Huaibin County", "Xi County", "Xin County", "Shangcheng County", "Gushi County", "Luoshan County", "Guangshan County", "Other"] }, { "name": "Zhoukou", "area": ["Chuanhui District", "Xiangcheng City", "Shangshui County", "Huaiyang County", "Taikang County", "Luyi County", "Xihua County", "Fugou County", "Shenqiu County", "Dancheng County", "Other"] }, { "name": "Zhumadian", "area": ["Yicheng District", "Queshan County", "Xincai County", "Shangcai County", "Xiping County", "Biyang County", "Pingyu County", "Runan County", "Suiping County", "Zhengyang County", "Other"] }, { "name": "Jiaozuo", "area": ["Jiyuan City", "Other"] }, { "name": "Other", "area": ["Other"] }]
+	            "name": "Henan", "city": [{ "name": "Zhengzhou", "area": ["Zhongyuan District", "Jinshui District", "Erqi District", "Guancheng Hui Nationality District", "Shangxin District", "Huiji District", "Gongyi City", "Xinzheng City", "Xinmi City", "Dengfeng City", "Xingyang City", "Zhongmu County", "Other"] }, { "name": "Kaifeng", "area": ["Gulou District", "Longting District", "Shunhe Hui Nationality District", "Wangwangtai District", "Jinming District", "Kaifeng County", "Weishi County", "Lankao County", "Qi County", "Tongxu County", "Other"] }, { "name": "Luoyang", "area": ["Xigong District", "Laocheng District", "Jianxi District", "Chanhe Hui Nationality Area", "Luolong District", "Jili District", "Yanshi City", "Mengjin County", "Ruyang County", "Yichuan County", "Luoning County", "Song County", "Yiyang County", "Xin'an County", "Luanchuan County", "Other"] }, { "name": "Pingdingshan", "area": ["Xinhua District", "Weidong District", "Zhanhe District", "Shilong District", "Ruzhou City", "Wugang City", "Baofeng County", "Ye County", "Jia County", "Lushan County", "Other"] }, { "name": "Anyang", "area": ["Beiguan District", "Wenfeng District", "Yindu District", "Long'an District", "Linzhou City", "Anyang County", "Hua County", "Neihuang County", "Tangyin County", "Other"] }, { "name": "Hebi", "area": ["Qibin District", "Shancheng District", "Heshan District", "Xun County", "Qi County", "Other"] }, { "name": "Xinxiang", "area": ["Weibin District", "Hongqi District", "Fengquan District", "Muye District", "Weihui City", "Huixian City", "Xinxiang County", "Huojia County", "Yuanyang County", "Changyuan County", "Fengqiu County", "Yanjin County", "Other"] }, { "name": "Jiaozuo", "area": ["Jiefang District", "Zhongzhan District", "Macun District", "Shanyang District", "Qinyang City", "Mengzhou City", "Xiuwu County", "Wen County", "Wuzhi County", "Bo'ai County", "Other"] }, { "name": "Puyang", "area": ["Hualong District", "Shuyang County", "Nanle County", "Taiqian County", "Qingfeng County", "Fan County", "Other"] }, { "name": "Xu Chang", "area": ["Weidu District", "Yuzhou City", "Changge City", "Xuchang County", "Yanling County", "Xiangcheng County", "Other"] }, { "name": "Luohe", "area": ["Yuanhui District", "Yancheng District", "Zhaoling District", "Linying County", "Wuyang County", "Other"] }, { "name": "Sanmenxia", "area": ["Hubin District", "Yima City", "Lingbao City", "Mianchi County", "Lushi County", "Shan County", "Other"] }, { "name": "Nanyang", "area": ["Wolong District", "Wancheng District", "Dengzhou City", "Tongbai County", "Fangcheng County", "Xichuan County", "Zhenping County", "Tanghe County", "Nanzhao County", "Neixiang County", "Xinye County", "Sheqi County", "Xixia County", "Other"] }, { "name": "Shangqiu", "area": ["Liangyuan District", "Suiyang District", "Yongcheng City", "Ningling County", "Yucheng County", "Minquan County", "Xiayi County", "Zhecheng County", "Sui County", "Other"] }, { "name": "Xinyang", "area": ["Shihe District", "Pingqiao District", "Huangchuan County", "Huaibin County", "Xi County", "Xin County", "Shangcheng County", "Gushi County", "Luoshan County", "Guangshan County", "Other"] }, { "name": "Zhoukou", "area": ["Chuanhui District", "Xiangcheng City", "Shangshui County", "Huaiyang County", "Taikang County", "Luyi County", "Xihua County", "Fugou County", "Shenqiu County", "Dancheng County", "Other"] }, { "name": "Zhumadian", "area": ["Yicheng District", "Queshan County", "Xincai County", "Shangcai County", "Xiping County", "Biyang County", "Pingyu County", "Runan County", "Suiping County", "Zhengyang County", "Other"] }, { "name": "Jiaozuo", "area": ["Jiyuan City", "Other"] }, { "name": "Other", "area": ["Other"] }]
 	}, {
-	    "name": "Hubei", "city": [{ "name": "Wuhan", "area": ["Jiang'an District", "Wuchang District", "Jianghan District", "Qiaokou District", "Hanyang District", "Qingshan District", "Hongshan District", "Dongxihu District", "Hannan District", "Caidian District", "Jiangxia District", "Huangpi District", "Xinzhou District", "Other"] }, { "name": "Huangshi", "area": ["Huangshi Port Area", "Xisaishan District", "Lower Land Area", "Tieshan District", "Daye City", "Yangxin County", "Other"] }, { "name": "Shiyan", "area": ["Zhangwan District", "Maojian District", "Danjiangkou City", "Yun County", "Zhushan County", "Fang County", "Yunxi County", "Zhuxi County", "Other"] }, { "name": "Jingzhou", "area": ["Shashi District", "Jingzhou District", "Honghu City", "Shishou City", "Songzi City", "Jianli County", "Gong'an County", "Jiangling County", "Other"] }, { "name": "Yichang", "area": ["Xiling District", "Wujiagang District", "Dianjun District", "Xiaoting District", "Yiling District", "Yidu City", "Dangyang City", "Zhijiang City", "Zigui County", "Yuan'an County", "Xingshan County", "Wufeng Tujia Autonomous County", "Changyang Tujia Autonomous County", "Other"] }, { "name": "Xiangfan", "area": ["Xiangcheng District", "Fancheng District", "Xiangyang District", "Laohekou City", "Zaoyang City", "Yicheng City", "Nanzhang County", "Gucheng County", "Baokang County", "Other"] }, { "name": "Ezhou", "area": ["Echeng District", "Huarong District", "Liangzihu District", "Other"] }, { "name": "Jingmen", "area": ["Dongbao District", "Duodao District", "Zhongxiang City", "Jingshan County", "Shayang County", "Other"] }, { "name": "Xiaogan", "area": ["Xiaonan District", "Yingcheng City", "Anlu City", "Hanchuan City", "Yunmeng County", "Dawu County", "Xiaochang County", "Other"] }, { "name": "Huanggang", "area": ["Huangzhou District", "Macheng", "Wuxue City", "Hong'an County", "Luotian County", "Xishui County", "Qichun County", "Huangmei County", "Yingshan County", "Tuanfeng County", "Other"] }, { "name": "Xianning", "area": ["Xian'an District", "Chibi City", "Jiayu County", "Tongshan County", "Chongyang County", "Tongcheng County", "Other"] }, { "name": "Suizhou", "area": ["Zengdu District", "Guangshui City", "Other"] }, { "name": "Enshi Tujia and Miao Autonomous Prefecture", "area": ["Enshi City", "Lichuan City", "Jianshi County", "Laifeng County", "Badong County", "Hefeng County", "Xuan'en County", "Xianfeng County", "Other"] }, { "name": "Xiantao", "area": ["Xiantao"] }, { "name": "Tianmen", "area": ["Tianmen"] }, { "name": "Qianjiang", "area": ["Qianjiang"] }, { "name": "Shennongjia Forest Area", "area": ["Shennongjia Forest Area"] }, { "name": "Other", "area": ["Other"] }]
+	            "name": "Hubei", "city": [{ "name": "Wuhan", "area": ["Jiang'an District", "Wuchang District", "Jianghan District", "Qiaokou District", "Hanyang District", "Qingshan District", "Hongshan District", "Dongxihu District", "Hannan District", "Caidian District", "Jiangxia District", "Huangpi District", "Xinzhou District", "Other"] }, { "name": "Huangshi", "area": ["Huangshi Port Area", "Xisaishan District", "Lower Land Area", "Tieshan District", "Daye City", "Yangxin County", "Other"] }, { "name": "Shiyan", "area": ["Zhangwan District", "Maojian District", "Danjiangkou City", "Yun County", "Zhushan County", "Fang County", "Yunxi County", "Zhuxi County", "Other"] }, { "name": "Jingzhou", "area": ["Shashi District", "Jingzhou District", "Honghu City", "Shishou City", "Songzi City", "Jianli County", "Gong'an County", "Jiangling County", "Other"] }, { "name": "Yichang", "area": ["Xiling District", "Wujiagang District", "Dianjun District", "Xiaoting District", "Yiling District", "Yidu City", "Dangyang City", "Zhijiang City", "Zigui County", "Yuan'an County", "Xingshan County", "Wufeng Tujia Autonomous County", "Changyang Tujia Autonomous County", "Other"] }, { "name": "Xiangfan", "area": ["Xiangcheng District", "Fancheng District", "Xiangyang District", "Laohekou City", "Zaoyang City", "Yicheng City", "Nanzhang County", "Gucheng County", "Baokang County", "Other"] }, { "name": "Ezhou", "area": ["Echeng District", "Huarong District", "Liangzihu District", "Other"] }, { "name": "Jingmen", "area": ["Dongbao District", "Duodao District", "Zhongxiang City", "Jingshan County", "Shayang County", "Other"] }, { "name": "Xiaogan", "area": ["Xiaonan District", "Yingcheng City", "Anlu City", "Hanchuan City", "Yunmeng County", "Dawu County", "Xiaochang County", "Other"] }, { "name": "Huanggang", "area": ["Huangzhou District", "Macheng", "Wuxue City", "Hong'an County", "Luotian County", "Xishui County", "Qichun County", "Huangmei County", "Yingshan County", "Tuanfeng County", "Other"] }, { "name": "Xianning", "area": ["Xian'an District", "Chibi City", "Jiayu County", "Tongshan County", "Chongyang County", "Tongcheng County", "Other"] }, { "name": "Suizhou", "area": ["Zengdu District", "Guangshui City", "Other"] }, { "name": "Enshi Tujia and Miao Autonomous Prefecture", "area": ["Enshi City", "Lichuan City", "Jianshi County", "Laifeng County", "Badong County", "Hefeng County", "Xuan'en County", "Xianfeng County", "Other"] }, { "name": "Xiantao", "area": ["Xiantao"] }, { "name": "Tianmen", "area": ["Tianmen"] }, { "name": "Qianjiang", "area": ["Qianjiang"] }, { "name": "Shennongjia Forest Area", "area": ["Shennongjia Forest Area"] }, { "name": "Other", "area": ["Other"] }]
 	}, {
-	    "name": "Hu'nan", "city": [{ "name": "Changsha", "area": ["Yuelu District", "Furong District", "Tianxin District", "Kaifu District", "Yuhua District", "Liuyang City", "Changsha County", "Wangcheng County", "Ningxiang County", "Other"] }, { "name": "Zhuzhou", "area": ["Tianyuan District", "Hetang District", "Lusong District", "Shifeng District", "Liling City", "Zhuzhou County", "Yanling County", "Chaling County", "You County", "Other"] }, { "name": "Xiangtan", "area": ["Yuetang District", "Yuhu District", "Xiangxiang City", "Shaoshan City", "Xiangtan County", "Other"] }, { "name": "Hengyang", "area": ["Yanfeng District", "Zhuhui District", "Shigu District", "Zhengxiang District", "Nanyue District", "Leiyang City", "Changning City", "Hengyang County", "Hengdong County", "Hengshan County", "Hengnan County", "Qidong County", "Other"] }, { "name": "Shaoyang", "area": ["Shuangqing District", "Daxiang District", "Beita District", "Wugang City", "Shaodong County", "Dongkou County", "Xinshao County", "Suining County", "Xinning County", "Shaoyang County", "Longhui County", "Chengbu Miao Autonomous County", "Other"] }, { "name": "Yueyang", "area": ["Yueyang Building District", "Yunxi District", "Junshan District", "Linxiang City", "Miluo City", "Yueyang County", "Xiangyin County", "Pingjiang County", "Huarong County", "Other"] }, { "name": "Changde", "area": ["Wuling District", "Dingcheng District", "Jinshi City", "Li County", "Linli County", "Taoyuan County", "Hanshou County", "Anxiang County", "Shimen County", "Other"] }, { "name": "Zhangjiajie", "area": ["Yongding District", "Wulingyuan District", "Cili County", "Sangzhi County", "Other"] }, { "name": "Yiyang", "area": ["Heshan District", "Ziyang District", "Yuanjiang City", "Taojiang County", "Nan County", "Anhua County", "Other"] }, { "name": "Chenzhou", "area": ["Beihu District", "Suxian District", "Zixing City", "Yizhang County", "Yucheng County", "Anren County", "Jiahe County", "Linwu County", "Guidong County", "Yongxing County", "Guiyang County", "Other"] }, { "name": "Yongzhou", "area": ["Lengshuitan District", "Lingling District", "Qiyang County", "Lanshan County", "Ningyuan County", "Xintian County", "Dong'an County", "Jiangyong County", "Dao County", "Shuangpai County", "Jianghua Yao Autonomous County", "Other"] }, { "name": "Huaihua", "area": ["Hecheng District", "Hongjiang City", "Huitong County", "Yanling County", "Chenxi County", "Xupu County", "Zhongfang County", "Xinhuang Dong Autonomous County", "Minjiang Dong Autonomous County", "Channel Dong Autonomous County", "Jingzhou Miao and Dong Autonomous County", "Mayang Miao Autonomous County", "Other"] }, { "name": "Bottom", "area": ["Comet area", "Lengshuijiang City", "Lianyuan City", "Xinhua County", "Shuangfeng County", "Other"] }, { "name": "Xiangxi Tujia and Miao Autonomous Prefecture", "area": ["Jishou City", "Guzhang County", "Longshan County", "Yongshun County", "Fenghuang County", "Luxi County", "Baojing County", "Huayuan County", "Other"] }, { "name": "Other", "area": ["Other"] }]
+	            "name": "Hu'nan", "city": [{ "name": "Changsha", "area": ["Yuelu District", "Furong District", "Tianxin District", "Kaifu District", "Yuhua District", "Liuyang City", "Changsha County", "Wangcheng County", "Ningxiang County", "Other"] }, { "name": "Zhuzhou", "area": ["Tianyuan District", "Hetang District", "Lusong District", "Shifeng District", "Liling City", "Zhuzhou County", "Yanling County", "Chaling County", "You County", "Other"] }, { "name": "Xiangtan", "area": ["Yuetang District", "Yuhu District", "Xiangxiang City", "Shaoshan City", "Xiangtan County", "Other"] }, { "name": "Hengyang", "area": ["Yanfeng District", "Zhuhui District", "Shigu District", "Zhengxiang District", "Nanyue District", "Leiyang City", "Changning City", "Hengyang County", "Hengdong County", "Hengshan County", "Hengnan County", "Qidong County", "Other"] }, { "name": "Shaoyang", "area": ["Shuangqing District", "Daxiang District", "Beita District", "Wugang City", "Shaodong County", "Dongkou County", "Xinshao County", "Suining County", "Xinning County", "Shaoyang County", "Longhui County", "Chengbu Miao Autonomous County", "Other"] }, { "name": "Yueyang", "area": ["Yueyang Building District", "Yunxi District", "Junshan District", "Linxiang City", "Miluo City", "Yueyang County", "Xiangyin County", "Pingjiang County", "Huarong County", "Other"] }, { "name": "Changde", "area": ["Wuling District", "Dingcheng District", "Jinshi City", "Li County", "Linli County", "Taoyuan County", "Hanshou County", "Anxiang County", "Shimen County", "Other"] }, { "name": "Zhangjiajie", "area": ["Yongding District", "Wulingyuan District", "Cili County", "Sangzhi County", "Other"] }, { "name": "Yiyang", "area": ["Heshan District", "Ziyang District", "Yuanjiang City", "Taojiang County", "Nan County", "Anhua County", "Other"] }, { "name": "Chenzhou", "area": ["Beihu District", "Suxian District", "Zixing City", "Yizhang County", "Yucheng County", "Anren County", "Jiahe County", "Linwu County", "Guidong County", "Yongxing County", "Guiyang County", "Other"] }, { "name": "Yongzhou", "area": ["Lengshuitan District", "Lingling District", "Qiyang County", "Lanshan County", "Ningyuan County", "Xintian County", "Dong'an County", "Jiangyong County", "Dao County", "Shuangpai County", "Jianghua Yao Autonomous County", "Other"] }, { "name": "Huaihua", "area": ["Hecheng District", "Hongjiang City", "Huitong County", "Yanling County", "Chenxi County", "Xupu County", "Zhongfang County", "Xinhuang Dong Autonomous County", "Minjiang Dong Autonomous County", "Channel Dong Autonomous County", "Jingzhou Miao and Dong Autonomous County", "Mayang Miao Autonomous County", "Other"] }, { "name": "Bottom", "area": ["Comet area", "Lengshuijiang City", "Lianyuan City", "Xinhua County", "Shuangfeng County", "Other"] }, { "name": "Xiangxi Tujia and Miao Autonomous Prefecture", "area": ["Jishou City", "Guzhang County", "Longshan County", "Yongshun County", "Fenghuang County", "Luxi County", "Baojing County", "Huayuan County", "Other"] }, { "name": "Other", "area": ["Other"] }]
 	}, {
-	    "name": "Guangdong", "city": [{ "name": "Guangzhou", "area": ["Yuexiu District", "Liwan District", "Haizhu District", "Tianhe District", "Baiyun District", "Huangpu District", "Fanyu District", "Huadu District", "Nansha District", "Luogang District", "Zengcheng City", "Conghua City", "Other"] }, { "name": "Shenzhen", "area": ["Futian District", "Luohu District", "Nanshan District", "Bao'an District", "Longgang District", "Yantian District", "Other"] }, { "name": "Dongguan", "area": ["Guancheng", "Changping", "Tangxia", "Tangxia", "Tangxia", "Other"] }, { "name": "Zhongshan", "area": ["Zhongshan"] }, { "name": "Chaozhou", "area": ["Xiangqiao District", "Chao'an County", "Raoping County", "Other"] }, { "name": "Jieyang", "area": ["Rongcheng District", "Jiedong County", "Jiexi County", "Huilai County", "Puning City", "Other"] }, { "name": "Yunfu", "area": ["Yuncheng District", "Xinxing County", "Yunan County", "Yun'an County", "Luoding City", "Other"] }, { "name": "Zhuhai", "area": ["Xiangzhou District", "Doumen District", "Jinwan District", "Other"] }, { "name": "Shantou", "area": ["Jinping District", "Haojiang District", "Longhu District", "Chaoyang District", "Chaonan District", "Chenghai District", "Nan'ao County", "Other"] }, { "name": "Shaoguan", "area": ["Zhenjiang District", "Wujiang District", "Qujiang District", "Lechang City", "Nanxiong City", "Shixing County", "Renhua County", "Wengyuan County", "Xinfeng County", "Ruyuan Yao Autonomous County", "Other"] }, { "name": "Foshan", "area": ["Chancheng District", "Nanhai District", "Shunde District", "Sanshui District", "Gaoming District", "Other"] }, { "name": "Jiangmen", "area": ["Pengjiang District", "Jianghai District", "Xinhui District", "Enping City", "Taishan City", "Kaiping City", "Heshan City", "Other"] }, { "name": "Zhanjiang", "area": ["Chikan District", "Xiashan District", "Potou District", "Mazhang District", "Wuchuan City", "Lianjiang City", "Leizhou City", "Suixi County", "Xuwen County", "Other"] }, { "name": "Maoming", "area": ["Maonan District", "Maogang District", "Huazhou City", "Xinyi City", "Gaozhou", "Dianbai County", "Other"] }, { "name": "Zhaoqing", "area": ["Duanzhou District", "Dinghu District", "Gaoyao City", "Sihui City", "Guangning County", "Huaiji County", "Fengkai County", "Deqing County", "Other"] }, { "name": "Huizhou", "area": ["Huicheng District", "Huiyang District", "Boluo County", "Huidong County", "Longmen County", "Other"] }, { "name": "Meizhou", "area": ["Meijiang District", "Xingning City", "Mei County", "Dapu County", "Fengshun County", "Wuhua County", "Pingyuan County", "Jiaoling County", "Other"] }, { "name": "Shanwei", "area": ["Urban Area", "Lufeng City", "Haifeng County", "Luhe County", "Other"] }, { "name": "Heyuan", "area": ["Yuancheng District", "Zijin County", "Longchuan County", "Lianping County", "Heping County", "Dongyuan County", "Other"] }, { "name": "Yangjiang", "area": ["Jiangcheng District", "Yangchun City", "Yangxi County", "Yangdong County", "Other"] }, { "name": "Qingyuan", "area": ["Qingcheng District", "Yingde City", "Lianzhou City", "Fogang County", "Yangshan County", "Qingxin County", "Lianshan Zhuang and Yao Autonomous County", "Liannan Yao Autonomous County", "Other"] }]
+	            "name": "Guangdong", "city": [{ "name": "Guangzhou", "area": ["Yuexiu District", "Liwan District", "Haizhu District", "Tianhe District", "Baiyun District", "Huangpu District", "Fanyu District", "Huadu District", "Nansha District", "Luogang District", "Zengcheng City", "Conghua City", "Other"] }, { "name": "Shenzhen", "area": ["Futian District", "Luohu District", "Nanshan District", "Bao'an District", "Longgang District", "Yantian District", "Other"] }, { "name": "Dongguan", "area": ["Guancheng", "Changping", "Tangxia", "Tangxia", "Tangxia", "Other"] }, { "name": "Zhongshan", "area": ["Zhongshan"] }, { "name": "Chaozhou", "area": ["Xiangqiao District", "Chao'an County", "Raoping County", "Other"] }, { "name": "Jieyang", "area": ["Rongcheng District", "Jiedong County", "Jiexi County", "Huilai County", "Puning City", "Other"] }, { "name": "Yunfu", "area": ["Yuncheng District", "Xinxing County", "Yunan County", "Yun'an County", "Luoding City", "Other"] }, { "name": "Zhuhai", "area": ["Xiangzhou District", "Doumen District", "Jinwan District", "Other"] }, { "name": "Shantou", "area": ["Jinping District", "Haojiang District", "Longhu District", "Chaoyang District", "Chaonan District", "Chenghai District", "Nan'ao County", "Other"] }, { "name": "Shaoguan", "area": ["Zhenjiang District", "Wujiang District", "Qujiang District", "Lechang City", "Nanxiong City", "Shixing County", "Renhua County", "Wengyuan County", "Xinfeng County", "Ruyuan Yao Autonomous County", "Other"] }, { "name": "Foshan", "area": ["Chancheng District", "Nanhai District", "Shunde District", "Sanshui District", "Gaoming District", "Other"] }, { "name": "Jiangmen", "area": ["Pengjiang District", "Jianghai District", "Xinhui District", "Enping City", "Taishan City", "Kaiping City", "Heshan City", "Other"] }, { "name": "Zhanjiang", "area": ["Chikan District", "Xiashan District", "Potou District", "Mazhang District", "Wuchuan City", "Lianjiang City", "Leizhou City", "Suixi County", "Xuwen County", "Other"] }, { "name": "Maoming", "area": ["Maonan District", "Maogang District", "Huazhou City", "Xinyi City", "Gaozhou", "Dianbai County", "Other"] }, { "name": "Zhaoqing", "area": ["Duanzhou District", "Dinghu District", "Gaoyao City", "Sihui City", "Guangning County", "Huaiji County", "Fengkai County", "Deqing County", "Other"] }, { "name": "Huizhou", "area": ["Huicheng District", "Huiyang District", "Boluo County", "Huidong County", "Longmen County", "Other"] }, { "name": "Meizhou", "area": ["Meijiang District", "Xingning City", "Mei County", "Dapu County", "Fengshun County", "Wuhua County", "Pingyuan County", "Jiaoling County", "Other"] }, { "name": "Shanwei", "area": ["Urban Area", "Lufeng City", "Haifeng County", "Luhe County", "Other"] }, { "name": "Heyuan", "area": ["Yuancheng District", "Zijin County", "Longchuan County", "Lianping County", "Heping County", "Dongyuan County", "Other"] }, { "name": "Yangjiang", "area": ["Jiangcheng District", "Yangchun City", "Yangxi County", "Yangdong County", "Other"] }, { "name": "Qingyuan", "area": ["Qingcheng District", "Yingde City", "Lianzhou City", "Fogang County", "Yangshan County", "Qingxin County", "Lianshan Zhuang and Yao Autonomous County", "Liannan Yao Autonomous County", "Other"] }]
 	}, {
-	    "name": "Guangxi", "city": [{ "name": "Nanning", "area": ["Qingxiu District", "Xingning District", "Xixiangtang District", "Liangqing District", "Jiangnan District", "Yongning District", "Wuming County", "Longan County", "Mashan County", "Shanglin County", "Binyang County", "Heng County", "Other"] }, { "name": "Liuzhou", "area": ["Chengzhong District", "Yufeng District", "Liubei District", "Liunan District", "Liujiang County", "Liucheng County", "Luzhai County", "Rong'an County", "Rongshui Miao Autonomous County", "Sanjiang Dong Autonomous County", "Other"] }, { "name": "Guilin", "area": ["Xiangshan District", "Xiufeng District", "Stacking area", "Qixing District", "Yanshan District", "Yangshuo County", "Lingui County", "Lingchuan County", "Quanzhou County", "Pingle County", "Xing'an County", "Guanyang County", "Lipu County", "Ziyuan County", "Yongfu County", "Longsheng Multinational Autonomous County ", "Gongcheng Yao Autonomous County", "Other"] }, { "name": "Wuzhou", "area": ["Wanxiu District", "Dieshan District", "Changzhou District", "Cenxi City", "Cangwu County", "Teng County", "Mengshan County", "Other"] }, { "name": "Beihai", "area": ["Haicheng District", "Yinhai District", "Tieshan Port Area", "Hepu County", "Other"] }, { "name": "Fangchenggang", "area": ["Port Area", "Fangcheng District", "Dongxing City", "Shangsi County", "Other"] }, { "name": "Qinzhou", "area": ["Qinnan District", "Qinbei District", "Lingshan County", "Pubei County", "Other"] }, { "name": "Guigang", "area": ["Gangbei District", "Gangnam District", "Qintang District", "Guiping City", "Pingnan County", "Other"] }, { "name": "Yulin", "area": ["Yuzhou District", "Beiliu City", "Rong County", "Luchuan County", "Bobai County", "Xingye County", "Other"] }, { "name": "Baise", "area": ["Youjiang District", "Lingyun County", "Pingguo County", "Xilin County", "Leye County", "Debao County", "Tianlin County", "Tianyang County", "Jingxi County", "Tiandong County", "Napo County", "Longlin Multinational Autonomous County", "Other"] }, { "name": "Hezhou", "area": ["Babu District", "Zhongshan County", "Zhaoping County", "Fuchuan Yao Autonomous County", "Other"] }, { "name": "Hechi", "area": ["Jinchengjiang District", "Yizhou City", "Tian'e County", "Fengshan County", "Nandan County", "Donglan County", "Du'an Yao Autonomous County", "Luocheng Mulam Autonomous County", "Bama Yao Autonomous County", "Huanjiang Maonan Autonomous County", "Dahua Yao Autonomous County", "Other"] }, { "name": "Guest", "area": ["Xingbin District", "Heshan City", "Xiangzhou County", "Wuxuan County", "Xincheng County", "Jinxiu Yao Autonomous County", "Other"] }, { "name": "Chongzuo", "area": ["Jiangzhou District", "Pingxiang City", "Ningming County", "Fusui County", "Longzhou County", "Daxin County", "Tiandeng County", "Other"] }, { "name": "Other", "area": ["Other"] }]
+	            "name": "Guangxi", "city": [{ "name": "Nanning", "area": ["Qingxiu District", "Xingning District", "Xixiangtang District", "Liangqing District", "Jiangnan District", "Yongning District", "Wuming County", "Longan County", "Mashan County", "Shanglin County", "Binyang County", "Heng County", "Other"] }, { "name": "Liuzhou", "area": ["Chengzhong District", "Yufeng District", "Liubei District", "Liunan District", "Liujiang County", "Liucheng County", "Luzhai County", "Rong'an County", "Rongshui Miao Autonomous County", "Sanjiang Dong Autonomous County", "Other"] }, { "name": "Guilin", "area": ["Xiangshan District", "Xiufeng District", "Stacking area", "Qixing District", "Yanshan District", "Yangshuo County", "Lingui County", "Lingchuan County", "Quanzhou County", "Pingle County", "Xing'an County", "Guanyang County", "Lipu County", "Ziyuan County", "Yongfu County", "Longsheng Multinational Autonomous County ", "Gongcheng Yao Autonomous County", "Other"] }, { "name": "Wuzhou", "area": ["Wanxiu District", "Dieshan District", "Changzhou District", "Cenxi City", "Cangwu County", "Teng County", "Mengshan County", "Other"] }, { "name": "Beihai", "area": ["Haicheng District", "Yinhai District", "Tieshan Port Area", "Hepu County", "Other"] }, { "name": "Fangchenggang", "area": ["Port Area", "Fangcheng District", "Dongxing City", "Shangsi County", "Other"] }, { "name": "Qinzhou", "area": ["Qinnan District", "Qinbei District", "Lingshan County", "Pubei County", "Other"] }, { "name": "Guigang", "area": ["Gangbei District", "Gangnam District", "Qintang District", "Guiping City", "Pingnan County", "Other"] }, { "name": "Yulin", "area": ["Yuzhou District", "Beiliu City", "Rong County", "Luchuan County", "Bobai County", "Xingye County", "Other"] }, { "name": "Baise", "area": ["Youjiang District", "Lingyun County", "Pingguo County", "Xilin County", "Leye County", "Debao County", "Tianlin County", "Tianyang County", "Jingxi County", "Tiandong County", "Napo County", "Longlin Multinational Autonomous County", "Other"] }, { "name": "Hezhou", "area": ["Babu District", "Zhongshan County", "Zhaoping County", "Fuchuan Yao Autonomous County", "Other"] }, { "name": "Hechi", "area": ["Jinchengjiang District", "Yizhou City", "Tian'e County", "Fengshan County", "Nandan County", "Donglan County", "Du'an Yao Autonomous County", "Luocheng Mulam Autonomous County", "Bama Yao Autonomous County", "Huanjiang Maonan Autonomous County", "Dahua Yao Autonomous County", "Other"] }, { "name": "Guest", "area": ["Xingbin District", "Heshan City", "Xiangzhou County", "Wuxuan County", "Xincheng County", "Jinxiu Yao Autonomous County", "Other"] }, { "name": "Chongzuo", "area": ["Jiangzhou District", "Pingxiang City", "Ningming County", "Fusui County", "Longzhou County", "Daxin County", "Tiandeng County", "Other"] }, { "name": "Other", "area": ["Other"] }]
 	}, {
-	    "name": "Hainan", "city": [{ "name": "Haikou", "area": ["Longhua District", "Xiuying District", "Qiongshan District", "Meilan District", "Other"] }, { "name": "Sanya", "area": ["Sanya City", "Other"] }, { "name": "Wuzhishan", "area": ["Wuzhishan"] }, { "name": "Qionghai", "area": ["Qionghai"] }, { "name": "Danzhou", "area": ["Danzhou"] }, { "name": "Wenchang", "area": ["Wenchang"] }, { "name": "Wanning", "area": ["Wanning"] }, { "name": "Dongfang", "area": ["Dongfang"] }, { "name": "Chengmai County", "area": ["Chengmai County"] }, { "name": "Ding'an County", "area": ["Ding'an County"] }, { "name": "Tunchang County", "area": ["Tunchang County"] }, { "name": "Lingao County", "area": ["Lingao County"] }, { "name": "Baisha Li Autonomous County", "area": ["Baisha Li Autonomous County"] }, { "name": "Changjiang Li Autonomous County", "area": ["Changjiang Li Autonomous County"] }, { "name": "Ledong Li Autonomous County", "area": ["Ledong Li Autonomous County"] }, { "name": "Lingshui Li Autonomous County", "area": ["Lingshui Li Autonomous County"] }, { "name": "Baoting Li and Miao Autonomous County", "area": ["Baoting Li and Miao Autonomous County"] }, { "name": "Qiongzhong Li and Miao Autonomous County", "area": ["Qiongzhong Li and Miao Autonomous County"] }, { "name": "Other", "area": ["Other"] }]
+	            "name": "Hainan", "city": [{ "name": "Haikou", "area": ["Longhua District", "Xiuying District", "Qiongshan District", "Meilan District", "Other"] }, { "name": "Sanya", "area": ["Sanya City", "Other"] }, { "name": "Wuzhishan", "area": ["Wuzhishan"] }, { "name": "Qionghai", "area": ["Qionghai"] }, { "name": "Danzhou", "area": ["Danzhou"] }, { "name": "Wenchang", "area": ["Wenchang"] }, { "name": "Wanning", "area": ["Wanning"] }, { "name": "Dongfang", "area": ["Dongfang"] }, { "name": "Chengmai County", "area": ["Chengmai County"] }, { "name": "Ding'an County", "area": ["Ding'an County"] }, { "name": "Tunchang County", "area": ["Tunchang County"] }, { "name": "Lingao County", "area": ["Lingao County"] }, { "name": "Baisha Li Autonomous County", "area": ["Baisha Li Autonomous County"] }, { "name": "Changjiang Li Autonomous County", "area": ["Changjiang Li Autonomous County"] }, { "name": "Ledong Li Autonomous County", "area": ["Ledong Li Autonomous County"] }, { "name": "Lingshui Li Autonomous County", "area": ["Lingshui Li Autonomous County"] }, { "name": "Baoting Li and Miao Autonomous County", "area": ["Baoting Li and Miao Autonomous County"] }, { "name": "Qiongzhong Li and Miao Autonomous County", "area": ["Qiongzhong Li and Miao Autonomous County"] }, { "name": "Other", "area": ["Other"] }]
 	}, {
-	    "name": "Chongqing", "city": [{ "name": "Chongqing", "area": ["Yuzhong District", "Dadukou District", "Jiangbei District", "Nan'an District", "Beibei District", "Yubei District", "Banan District", "Changshou District", "Shuangqiao District", "Shapingba District", "Wansheng District", "Wanzhou District", "Fuling District", "Qianjiang District", "Yongchuan District", "Hechuan District", "Jiangjin District", "Jiulongpo District", "Nanchuan District", "Qijiang County", "Tongnan District", "Rongchang County", "Bishan County", "Dazu County", "Tongliang County", "Liangping County", "Kai County", "Zhong County", "Chengkou County", "Dianjiang County", "Wulong County", "Fengdu County", "Fengjie County", "Yunyang County", "Wuxi County", "Wushan County", "Shizhu Tujia Autonomous County", "Xiushan Tujia and Miao Autonomous County", "Xiangyang Tujia and Miao Autonomous County", "Pengshui Miao and Tujia Autonomous County", "Other"] }]
+	            "name": "Chongqing", "city": [{ "name": "Chongqing", "area": ["Yuzhong District", "Dadukou District", "Jiangbei District", "Nan'an District", "Beibei District", "Yubei District", "Banan District", "Changshou District", "Shuangqiao District", "Shapingba District", "Wansheng District", "Wanzhou District", "Fuling District", "Qianjiang District", "Yongchuan District", "Hechuan District", "Jiangjin District", "Jiulongpo District", "Nanchuan District", "Qijiang County", "Tongnan District", "Rongchang County", "Bishan County", "Dazu County", "Tongliang County", "Liangping County", "Kai County", "Zhong County", "Chengkou County", "Dianjiang County", "Wulong County", "Fengdu County", "Fengjie County", "Yunyang County", "Wuxi County", "Wushan County", "Shizhu Tujia Autonomous County", "Xiushan Tujia and Miao Autonomous County", "Xiangyang Tujia and Miao Autonomous County", "Pengshui Miao and Tujia Autonomous County", "Other"] }]
 	}, {
-	    "name": "Sichuan", "city": [{ "name": "Chengdu", "area": ["Qingyang District", "Jinjiang District", "Jinniu District", "Wuhou District", "Chenghua District", "Longquanyi District", "Qingbaijiang District", "Xindu District", "Wenjiang District", "Dujiangyan City", "Pengzhou City", "Qionglai City", "Chongzhou City", "Jintang County", "Pi County", "Xinjin County", "Shuangliu County", "Pujiang County", "Dayi County", "Other"] }, { "name": "Zigong", "area": ["Daan District", "Ziliujing District", "Gongjing District", "Yantan District", "Rong County", "Fushun County", "Other"] }, { "name": "Panzhihua", "area": ["Renhe District", "Miyi County", "Yanbian County", "Eastern District", "Western District", "Other"] }, { "name": "Luzhou", "area": ["Jiangyang District", "Naxi District", "Longmatan District", "Lu County", "Hejiang County", "Xuyong County", "Gulin County", "Other"] }, { "name": "Deyang", "area": ["Jingyang District", "Guanghan City", "Shifang City", "Mianzhu City", "Luojiang County", "Zhongjiang County", "Other"] }, { "name": "Mianyang", "area": ["Fucheng District", "Youxian District", "Jiangyou City", "Yanting County", "Santai County", "Pingwu County", "An County", "Zitong County", "Beichuan Qiang Autonomous County", "Other"] }, { "name": "Guangyuan", "area": ["Yuanba District", "Chaotian District", "Qingchuan County", "Wangcang County", "Jiange County", "Cangxi County", "Shizhong District", "Other"] }, { "name": "Suining", "area": ["Chuanshan District", "Anju District", "Shehong County", "Pengxi County", "Daying County", "Other"] }, { "name": "Neijiang", "area": ["Shizhong District", "Dongxing District", "Zizhong County", "Longchang County", "Weiyuan County", "Other"] }, { "name": "Leshan", "area": ["Shizhong District", "Wutongqiao District", "Shawan District", "Jinkouhe District", "Emeishan City", "Jiajiang County", "Jingyan County", "Qianwei County", "Muchuan County", "Mabian Yi Autonomous County", "Yibian Yi Autonomous County", "Other"] }, { "name": "Nanchong", "area": ["Shunqing District", "Gaoping District", "Jialing District", "Langzhong City", "Yingshan County", "Peng'an County", "Yilong County", "Nanbu County", "Xichong County", "Other"] }, { "name": "Meishan", "area": ["Dongpo District", "Renshou County", "Pengshan County", "Hongya County", "Danling County", "Qingshen County", "Other"] }, { "name": "Yibin", "area": ["Cuiping District", "Yibin County", "Xingwen County", "Nanxi County", "Gong County", "Changning County", "Gao County", "Jiang'an County", "Junlian County", "Pingshan County", "Other"] }, { "name": "Guang'an", "area": ["Guang'an District", "Huaying City", "Yuechi County", "Linshui County", "Wusheng County", "Other"] }, { "name": "Dazhou", "area": ["Tongchuan District", "Wanyuan City", "Daxian", "Qu County", "Xuanhan County", "Kaijiang County", "Dazhu County", "Other"] }, { "name": "Yaan", "area": ["Yucheng District", "Lushan County", "Shimian County", "Mingshan County", "Tianquan County", "Yingjing County", "Baoxing County", "Hanyuan County", "Other"] }, { "name": "Bazhong", "area": ["Bazhou District", "Nanjiang County", "Pingchang County", "Tongjiang County", "Other"] }, { "name": "Ziyang", "area": ["Yanjiang District", "Jianyang City", "Anyue County", "Lezhi County", "Other"] }, { "name": "Aba Tibetan and Qiang Autonomous Prefecture", "area": ["Malcom County", "Jiuzhaigou County", "Hongyuan County", "Wenchuan County", "Aba County", "Li County", "Ruoergai County", "Xiaojin County", "Heishui County", "Jinchuan County", "Songpan County", "Xiangtang County", "Mao County", "Other"] }, { "name": "Ganzi Tibetan Autonomous Prefecture", "area": ["Kangding County", "Danba County", "Luhuo County", "Jiulong County", "Ganzi County", "Yajiang County", "Xinlong County", "Daofu County", "Baiyu County", "Litang County", "Dege County", "Xiangcheng County", "Shiqu County", "Daocheng County", "Seda County", "Batang County", "Luding County", "Derong County", "Other"] }, { "name": "Liangshan Yi Autonomous Prefecture", "area": ["Xichang City", "Meigu County", "Zhaojue County", "Jinyang County", "Ganluo County", "Butuo County", "Leibo County", "Puge County", "Ningnan County", "Xide County", "Huidong County", "Yuexi County", "Huili County", "Yanyuan County", "Dechang County", "Mianning County", "Muli Tibetan Autonomous County", "Other"] }, { "name": "Other", "area": ["Other"] }]
+	            "name": "Sichuan", "city": [{ "name": "Chengdu", "area": ["Qingyang District", "Jinjiang District", "Jinniu District", "Wuhou District", "Chenghua District", "Longquanyi District", "Qingbaijiang District", "Xindu District", "Wenjiang District", "Dujiangyan City", "Pengzhou City", "Qionglai City", "Chongzhou City", "Jintang County", "Pi County", "Xinjin County", "Shuangliu County", "Pujiang County", "Dayi County", "Other"] }, { "name": "Zigong", "area": ["Daan District", "Ziliujing District", "Gongjing District", "Yantan District", "Rong County", "Fushun County", "Other"] }, { "name": "Panzhihua", "area": ["Renhe District", "Miyi County", "Yanbian County", "Eastern District", "Western District", "Other"] }, { "name": "Luzhou", "area": ["Jiangyang District", "Naxi District", "Longmatan District", "Lu County", "Hejiang County", "Xuyong County", "Gulin County", "Other"] }, { "name": "Deyang", "area": ["Jingyang District", "Guanghan City", "Shifang City", "Mianzhu City", "Luojiang County", "Zhongjiang County", "Other"] }, { "name": "Mianyang", "area": ["Fucheng District", "Youxian District", "Jiangyou City", "Yanting County", "Santai County", "Pingwu County", "An County", "Zitong County", "Beichuan Qiang Autonomous County", "Other"] }, { "name": "Guangyuan", "area": ["Yuanba District", "Chaotian District", "Qingchuan County", "Wangcang County", "Jiange County", "Cangxi County", "Shizhong District", "Other"] }, { "name": "Suining", "area": ["Chuanshan District", "Anju District", "Shehong County", "Pengxi County", "Daying County", "Other"] }, { "name": "Neijiang", "area": ["Shizhong District", "Dongxing District", "Zizhong County", "Longchang County", "Weiyuan County", "Other"] }, { "name": "Leshan", "area": ["Shizhong District", "Wutongqiao District", "Shawan District", "Jinkouhe District", "Emeishan City", "Jiajiang County", "Jingyan County", "Qianwei County", "Muchuan County", "Mabian Yi Autonomous County", "Yibian Yi Autonomous County", "Other"] }, { "name": "Nanchong", "area": ["Shunqing District", "Gaoping District", "Jialing District", "Langzhong City", "Yingshan County", "Peng'an County", "Yilong County", "Nanbu County", "Xichong County", "Other"] }, { "name": "Meishan", "area": ["Dongpo District", "Renshou County", "Pengshan County", "Hongya County", "Danling County", "Qingshen County", "Other"] }, { "name": "Yibin", "area": ["Cuiping District", "Yibin County", "Xingwen County", "Nanxi County", "Gong County", "Changning County", "Gao County", "Jiang'an County", "Junlian County", "Pingshan County", "Other"] }, { "name": "Guang'an", "area": ["Guang'an District", "Huaying City", "Yuechi County", "Linshui County", "Wusheng County", "Other"] }, { "name": "Dazhou", "area": ["Tongchuan District", "Wanyuan City", "Daxian", "Qu County", "Xuanhan County", "Kaijiang County", "Dazhu County", "Other"] }, { "name": "Yaan", "area": ["Yucheng District", "Lushan County", "Shimian County", "Mingshan County", "Tianquan County", "Yingjing County", "Baoxing County", "Hanyuan County", "Other"] }, { "name": "Bazhong", "area": ["Bazhou District", "Nanjiang County", "Pingchang County", "Tongjiang County", "Other"] }, { "name": "Ziyang", "area": ["Yanjiang District", "Jianyang City", "Anyue County", "Lezhi County", "Other"] }, { "name": "Aba Tibetan and Qiang Autonomous Prefecture", "area": ["Malcom County", "Jiuzhaigou County", "Hongyuan County", "Wenchuan County", "Aba County", "Li County", "Ruoergai County", "Xiaojin County", "Heishui County", "Jinchuan County", "Songpan County", "Xiangtang County", "Mao County", "Other"] }, { "name": "Ganzi Tibetan Autonomous Prefecture", "area": ["Kangding County", "Danba County", "Luhuo County", "Jiulong County", "Ganzi County", "Yajiang County", "Xinlong County", "Daofu County", "Baiyu County", "Litang County", "Dege County", "Xiangcheng County", "Shiqu County", "Daocheng County", "Seda County", "Batang County", "Luding County", "Derong County", "Other"] }, { "name": "Liangshan Yi Autonomous Prefecture", "area": ["Xichang City", "Meigu County", "Zhaojue County", "Jinyang County", "Ganluo County", "Butuo County", "Leibo County", "Puge County", "Ningnan County", "Xide County", "Huidong County", "Yuexi County", "Huili County", "Yanyuan County", "Dechang County", "Mianning County", "Muli Tibetan Autonomous County", "Other"] }, { "name": "Other", "area": ["Other"] }]
 	}, {
-	    "name": "Guizhou", "city": [{ "name": "Guiyang", "area": ["Nanming District", "Yunyan District", "Huaxi District", "Wudang District", "Baiyun District", "Xiaohe District", "Qingzhen City", "Kaiyang County", "Xiuwen County", "Xifeng County", "Other"] }, { "name": "Liupanshui", "area": ["Zhongshan District", "Shuicheng County", "Pan County", "Liuzhite District", "Other"] }, { "name": "Zunyi", "area": ["Honghuagang District", "Huichuan District", "Chishui City", "Renhuai City", "Zunyi County", "Suiyang County", "Tongzi County", "Xishui County", "Fenggang County", "Zheng'an County", "Yuqing County", "Meitan County", "Daozhen Gelao and Miao Autonomous County", "Wuchuan Gelao and Miao Autonomous County", "Other"] }, { "name": "Anshun", "area": ["Xixiu District", "Puding County", "Pingba County", "Zhenning Buyi and Miao Autonomous County", "Ziyun Buyi and Miao Autonomous County", "Guanling Buyi and Miao Autonomous County", "Other"] }, { "name": "Tongren Area", "area": ["Tongren City", "Dejiang County", "Jiangkou County", "Sinan County", "Shiqian County", "Yuping Dong Autonomous County", "Songtao Miao Autonomous County", "Yinjiang Tujia and Miao Autonomous County", "Yanhe Tujia Autonomous County", "Wanshan Special Area", "Other"] }, { "name": "Bijie Area", "area": ["Bijie City", "Qianxi County", "Dafang County", "Zhijin County", "Jinsha County", "Hezhang County", "Nayong County", "Weining Yi Hui and Miao Autonomous County", "Other"] }, { "name": "Southwest Qian Buyi and Miao Autonomous Prefecture", "area": ["Xingyi City", "Wangmo County", "Xingren County", "Pu'an County", "Ceheng County", "Qinglong County", "Zhenfeng County", "Anlong County", "Other"] }, { "name": "Southeast Qian Miao and Dong Autonomous Prefecture", "area": ["Kaili City", "Shibing County", "Congjiang County", "Jinping County", "Zhenyuan County", "Majiang County", "Taijiang County", "Tianzhu County", "Huangping County", "Rongjiang County", "Jianhe County", "Sansui County", "Leishan County", "Liping County", "Cengong County", "Danzhai County", "Other"] }, { "name": "South Qian Buyi and Miao Autonomous Prefecture", "area": ["Duyun City", "Fuquan City", "Guiding County", "Huishui County", "Luodian County", "Chun'an County", "Libo County", "Longli County", "Pingtang County", "Changshun County", "Dushan County", "Sandu Shui Autonomous County", "Other"] }, { "name": "Other", "area": ["Other"] }]
+	            "name": "Guizhou", "city": [{ "name": "Guiyang", "area": ["Nanming District", "Yunyan District", "Huaxi District", "Wudang District", "Baiyun District", "Xiaohe District", "Qingzhen City", "Kaiyang County", "Xiuwen County", "Xifeng County", "Other"] }, { "name": "Liupanshui", "area": ["Zhongshan District", "Shuicheng County", "Pan County", "Liuzhite District", "Other"] }, { "name": "Zunyi", "area": ["Honghuagang District", "Huichuan District", "Chishui City", "Renhuai City", "Zunyi County", "Suiyang County", "Tongzi County", "Xishui County", "Fenggang County", "Zheng'an County", "Yuqing County", "Meitan County", "Daozhen Gelao and Miao Autonomous County", "Wuchuan Gelao and Miao Autonomous County", "Other"] }, { "name": "Anshun", "area": ["Xixiu District", "Puding County", "Pingba County", "Zhenning Buyi and Miao Autonomous County", "Ziyun Buyi and Miao Autonomous County", "Guanling Buyi and Miao Autonomous County", "Other"] }, { "name": "Tongren Area", "area": ["Tongren City", "Dejiang County", "Jiangkou County", "Sinan County", "Shiqian County", "Yuping Dong Autonomous County", "Songtao Miao Autonomous County", "Yinjiang Tujia and Miao Autonomous County", "Yanhe Tujia Autonomous County", "Wanshan Special Area", "Other"] }, { "name": "Bijie Area", "area": ["Bijie City", "Qianxi County", "Dafang County", "Zhijin County", "Jinsha County", "Hezhang County", "Nayong County", "Weining Yi Hui and Miao Autonomous County", "Other"] }, { "name": "Southwest Qian Buyi and Miao Autonomous Prefecture", "area": ["Xingyi City", "Wangmo County", "Xingren County", "Pu'an County", "Ceheng County", "Qinglong County", "Zhenfeng County", "Anlong County", "Other"] }, { "name": "Southeast Qian Miao and Dong Autonomous Prefecture", "area": ["Kaili City", "Shibing County", "Congjiang County", "Jinping County", "Zhenyuan County", "Majiang County", "Taijiang County", "Tianzhu County", "Huangping County", "Rongjiang County", "Jianhe County", "Sansui County", "Leishan County", "Liping County", "Cengong County", "Danzhai County", "Other"] }, { "name": "South Qian Buyi and Miao Autonomous Prefecture", "area": ["Duyun City", "Fuquan City", "Guiding County", "Huishui County", "Luodian County", "Chun'an County", "Libo County", "Longli County", "Pingtang County", "Changshun County", "Dushan County", "Sandu Shui Autonomous County", "Other"] }, { "name": "Other", "area": ["Other"] }]
 	}, {
-	    "name": "Yunnan", "city": [{ "name": "Kunming", "area": ["Panlong District", "Wuhua District", "Guandu District", "Xishan District", "Dongchuan District", "Anning City", "Chenggong County", "Jinning County", "Fumin County", "Yiliang County", "Songming County", "Shilin Yi Autonomous County", "Luquan Yi and Miao Autonomous County", "Xundian Hui and Yi Autonomous County", "Other"] }, { "name": "Qujing", "area": ["Qilin District", "Xuanwei City", "Malong County", "Zhanyi County", "Fuyuan County", "Luoping County", "Shizong County", "Luliang County", "Huize County", "Other"] }, { "name": "Yuxi", "area": ["Hongta District", "Jiangchuan County", "Chengjiang County", "Tonghai County", "Huaning County", "Yimen County", "Eshan Yi Autonomous County", "Xinping Yi and Dong Autonomous County", "Yuanjiang Hani Dai and Yi Autonomous County", "Other"] }, { "name": "Baoshan", "area": ["Longyang District", "Shidian County", "Tengchong County", "Longling County", "Changning County", "Other"] }, { "name": "Zhaotong", "area": ["Zhaoyang District", "Ludian County", "Qiaojia County", "Yanjin County", "Daguan County", "Yongshan County", "Suijiang County", "Zhenxiong County", "Yiliang County", "Weixin County", "Shuifu County", "Other"] }, { "name": "Lijiang", "area": ["Gucheng District", "Yongsheng County", "Huaping County", "Yulong Naxi Autonomous County", "Ninglang Yi Autonomous County", "Other"] }, { "name": "Pu'er", "area": ["Simao District", "Pu'er Hani and Yi Autonomous County", "Mojiang Hani Autonomous County", "Jingdong Yi Autonomous County", "Jinggu Yi and Dai Autonomous County", "Zhenuan Yi Hani ad Lahu Autonomous County", "Jiangcheng Hani and Yi Autonomous County", "Menglian Dai Lahu and Wa Autonomous County", "Lancang Lagu Autonomous County", "Ximeng Wa Autonomous County", "Other"] }, { "name": "Lincang", "area": ["Linxiang District", "Fengqing County", "Yun County", "Yongde County", "Zhenkang County", "Shuangjiang Lahu Wa Blang and Dai Autonomous County", "Gengma Dai and Wa Autonomous County", "Cangyuan Wa Autonomous County", "Other"] }, { "name": "Dehong Dai and Jingpo Autonomous Prefecture", "area": ["Luxi City", "Ruili City", "Lianghe County", "Yingjiang County", "Longchuan County", "Other"] }, { "name": "Nujiang Lisu Autonomous Prefecture", "area": ["Lushui County", "Fugong County", "Gongshan Dulong and Nu Autonomous County", "Lanping Baizu and Pumi Autonomous County", "Other"] }, { "name": "Diqing Tibetan Autonomous Prefecture", "area": ["Shangri-La County", "Deqin County", "Weixi Lisu Autonomous County", "Other"] }, { "name": "Dali Bai Autonomous Prefecture", "area": ["Dali City", "Xiangyun County", "Binchuan County", "Midu County", "Yongping County", "Yunlong County", "Eryuan County", "Jianchuan County", "Heqing County", "Yangbi Yi Autonomous County", "Nanjian Yi Autonomous County", "Weishan Yi and Hui Autonomous County", "Other"] }, { "name": "Chuxiong Yi Autonomous Prefecture", "area": ["Chuxiong City", "Shuangbai County", "Muding County", "Nanhua County", "Yao'an County", "Dayao County", "Yongren County", "Yuanmou County", "Wuding County", "Lufeng County", "Other"] }, { "name": "Honghe Hani and Yi Autonomous Prefecture", "area": ["Mengzi County", "Gejiu City", "Kaiyuan City", "LVchun County", "Jianshui County", "Shiping County", "Mile County", "Luxi County", "Yuanyang County", "Honghe County", "Jinping Miao Yao and Dai Autonomous County", "Hekou Yao Autonomous County", "Pingbian Miao Autonomous County", "Other"] }, { "name": "Wenshan Zhuang and Miao Autonomous Prefecture", "area": ["Wenshan County", "Yanshan County", "Xichou County", "Malipo County", "Maguan County", "Qiubei County", "Guangnan County", "Funing County", "Other"] }, { "name": "Xishuangbanna Dai Autonomous Prefecture", "area": ["Jinghong City", "Menghai County", "Mengla County", "Other"] }, { "name": "Other", "area": ["Other"] }]
+	            "name": "Yunnan", "city": [{ "name": "Kunming", "area": ["Panlong District", "Wuhua District", "Guandu District", "Xishan District", "Dongchuan District", "Anning City", "Chenggong County", "Jinning County", "Fumin County", "Yiliang County", "Songming County", "Shilin Yi Autonomous County", "Luquan Yi and Miao Autonomous County", "Xundian Hui and Yi Autonomous County", "Other"] }, { "name": "Qujing", "area": ["Qilin District", "Xuanwei City", "Malong County", "Zhanyi County", "Fuyuan County", "Luoping County", "Shizong County", "Luliang County", "Huize County", "Other"] }, { "name": "Yuxi", "area": ["Hongta District", "Jiangchuan County", "Chengjiang County", "Tonghai County", "Huaning County", "Yimen County", "Eshan Yi Autonomous County", "Xinping Yi and Dong Autonomous County", "Yuanjiang Hani Dai and Yi Autonomous County", "Other"] }, { "name": "Baoshan", "area": ["Longyang District", "Shidian County", "Tengchong County", "Longling County", "Changning County", "Other"] }, { "name": "Zhaotong", "area": ["Zhaoyang District", "Ludian County", "Qiaojia County", "Yanjin County", "Daguan County", "Yongshan County", "Suijiang County", "Zhenxiong County", "Yiliang County", "Weixin County", "Shuifu County", "Other"] }, { "name": "Lijiang", "area": ["Gucheng District", "Yongsheng County", "Huaping County", "Yulong Naxi Autonomous County", "Ninglang Yi Autonomous County", "Other"] }, { "name": "Pu'er", "area": ["Simao District", "Pu'er Hani and Yi Autonomous County", "Mojiang Hani Autonomous County", "Jingdong Yi Autonomous County", "Jinggu Yi and Dai Autonomous County", "Zhenuan Yi Hani ad Lahu Autonomous County", "Jiangcheng Hani and Yi Autonomous County", "Menglian Dai Lahu and Wa Autonomous County", "Lancang Lagu Autonomous County", "Ximeng Wa Autonomous County", "Other"] }, { "name": "Lincang", "area": ["Linxiang District", "Fengqing County", "Yun County", "Yongde County", "Zhenkang County", "Shuangjiang Lahu Wa Blang and Dai Autonomous County", "Gengma Dai and Wa Autonomous County", "Cangyuan Wa Autonomous County", "Other"] }, { "name": "Dehong Dai and Jingpo Autonomous Prefecture", "area": ["Luxi City", "Ruili City", "Lianghe County", "Yingjiang County", "Longchuan County", "Other"] }, { "name": "Nujiang Lisu Autonomous Prefecture", "area": ["Lushui County", "Fugong County", "Gongshan Dulong and Nu Autonomous County", "Lanping Baizu and Pumi Autonomous County", "Other"] }, { "name": "Diqing Tibetan Autonomous Prefecture", "area": ["Shangri-La County", "Deqin County", "Weixi Lisu Autonomous County", "Other"] }, { "name": "Dali Bai Autonomous Prefecture", "area": ["Dali City", "Xiangyun County", "Binchuan County", "Midu County", "Yongping County", "Yunlong County", "Eryuan County", "Jianchuan County", "Heqing County", "Yangbi Yi Autonomous County", "Nanjian Yi Autonomous County", "Weishan Yi and Hui Autonomous County", "Other"] }, { "name": "Chuxiong Yi Autonomous Prefecture", "area": ["Chuxiong City", "Shuangbai County", "Muding County", "Nanhua County", "Yao'an County", "Dayao County", "Yongren County", "Yuanmou County", "Wuding County", "Lufeng County", "Other"] }, { "name": "Honghe Hani and Yi Autonomous Prefecture", "area": ["Mengzi County", "Gejiu City", "Kaiyuan City", "LVchun County", "Jianshui County", "Shiping County", "Mile County", "Luxi County", "Yuanyang County", "Honghe County", "Jinping Miao Yao and Dai Autonomous County", "Hekou Yao Autonomous County", "Pingbian Miao Autonomous County", "Other"] }, { "name": "Wenshan Zhuang and Miao Autonomous Prefecture", "area": ["Wenshan County", "Yanshan County", "Xichou County", "Malipo County", "Maguan County", "Qiubei County", "Guangnan County", "Funing County", "Other"] }, { "name": "Xishuangbanna Dai Autonomous Prefecture", "area": ["Jinghong City", "Menghai County", "Mengla County", "Other"] }, { "name": "Other", "area": ["Other"] }]
 	}, {
-	    "name": "Tibet", "city": [{ "name": "Lhasa", "area": ["Chengguan District", "Linzhou County", "Dangxiong County", "Nimu County", "Qushui County", "Duilongdeqing County", "Dazi County", "Mozhugongka County", "Other"] }, { "name": "Naqu Area", "area": ["Naqu County", "Jiali County", "Biru county", "Nierong County", "Anduo County", "Shenzha County", "Suo County", "Bange County", "Baqing County", "Nima County", "Other"] }, { "name": "Changdu Area", "area": ["Changdu County", "Jiangda County", "Gongjue County", "Leiwuqi County", "Dingqing County", "Chaya County", "Basu County", "Zuogong County", "Mangkang County", "Luolong County", "Bianba County", "Other"] }, { "name": "Linzhi Area", "area": ["Linzhi County", "Gongbujiangda County", "Milin County", "Medog County", "Bomi County", "Chayu County", "Lang County", "Other"] }, { "name": "Shannan Area", "area": ["Naidong County", "Chanang County", "Gongga County", "Sangri County", "Qiongjie County", "Qusong County", "Cuomei County", "Loza County", "Jiacha County", "Longzi County", "Cuona County", "Langkazi County", "Other"] }, { "name": "Shigatse Area", "area": ["Shigatse City", "Nanmling County", "Jiangzi County", "Dingri County", "Sag'ya County", "Lazi County", "Angren County", "Xietongmen County", "Bailang County", "Renbu County", "Kangma County", "Dingjie County", "Zhongba County", "Yadong County", "Jilong County", "Nyalam County", "Saga County", "Gamba County", "Other"] }, { "name": "Ali area", "area": ["Gar County", "Pulan County", "Zanda County", "Ritu County", "Geji County", "Gerze county", "Coqen County", "Other"] }, { "name": "Other", "area": ["Other"] }]
+	            "name": "Tibet", "city": [{ "name": "Lhasa", "area": ["Chengguan District", "Linzhou County", "Dangxiong County", "Nimu County", "Qushui County", "Duilongdeqing County", "Dazi County", "Mozhugongka County", "Other"] }, { "name": "Naqu Area", "area": ["Naqu County", "Jiali County", "Biru county", "Nierong County", "Anduo County", "Shenzha County", "Suo County", "Bange County", "Baqing County", "Nima County", "Other"] }, { "name": "Changdu Area", "area": ["Changdu County", "Jiangda County", "Gongjue County", "Leiwuqi County", "Dingqing County", "Chaya County", "Basu County", "Zuogong County", "Mangkang County", "Luolong County", "Bianba County", "Other"] }, { "name": "Linzhi Area", "area": ["Linzhi County", "Gongbujiangda County", "Milin County", "Medog County", "Bomi County", "Chayu County", "Lang County", "Other"] }, { "name": "Shannan Area", "area": ["Naidong County", "Chanang County", "Gongga County", "Sangri County", "Qiongjie County", "Qusong County", "Cuomei County", "Loza County", "Jiacha County", "Longzi County", "Cuona County", "Langkazi County", "Other"] }, { "name": "Shigatse Area", "area": ["Shigatse City", "Nanmling County", "Jiangzi County", "Dingri County", "Sag'ya County", "Lazi County", "Angren County", "Xietongmen County", "Bailang County", "Renbu County", "Kangma County", "Dingjie County", "Zhongba County", "Yadong County", "Jilong County", "Nyalam County", "Saga County", "Gamba County", "Other"] }, { "name": "Ali area", "area": ["Gar County", "Pulan County", "Zanda County", "Ritu County", "Geji County", "Gerze county", "Coqen County", "Other"] }, { "name": "Other", "area": ["Other"] }]
 	}, {
-	    "name": "Shaanxi", "city": [{ "name": "Xi'an", "area": ["Lianhu District", "New Urban Area", "Beilin District", "Yanta District", "Baqiao District", "Weiyang District", "Yanliang District", "Lintong District", "Chang'an District", "Gaoling County", "Lantian County", "Hu County", "Zhouzhi County", "Other"] }, { "name": "Tongchuan", "area": ["Yaozhou District", "Wangyi District", "Yintai District", "Yijun County", "Other"] }, { "name": "Baoji", "area": ["Weibin District", "Jintai District", "Chencang District", "Qishan County", "Fengxiang County", "Long County", "Taibai County", "Linyou County", "Fufeng County", "Qianyang County", "Mei County", "Feng County", "Other"] }, { "name": "Xianyang", "area": ["Qindu District", "Weicheng District", "Yangling District", "Xingping City", "Liquan County", "Jingyang County", "Yongshou County", "Sanyuan County", "Bin County", "Xunyi County", "Changwu County", "Qian County", "Wugong County", "Chunhua County", "Other"] }, { "name": "Weinan", "area": ["Linyi District", "Hancheng City", "Huayin City", "Pucheng County", "Tongguan County", "Baishui County", "Chengcheng County", "Hua County", "Heyang County", "Fuping County", "Dali County", "Other"] }, { "name": "Yan'an", "area": ["Baota District", "Ansai County", "Luochuan County", "Zichang County", "Huangling County", "Yanchuan County", "Fu County", "Yanchang County", "Ganquan County", "Yichuan County", "Zhidan County", "Huanglong County", "Wuqi County", "Other"] }, { "name": "Hanzhong", "area": ["Hantai District", "Liuba County", "Zhenba County", "Chenggu County", "Nanzheng County", "Yang County", "Ningqiang County", "Foping County", "Mian County", "Xixiang County", "Lueyang County", "Other"] }, { "name": "Yulin", "area": ["Yuyang District", "Qingjian County", "Suide County", "Shenmu County", "Jia County", "Fugu County", "Zizhou County", "Jingbian County", "Hengshan County", "Mizhi County", "Wubao County", "Dingbian County", "Other"] }, { "name": "Ankang", "area": ["Hanbin District", "Ziyang County", "Langao County", "Xunyang County", "Zhenping County", "Pingli County", "Shiquan County", "Ningshan County", "Baihe County", "Hanyin County", "Other"] }, { "name": "Shangluo", "area": ["Shangzhou District", "Zhen'an County", "Shanyang County", "Luonan County", "Shangnan County", "Danfeng County", "Zhashui County", "Other"] }, { "name": "Other", "area": ["Other"] }]
+	            "name": "Shaanxi", "city": [{ "name": "Xi'an", "area": ["Lianhu District", "New Urban Area", "Beilin District", "Yanta District", "Baqiao District", "Weiyang District", "Yanliang District", "Lintong District", "Chang'an District", "Gaoling County", "Lantian County", "Hu County", "Zhouzhi County", "Other"] }, { "name": "Tongchuan", "area": ["Yaozhou District", "Wangyi District", "Yintai District", "Yijun County", "Other"] }, { "name": "Baoji", "area": ["Weibin District", "Jintai District", "Chencang District", "Qishan County", "Fengxiang County", "Long County", "Taibai County", "Linyou County", "Fufeng County", "Qianyang County", "Mei County", "Feng County", "Other"] }, { "name": "Xianyang", "area": ["Qindu District", "Weicheng District", "Yangling District", "Xingping City", "Liquan County", "Jingyang County", "Yongshou County", "Sanyuan County", "Bin County", "Xunyi County", "Changwu County", "Qian County", "Wugong County", "Chunhua County", "Other"] }, { "name": "Weinan", "area": ["Linyi District", "Hancheng City", "Huayin City", "Pucheng County", "Tongguan County", "Baishui County", "Chengcheng County", "Hua County", "Heyang County", "Fuping County", "Dali County", "Other"] }, { "name": "Yan'an", "area": ["Baota District", "Ansai County", "Luochuan County", "Zichang County", "Huangling County", "Yanchuan County", "Fu County", "Yanchang County", "Ganquan County", "Yichuan County", "Zhidan County", "Huanglong County", "Wuqi County", "Other"] }, { "name": "Hanzhong", "area": ["Hantai District", "Liuba County", "Zhenba County", "Chenggu County", "Nanzheng County", "Yang County", "Ningqiang County", "Foping County", "Mian County", "Xixiang County", "Lueyang County", "Other"] }, { "name": "Yulin", "area": ["Yuyang District", "Qingjian County", "Suide County", "Shenmu County", "Jia County", "Fugu County", "Zizhou County", "Jingbian County", "Hengshan County", "Mizhi County", "Wubao County", "Dingbian County", "Other"] }, { "name": "Ankang", "area": ["Hanbin District", "Ziyang County", "Langao County", "Xunyang County", "Zhenping County", "Pingli County", "Shiquan County", "Ningshan County", "Baihe County", "Hanyin County", "Other"] }, { "name": "Shangluo", "area": ["Shangzhou District", "Zhen'an County", "Shanyang County", "Luonan County", "Shangnan County", "Danfeng County", "Zhashui County", "Other"] }, { "name": "Other", "area": ["Other"] }]
 	}, {
-	    "name": "Gansu", "city": [{ "name": "Lanzhou", "area": ["Chengguan District", "Qilihe District", "Xigu District", "Anning District", "Honggu District", "Yongdeng County", "Gaolan County", "Yuzhong County", "Other"] }, { "name": "Jiayuguan", "area": ["Jiayuguan City", "Other"] }, { "name": "Jinchang", "area": ["Jinchuan District", "Yongchang County", "Other"] }, { "name": "Baiyin", "area": ["Baiyin area", "Pingchuan District", "Jingyuan County", "Huining County", "Jingtai County", "Other"] }, { "name": "Tianshui", "area": ["Qingshui County", "Qin'an County", "Gangu County", "Wushan County", "Zhangjiachuan Hui Autonomous County", "Beidao District", "Qincheng District", "Other"] }, { "name": "Wuwei", "area": ["Liangzhou District", "Minqin County", "Gulang County", "Tianzhu Tibetan Autonomous County", "Other"] }, { "name": "Jiuquan", "area": ["Suzhou District", "Yumen City", "Dunhuang City", "Jinta County", "Subei Mongolian Autonomous County", "Akesai Kazakh Autonomous County", "Anxi County", "Other"] }, { "name": "Zhangye", "area": ["Ganzhou District", "Minle County", "Linze County", "Gaotai County", "Shandan County", "Sunan Yugu Autonomous County", "Other"] }, { "name": "Qingyang", "area": ["Xifeng District", "Qingcheng County", "Huan County", "Huachi County", "Heshui County", "Zhengning County", "Ning County", "Zhenyuan County", "Other"] }, { "name": "Pingliang", "area": ["Kongtong District", "Jingchuan County", "Lingtai County", "Chongxin County", "Huating County", "Zhuanglang County", "Jingning County", "Other"] }, { "name": "Dingxi", "area": ["Anding District", "Tongwei County", "Lintao County", "Zhang County", "Min County", "Weiyuan County", "Longxi County", "Other"] }, { "name": "Longnan", "area": ["Wudu District", "Cheng County", "Tanchang County", "Kang County", "Wen County", "Xihe County", "Li County", "Liangdang County", "Hui County", "Other"] }, { "name": "Linxia Hui Autonomous Prefecture", "area": ["Linxia City", "Linxia County", "Kangle County", "Yongjing County", "Guanghe County", "Hezheng County", "Dongxiang Autonomous County", "Jishishan Baoan Dongxiang Sala Autonomous County", "Other"] }, { "name": "Gannan Tibetan Autonomous Prefecture", "area": ["Hezuo City", "Lintan County", "Zhuoni County", "Zhouqu County", "Diebu County", "Maqu County", "Luqu County", "Xiahe County", "Other"] }, { "name": "Other", "area": ["Other"] }]
+	            "name": "Gansu", "city": [{ "name": "Lanzhou", "area": ["Chengguan District", "Qilihe District", "Xigu District", "Anning District", "Honggu District", "Yongdeng County", "Gaolan County", "Yuzhong County", "Other"] }, { "name": "Jiayuguan", "area": ["Jiayuguan City", "Other"] }, { "name": "Jinchang", "area": ["Jinchuan District", "Yongchang County", "Other"] }, { "name": "Baiyin", "area": ["Baiyin area", "Pingchuan District", "Jingyuan County", "Huining County", "Jingtai County", "Other"] }, { "name": "Tianshui", "area": ["Qingshui County", "Qin'an County", "Gangu County", "Wushan County", "Zhangjiachuan Hui Autonomous County", "Beidao District", "Qincheng District", "Other"] }, { "name": "Wuwei", "area": ["Liangzhou District", "Minqin County", "Gulang County", "Tianzhu Tibetan Autonomous County", "Other"] }, { "name": "Jiuquan", "area": ["Suzhou District", "Yumen City", "Dunhuang City", "Jinta County", "Subei Mongolian Autonomous County", "Akesai Kazakh Autonomous County", "Anxi County", "Other"] }, { "name": "Zhangye", "area": ["Ganzhou District", "Minle County", "Linze County", "Gaotai County", "Shandan County", "Sunan Yugu Autonomous County", "Other"] }, { "name": "Qingyang", "area": ["Xifeng District", "Qingcheng County", "Huan County", "Huachi County", "Heshui County", "Zhengning County", "Ning County", "Zhenyuan County", "Other"] }, { "name": "Pingliang", "area": ["Kongtong District", "Jingchuan County", "Lingtai County", "Chongxin County", "Huating County", "Zhuanglang County", "Jingning County", "Other"] }, { "name": "Dingxi", "area": ["Anding District", "Tongwei County", "Lintao County", "Zhang County", "Min County", "Weiyuan County", "Longxi County", "Other"] }, { "name": "Longnan", "area": ["Wudu District", "Cheng County", "Tanchang County", "Kang County", "Wen County", "Xihe County", "Li County", "Liangdang County", "Hui County", "Other"] }, { "name": "Linxia Hui Autonomous Prefecture", "area": ["Linxia City", "Linxia County", "Kangle County", "Yongjing County", "Guanghe County", "Hezheng County", "Dongxiang Autonomous County", "Jishishan Baoan Dongxiang Sala Autonomous County", "Other"] }, { "name": "Gannan Tibetan Autonomous Prefecture", "area": ["Hezuo City", "Lintan County", "Zhuoni County", "Zhouqu County", "Diebu County", "Maqu County", "Luqu County", "Xiahe County", "Other"] }, { "name": "Other", "area": ["Other"] }]
 	}, {
-	    "name": "Qinghai", "city": [{ "name": "Xining", "area": ["Chengzhong District", "Chengdong District", "Chengxi District", "Chengbei District", "Huangyuan County", "Huangzhong County", "Datong Hui Nationality Autonomous County", "Other"] }, { "name": "Haidong area", "area": ["Pingan County", "Ledu County", "Minhe Hui and Tu Autonomous County", "Huzhu Tu Autonomous County", "Hualong Hui Autonomous County", "Xunhua Sala Autonomous County", "Other"] }, { "name": "Haibei Tibetan Autonomous Prefecture", "area": ["Haiyan County", "Qilian County", "Gangcha County", "Menyuan Hui Autonomous County", "Other"] }, { "name": "Hainan Tibetan Autonomous Prefecture", "area": ["Gonghe County", "Tongde County", "Guide County", "Xinghai County", "Guinan County", "Other"] }, { "name": "Huangnan Tibetan Autonomous Prefecture", "area": ["Tongren County", "Jianzha County", "Zeku County", "Henan Mongolian Autonomous County", "Other"] }, { "name": "Guoluo Tibetan Autonomous Prefecture", "area": ["Maqin County", "Banma County", "Gande County", "Dari County", "Jiuzhi County", "Maduo County", "Other"] }, { "name": "Yushu Tibetan Autonomous Prefecture", "area": ["Yushu County", "Zaduo County", "Chengduo County", "Zhiduo County", "Nangqian County", "Qumalai County", "Other"] }, { "name": "Haixi Mongolian and Tibetan Autonomous Prefecture", "area": ["Delingha City", "Golmud City", "Wulan County", "Dulan County", "Tianjun County", "Other"] }, { "name": "Other", "area": ["Other"] }]
+	            "name": "Qinghai", "city": [{ "name": "Xining", "area": ["Chengzhong District", "Chengdong District", "Chengxi District", "Chengbei District", "Huangyuan County", "Huangzhong County", "Datong Hui Nationality Autonomous County", "Other"] }, { "name": "Haidong area", "area": ["Pingan County", "Ledu County", "Minhe Hui and Tu Autonomous County", "Huzhu Tu Autonomous County", "Hualong Hui Autonomous County", "Xunhua Sala Autonomous County", "Other"] }, { "name": "Haibei Tibetan Autonomous Prefecture", "area": ["Haiyan County", "Qilian County", "Gangcha County", "Menyuan Hui Autonomous County", "Other"] }, { "name": "Hainan Tibetan Autonomous Prefecture", "area": ["Gonghe County", "Tongde County", "Guide County", "Xinghai County", "Guinan County", "Other"] }, { "name": "Huangnan Tibetan Autonomous Prefecture", "area": ["Tongren County", "Jianzha County", "Zeku County", "Henan Mongolian Autonomous County", "Other"] }, { "name": "Guoluo Tibetan Autonomous Prefecture", "area": ["Maqin County", "Banma County", "Gande County", "Dari County", "Jiuzhi County", "Maduo County", "Other"] }, { "name": "Yushu Tibetan Autonomous Prefecture", "area": ["Yushu County", "Zaduo County", "Chengduo County", "Zhiduo County", "Nangqian County", "Qumalai County", "Other"] }, { "name": "Haixi Mongolian and Tibetan Autonomous Prefecture", "area": ["Delingha City", "Golmud City", "Wulan County", "Dulan County", "Tianjun County", "Other"] }, { "name": "Other", "area": ["Other"] }]
 	}, {
-	    "name": "Ningxia", "city": [{ "name": "Yinchuan", "area": ["Xingqing District", "Xixia District", "Jinfeng District", "Lingwu City", "Yongning County", "Helan County", "Other"] }, { "name": "Shizuishan", "area": ["Dawukou District", "Huinong District", "Pingluo County", "Other"] }, { "name": "Wuzhong", "area": ["Litong District", "Qingtongxia City", "Yanchi County", "Tongxin County", "Other"] }, { "name": "Guyuan", "area": ["Yuanzhou District", "Xiji County", "Longde County", "Jingyuan County", "Pengyang County", "Other"] }, { "name": "Zhongwei", "area": ["Shapotou District", "Zhongning County", "Haiyuan County", "Other"] }, { "name": "Other", "area": ["Other"] }]
+	            "name": "Ningxia", "city": [{ "name": "Yinchuan", "area": ["Xingqing District", "Xixia District", "Jinfeng District", "Lingwu City", "Yongning County", "Helan County", "Other"] }, { "name": "Shizuishan", "area": ["Dawukou District", "Huinong District", "Pingluo County", "Other"] }, { "name": "Wuzhong", "area": ["Litong District", "Qingtongxia City", "Yanchi County", "Tongxin County", "Other"] }, { "name": "Guyuan", "area": ["Yuanzhou District", "Xiji County", "Longde County", "Jingyuan County", "Pengyang County", "Other"] }, { "name": "Zhongwei", "area": ["Shapotou District", "Zhongning County", "Haiyuan County", "Other"] }, { "name": "Other", "area": ["Other"] }]
 	}, {
-	    "name": "Xinjiang", "city": [{ "name": "Urumqi", "area": ["Tianshan District", "Shaybak District", "New Urban Area", "Shuimogou District", "Toutunhe District", "Dabancheng District", "Dongshan District", "Urumqi County", "Other"] }, { "name": "Karamay", "area": ["Karamay District", "Dushanzi District", "Baijitan area", "Urho District", "Other"] }, { "name": "Turpan Area", "area": ["Turpan City", "Toksun County", "Shanshan County", "Other"] }, { "name": "Hami area", "area": ["Hami City", "Yiwu County", "Balikun Kazakh Autonomous County", "Other"] }, { "name": "Hotan area", "area": ["Hotan City", "Hotan County", "Luopu County", "Minfeng County", "Pishan County", "Celle County", "Yutian County", "Moyu County", "Other"] }, { "name": "Aksu Area", "area": ["Aksu City", "Wensu County", "Shaya County", "Baicheng County", "Awati County", "Kuche County", "Keping County", "Xinhe County", "Wushi County", "Other"] }, { "name": "Kashgar Area", "area": ["Kashgar City", "Bachu County", "Zepu County", "Jiashi County", "Yecheng County", "Yuepuhu County", "Shule County", "Makati County", "Yingjisha County", "Shache County", "Shufu County", "Tashkurgan Tajik Autonomous County", "Other"] }, { "name": "Kizilsu Kirghiz Autonomous Prefecture", "area": ["Atushi City", "Aheqi County", "Wuqia County", "Akto County", "Other"] }, { "name": "Bayin Guoyu Mongolian Autonomous Prefecture", "area": ["Korla City", "Hejing County", "Yuli County", "Heshuo County", "Qiemo County", "Bohu County", "Luntai County", "Ruoqiang County", "Yanqi Hui Autonomous County", "Other"] }, { "name": "Changji Hui Autonomous Prefecture", "area": ["Changji City", "Fukang City", "Qitai County", "Manas County", "Jimsar County", "Hutubi County", "Mulei Kazakh Autonomous County", "Miquan City", "Other"] }, { "name": "Bortala Mongolian Autonomous Prefecture", "area": ["Bole City", "Jinghe County", "Wenquan County", "Other"] }, { "name": "Shihezi", "area": ["Shihezi"] }, { "name": "Alar", "area": ["Alar"] }, { "name": "Tumushuk", "area": ["Tumushuk"] }, { "name": "Wujiaqu", "area": ["Wujiaqu"] }, { "name": "Ili Kazakh Autonomous Prefecture", "area": ["Yining City", "Kuitun City", "Yining County", "Turks County", "Nilek County", "Zhaosu County", "Xinyuan County", "Huocheng County", "Gongliu County", "Chabuchar Xibe Autonomous County", "Tacheng Area", "Altay Area", "Other"] }, { "name": "Other", "area": ["Other"] }]
+	            "name": "Xinjiang", "city": [{ "name": "Urumqi", "area": ["Tianshan District", "Shaybak District", "New Urban Area", "Shuimogou District", "Toutunhe District", "Dabancheng District", "Dongshan District", "Urumqi County", "Other"] }, { "name": "Karamay", "area": ["Karamay District", "Dushanzi District", "Baijitan area", "Urho District", "Other"] }, { "name": "Turpan Area", "area": ["Turpan City", "Toksun County", "Shanshan County", "Other"] }, { "name": "Hami area", "area": ["Hami City", "Yiwu County", "Balikun Kazakh Autonomous County", "Other"] }, { "name": "Hotan area", "area": ["Hotan City", "Hotan County", "Luopu County", "Minfeng County", "Pishan County", "Celle County", "Yutian County", "Moyu County", "Other"] }, { "name": "Aksu Area", "area": ["Aksu City", "Wensu County", "Shaya County", "Baicheng County", "Awati County", "Kuche County", "Keping County", "Xinhe County", "Wushi County", "Other"] }, { "name": "Kashgar Area", "area": ["Kashgar City", "Bachu County", "Zepu County", "Jiashi County", "Yecheng County", "Yuepuhu County", "Shule County", "Makati County", "Yingjisha County", "Shache County", "Shufu County", "Tashkurgan Tajik Autonomous County", "Other"] }, { "name": "Kizilsu Kirghiz Autonomous Prefecture", "area": ["Atushi City", "Aheqi County", "Wuqia County", "Akto County", "Other"] }, { "name": "Bayin Guoyu Mongolian Autonomous Prefecture", "area": ["Korla City", "Hejing County", "Yuli County", "Heshuo County", "Qiemo County", "Bohu County", "Luntai County", "Ruoqiang County", "Yanqi Hui Autonomous County", "Other"] }, { "name": "Changji Hui Autonomous Prefecture", "area": ["Changji City", "Fukang City", "Qitai County", "Manas County", "Jimsar County", "Hutubi County", "Mulei Kazakh Autonomous County", "Miquan City", "Other"] }, { "name": "Bortala Mongolian Autonomous Prefecture", "area": ["Bole City", "Jinghe County", "Wenquan County", "Other"] }, { "name": "Shihezi", "area": ["Shihezi"] }, { "name": "Alar", "area": ["Alar"] }, { "name": "Tumushuk", "area": ["Tumushuk"] }, { "name": "Wujiaqu", "area": ["Wujiaqu"] }, { "name": "Ili Kazakh Autonomous Prefecture", "area": ["Yining City", "Kuitun City", "Yining County", "Turks County", "Nilek County", "Zhaosu County", "Xinyuan County", "Huocheng County", "Gongliu County", "Chabuchar Xibe Autonomous County", "Tacheng Area", "Altay Area", "Other"] }, { "name": "Other", "area": ["Other"] }]
 	}, {
-	    "name": "Taiwan", "city": [{ "name": "Taiwan", "area": ["Taipei City", "Kaohsiung City", "Taipei County", "Taoyuan County", "Hsinchu County", "Miaoli County", "Taichung County", "Changhua County", "Nantou County", "Yunlin County", "Chiayi County", "Tainan County", "Kaohsiung County", "Pingtung County", "Yilan County", "Hualien County", "Taitung County", "Wuhu County", "Keelung City", "Hsinchu City", "Taichung City", "Chiayi City", "Tainan City", "Other"] }, { "name": "Other", "area": ["Other"] }]
+	            "name": "Taiwan", "city": [{ "name": "Taiwan", "area": ["Taipei City", "Kaohsiung City", "Taipei County", "Taoyuan County", "Hsinchu County", "Miaoli County", "Taichung County", "Changhua County", "Nantou County", "Yunlin County", "Chiayi County", "Tainan County", "Kaohsiung County", "Pingtung County", "Yilan County", "Hualien County", "Taitung County", "Wuhu County", "Keelung City", "Hsinchu City", "Taichung City", "Chiayi City", "Tainan City", "Other"] }, { "name": "Other", "area": ["Other"] }]
 	}, {
-	    "name": "Macao", "city": [{ "name": "Macao", "area": ["Huadi Matang District", "Freguesia De Santo António ", "Sé Freguesias", "Wangdetang District", "Fengshuntang District", "Jiamotang District", "San Francesco Di Assisi District", "Ludang", "Other"] }]
+	            "name": "Macao", "city": [{ "name": "Macao", "area": ["Huadi Matang District", "Freguesia De Santo António ", "Sé Freguesias", "Wangdetang District", "Fengshuntang District", "Jiamotang District", "San Francesco Di Assisi District", "Ludang", "Other"] }]
 	}, {
-	    "name": "Hong Kong", "city": [{ "name": "Hong Kong", "area": ["Central and Western District", "Wanchai District", "Eastern District", "Southern District", "Sham Shui Po District", "Yau Tsim Mong District", "Kowloon City District", "Wong Tai Sin District", "Kwun Tong District", "Northern District", "Tai Po District", "Sha Tin District", "Sai Kung District", "Yuen Long District", "Tuen Mun District", "Quanwan District", "Kwai Tsing District", "Lidao District", "Other"] }]
+	            "name": "Hong Kong", "city": [{ "name": "Hong Kong", "area": ["Central and Western District", "Wanchai District", "Eastern District", "Southern District", "Sham Shui Po District", "Yau Tsim Mong District", "Kowloon City District", "Wong Tai Sin District", "Kwun Tong District", "Northern District", "Tai Po District", "Sha Tin District", "Sai Kung District", "Yuen Long District", "Tuen Mun District", "Quanwan District", "Kwai Tsing District", "Lidao District", "Other"] }]
 	}];
 	exports["default"] = provinceData;
 	module.exports = exports["default"];
@@ -55399,6 +55419,6391 @@
 	}(_react.Component);
 	
 	exports['default'] = Demo5;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 383 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _src = __webpack_require__(268);
+	
+	var _src2 = _interopRequireDefault(_src);
+	
+	var _beeForm = __webpack_require__(384);
+	
+	var _beeForm2 = _interopRequireDefault(_beeForm);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * @title 应用到form表单；
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * @description 在getFieldProps中设置initialValue以指定初始化值，若不需默认值只需设置initialValue：{ province:''}；
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+	
+	
+	var Demo6 = function (_Component) {
+		_inherits(Demo6, _Component);
+	
+		function Demo6() {
+			_classCallCheck(this, Demo6);
+	
+			var _this = _possibleConstructorReturn(this, _Component.call(this));
+	
+			_this.onChange = function (obj) {
+				console.log(obj);
+			};
+	
+			_this.state = {
+				value: { province: '山西', city: '长治', area: '长治县' },
+				// value: { province:''},//设置空值
+				disabled: true
+			};
+			return _this;
+		}
+	
+		Demo6.prototype.render = function render() {
+			var _props$form = this.props.form,
+			    getFieldProps = _props$form.getFieldProps,
+			    getFieldValue = _props$form.getFieldValue;
+	
+			return _react2['default'].createElement(
+				'div',
+				null,
+				_react2['default'].createElement(_src2['default'], _extends({ lang: 'zh_CN', allowClear: true
+				}, getFieldProps("areaInfo")))
+			);
+		};
+	
+		return Demo6;
+	}(_react.Component);
+	
+	exports['default'] = _beeForm2['default'].createForm()(Demo6);
+	module.exports = exports['default'];
+
+/***/ }),
+/* 384 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _Form = __webpack_require__(385);
+	
+	var _Form2 = _interopRequireDefault(_Form);
+	
+	var _FormItem = __webpack_require__(492);
+	
+	var _FormItem2 = _interopRequireDefault(_FormItem);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	_Form2["default"].FormItem = _FormItem2["default"];
+	exports["default"] = _Form2["default"];
+	module.exports = exports['default'];
+
+/***/ }),
+/* 385 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _propTypes = __webpack_require__(6);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _rcForm = __webpack_require__(386);
+	
+	var _classnames = __webpack_require__(5);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+	
+	var propTypes = {
+	    prefixCls: _propTypes2["default"].string,
+	    onSubmit: _propTypes2["default"].func
+	};
+	var defaultProps = {
+	    prefixCls: 'u-form',
+	    onSubmit: function onSubmit() {}
+	};
+	
+	var Form = function (_Component) {
+	    _inherits(Form, _Component);
+	
+	    function Form(props) {
+	        _classCallCheck(this, Form);
+	
+	        return _possibleConstructorReturn(this, _Component.call(this, props));
+	    }
+	
+	    Form.prototype.render = function render() {
+	        var _props = this.props,
+	            prefixCls = _props.prefixCls,
+	            _props$className = _props.className,
+	            className = _props$className === undefined ? '' : _props$className,
+	            children = _props.children,
+	            style = _props.style,
+	            onSubmit = _props.onSubmit;
+	
+	        var formClassName = (0, _classnames2["default"])(prefixCls, className);
+	        return _react2["default"].createElement(
+	            'form',
+	            { className: prefixCls + ' ' + className, style: style, onSubmit: onSubmit },
+	            children
+	        );
+	    };
+	
+	    return Form;
+	}(_react.Component);
+	
+	;
+	Form.createForm = _rcForm.createForm;
+	Form.createFormField = _rcForm.createFormField;
+	Form.propTypes = propTypes;
+	Form.defaultProps = defaultProps;
+	exports["default"] = Form;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 386 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.createForm = exports.formShape = exports.createFormField = undefined;
+	
+	var _createForm = __webpack_require__(387);
+	
+	var _createForm2 = _interopRequireDefault(_createForm);
+	
+	var _createFormField = __webpack_require__(489);
+	
+	var _createFormField2 = _interopRequireDefault(_createFormField);
+	
+	var _propTypes = __webpack_require__(491);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	exports.createFormField = _createFormField2['default'];
+	exports.formShape = _propTypes2['default'];
+	exports.createForm = _createForm2['default']; // export this package's api
+
+/***/ }),
+/* 387 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.mixin = undefined;
+	
+	var _createBaseForm = __webpack_require__(388);
+	
+	var _createBaseForm2 = _interopRequireDefault(_createBaseForm);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	var mixin = exports.mixin = {
+	  getForm: function getForm() {
+	    return {
+	      getFieldsValue: this.fieldsStore.getFieldsValue,
+	      getFieldValue: this.fieldsStore.getFieldValue,
+	      getFieldInstance: this.getFieldInstance,
+	      setFieldsValue: this.setFieldsValue,
+	      setFields: this.setFields,
+	      setFieldsInitialValue: this.fieldsStore.setFieldsInitialValue,
+	      getFieldDecorator: this.getFieldDecorator,
+	      getFieldProps: this.getFieldProps,
+	      getFieldsError: this.fieldsStore.getFieldsError,
+	      getFieldError: this.fieldsStore.getFieldError,
+	      isFieldValidating: this.fieldsStore.isFieldValidating,
+	      isFieldsValidating: this.fieldsStore.isFieldsValidating,
+	      isFieldsTouched: this.fieldsStore.isFieldsTouched,
+	      isFieldTouched: this.fieldsStore.isFieldTouched,
+	      isSubmitting: this.isSubmitting,
+	      submit: this.submit,
+	      validateFields: this.validateFields,
+	      resetFields: this.resetFields
+	    };
+	  }
+	};
+	
+	function createForm(options) {
+	  return (0, _createBaseForm2['default'])(options, [mixin]);
+	}
+	
+	exports['default'] = createForm;
+
+/***/ }),
+/* 388 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _objectWithoutProperties2 = __webpack_require__(277);
+	
+	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+	
+	var _defineProperty2 = __webpack_require__(345);
+	
+	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+	
+	var _extends5 = __webpack_require__(275);
+	
+	var _extends6 = _interopRequireDefault(_extends5);
+	
+	var _toConsumableArray2 = __webpack_require__(389);
+	
+	var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _createReactClass = __webpack_require__(399);
+	
+	var _createReactClass2 = _interopRequireDefault(_createReactClass);
+	
+	var _asyncValidator = __webpack_require__(405);
+	
+	var _asyncValidator2 = _interopRequireDefault(_asyncValidator);
+	
+	var _warning = __webpack_require__(32);
+	
+	var _warning2 = _interopRequireDefault(_warning);
+	
+	var _get = __webpack_require__(430);
+	
+	var _get2 = _interopRequireDefault(_get);
+	
+	var _set = __webpack_require__(482);
+	
+	var _set2 = _interopRequireDefault(_set);
+	
+	var _eq = __webpack_require__(467);
+	
+	var _eq2 = _interopRequireDefault(_eq);
+	
+	var _createFieldsStore = __webpack_require__(488);
+	
+	var _createFieldsStore2 = _interopRequireDefault(_createFieldsStore);
+	
+	var _utils = __webpack_require__(490);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	var DEFAULT_TRIGGER = 'onChange'; /* eslint-disable react/prefer-es6-class */
+	/* eslint-disable prefer-promise-reject-errors */
+	
+	function createBaseForm() {
+	  var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+	  var mixins = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+	  var validateMessages = option.validateMessages,
+	      onFieldsChange = option.onFieldsChange,
+	      onValuesChange = option.onValuesChange,
+	      _option$mapProps = option.mapProps,
+	      mapProps = _option$mapProps === undefined ? _utils.identity : _option$mapProps,
+	      mapPropsToFields = option.mapPropsToFields,
+	      fieldNameProp = option.fieldNameProp,
+	      fieldMetaProp = option.fieldMetaProp,
+	      fieldDataProp = option.fieldDataProp,
+	      _option$formPropName = option.formPropName,
+	      formPropName = _option$formPropName === undefined ? 'form' : _option$formPropName,
+	      formName = option.name,
+	      withRef = option.withRef;
+	
+	
+	  return function decorate(WrappedComponent) {
+	    var Form = (0, _createReactClass2['default'])({
+	      displayName: 'Form',
+	
+	      mixins: mixins,
+	
+	      getInitialState: function getInitialState() {
+	        var _this = this;
+	
+	        var fields = mapPropsToFields && mapPropsToFields(this.props);
+	        this.fieldsStore = (0, _createFieldsStore2['default'])(fields || {});
+	
+	        this.instances = {};
+	        this.cachedBind = {};
+	        this.clearedFieldMetaCache = {};
+	
+	        this.renderFields = {};
+	        this.domFields = {};
+	
+	        // HACK: https://github.com/ant-design/ant-design/issues/6406
+	        ['getFieldsValue', 'getFieldValue', 'setFieldsInitialValue', 'getFieldsError', 'getFieldError', 'isFieldValidating', 'isFieldsValidating', 'isFieldsTouched', 'isFieldTouched'].forEach(function (key) {
+	          _this[key] = function () {
+	            var _fieldsStore;
+	
+	            if (process.env.NODE_ENV !== 'production') {
+	              (0, _warning2['default'])(false, 'you should not use `ref` on enhanced form, please use `wrappedComponentRef`. ' + 'See: https://github.com/react-component/form#note-use-wrappedcomponentref-instead-of-withref-after-rc-form140');
+	            }
+	            return (_fieldsStore = _this.fieldsStore)[key].apply(_fieldsStore, arguments);
+	          };
+	        });
+	
+	        return {
+	          submitting: false
+	        };
+	      },
+	      componentDidMount: function componentDidMount() {
+	        this.cleanUpUselessFields();
+	      },
+	      componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	        if (mapPropsToFields) {
+	          this.fieldsStore.updateFields(mapPropsToFields(nextProps));
+	        }
+	      },
+	      componentDidUpdate: function componentDidUpdate() {
+	        this.cleanUpUselessFields();
+	      },
+	      onCollectCommon: function onCollectCommon(name, action, args) {
+	        var fieldMeta = this.fieldsStore.getFieldMeta(name);
+	        if (fieldMeta[action]) {
+	          fieldMeta[action].apply(fieldMeta, (0, _toConsumableArray3['default'])(args));
+	        } else if (fieldMeta.originalProps && fieldMeta.originalProps[action]) {
+	          var _fieldMeta$originalPr;
+	
+	          (_fieldMeta$originalPr = fieldMeta.originalProps)[action].apply(_fieldMeta$originalPr, (0, _toConsumableArray3['default'])(args));
+	        }
+	        var value = fieldMeta.getValueFromEvent ? fieldMeta.getValueFromEvent.apply(fieldMeta, (0, _toConsumableArray3['default'])(args)) : _utils.getValueFromEvent.apply(undefined, (0, _toConsumableArray3['default'])(args));
+	        if (onValuesChange && value !== this.fieldsStore.getFieldValue(name)) {
+	          var valuesAll = this.fieldsStore.getAllValues();
+	          var valuesAllSet = {};
+	          valuesAll[name] = value;
+	          Object.keys(valuesAll).forEach(function (key) {
+	            return (0, _set2['default'])(valuesAllSet, key, valuesAll[key]);
+	          });
+	          onValuesChange((0, _extends6['default'])((0, _defineProperty3['default'])({}, formPropName, this.getForm()), this.props), (0, _set2['default'])({}, name, value), valuesAllSet);
+	        }
+	        var field = this.fieldsStore.getField(name);
+	        return { name: name, field: (0, _extends6['default'])({}, field, { value: value, touched: true }), fieldMeta: fieldMeta };
+	      },
+	      onCollect: function onCollect(name_, action) {
+	        for (var _len = arguments.length, args = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+	          args[_key - 2] = arguments[_key];
+	        }
+	
+	        var _onCollectCommon = this.onCollectCommon(name_, action, args),
+	            name = _onCollectCommon.name,
+	            field = _onCollectCommon.field,
+	            fieldMeta = _onCollectCommon.fieldMeta;
+	
+	        var validate = fieldMeta.validate;
+	
+	
+	        this.fieldsStore.setFieldsAsDirty();
+	
+	        var newField = (0, _extends6['default'])({}, field, {
+	          dirty: (0, _utils.hasRules)(validate)
+	        });
+	        this.setFields((0, _defineProperty3['default'])({}, name, newField));
+	      },
+	      onCollectValidate: function onCollectValidate(name_, action) {
+	        for (var _len2 = arguments.length, args = Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
+	          args[_key2 - 2] = arguments[_key2];
+	        }
+	
+	        var _onCollectCommon2 = this.onCollectCommon(name_, action, args),
+	            field = _onCollectCommon2.field,
+	            fieldMeta = _onCollectCommon2.fieldMeta;
+	
+	        var newField = (0, _extends6['default'])({}, field, {
+	          dirty: true
+	        });
+	
+	        this.fieldsStore.setFieldsAsDirty();
+	
+	        this.validateFieldsInternal([newField], {
+	          action: action,
+	          options: {
+	            firstFields: !!fieldMeta.validateFirst
+	          }
+	        });
+	      },
+	      getCacheBind: function getCacheBind(name, action, fn) {
+	        if (!this.cachedBind[name]) {
+	          this.cachedBind[name] = {};
+	        }
+	        var cache = this.cachedBind[name];
+	        if (!cache[action] || cache[action].oriFn !== fn) {
+	          cache[action] = {
+	            fn: fn.bind(this, name, action),
+	            oriFn: fn
+	          };
+	        }
+	        return cache[action].fn;
+	      },
+	      getFieldDecorator: function getFieldDecorator(name, fieldOption) {
+	        var _this2 = this;
+	
+	        var props = this.getFieldProps(name, fieldOption);
+	        return function (fieldElem) {
+	          // We should put field in record if it is rendered
+	          _this2.renderFields[name] = true;
+	
+	          var fieldMeta = _this2.fieldsStore.getFieldMeta(name);
+	          var originalProps = fieldElem.props;
+	          if (process.env.NODE_ENV !== 'production') {
+	            var valuePropName = fieldMeta.valuePropName;
+	            (0, _warning2['default'])(!(valuePropName in originalProps), '`getFieldDecorator` will override `' + valuePropName + '`, ' + ('so please don\'t set `' + valuePropName + '` directly ') + 'and use `setFieldsValue` to set it.');
+	            var defaultValuePropName = 'default' + valuePropName[0].toUpperCase() + valuePropName.slice(1);
+	            (0, _warning2['default'])(!(defaultValuePropName in originalProps), '`' + defaultValuePropName + '` is invalid ' + ('for `getFieldDecorator` will set `' + valuePropName + '`,') + ' please use `option.initialValue` instead.');
+	          }
+	          fieldMeta.originalProps = originalProps;
+	          fieldMeta.ref = fieldElem.ref;
+	          return _react2['default'].cloneElement(fieldElem, (0, _extends6['default'])({}, props, _this2.fieldsStore.getFieldValuePropValue(fieldMeta)));
+	        };
+	      },
+	      getFieldProps: function getFieldProps(name) {
+	        var _this3 = this;
+	
+	        var usersFieldOption = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+	
+	        if (!name) {
+	          throw new Error('Must call `getFieldProps` with valid name string!');
+	        }
+	        if (process.env.NODE_ENV !== 'production') {
+	          (0, _warning2['default'])(this.fieldsStore.isValidNestedFieldName(name), 'One field name cannot be part of another, e.g. `a` and `a.b`. Check field: ' + name);
+	          (0, _warning2['default'])(!('exclusive' in usersFieldOption), '`option.exclusive` of `getFieldProps`|`getFieldDecorator` had been remove.');
+	        }
+	
+	        delete this.clearedFieldMetaCache[name];
+	
+	        var fieldOption = (0, _extends6['default'])({
+	          name: name,
+	          trigger: DEFAULT_TRIGGER,
+	          valuePropName: 'value',
+	          validate: []
+	        }, usersFieldOption);
+	
+	        var rules = fieldOption.rules,
+	            trigger = fieldOption.trigger,
+	            _fieldOption$validate = fieldOption.validateTrigger,
+	            validateTrigger = _fieldOption$validate === undefined ? trigger : _fieldOption$validate,
+	            validate = fieldOption.validate;
+	
+	
+	        var fieldMeta = this.fieldsStore.getFieldMeta(name);
+	        if ('initialValue' in fieldOption) {
+	          fieldMeta.initialValue = fieldOption.initialValue;
+	        }
+	
+	        var inputProps = (0, _extends6['default'])({}, this.fieldsStore.getFieldValuePropValue(fieldOption), {
+	          ref: this.getCacheBind(name, name + '__ref', this.saveRef)
+	        });
+	        if (fieldNameProp) {
+	          inputProps[fieldNameProp] = formName ? formName + '_' + name : name;
+	        }
+	
+	        var validateRules = (0, _utils.normalizeValidateRules)(validate, rules, validateTrigger);
+	        var validateTriggers = (0, _utils.getValidateTriggers)(validateRules);
+	        validateTriggers.forEach(function (action) {
+	          if (inputProps[action]) return;
+	          inputProps[action] = _this3.getCacheBind(name, action, _this3.onCollectValidate);
+	        });
+	
+	        // make sure that the value will be collect
+	        if (trigger && validateTriggers.indexOf(trigger) === -1) {
+	          inputProps[trigger] = this.getCacheBind(name, trigger, this.onCollect);
+	        }
+	
+	        var meta = (0, _extends6['default'])({}, fieldMeta, fieldOption, {
+	          validate: validateRules
+	        });
+	        this.fieldsStore.setFieldMeta(name, meta);
+	        if (fieldMetaProp) {
+	          inputProps[fieldMetaProp] = meta;
+	        }
+	
+	        if (fieldDataProp) {
+	          inputProps[fieldDataProp] = this.fieldsStore.getField(name);
+	        }
+	
+	        // This field is rendered, record it
+	        this.renderFields[name] = true;
+	
+	        return inputProps;
+	      },
+	      getFieldInstance: function getFieldInstance(name) {
+	        return this.instances[name];
+	      },
+	      getRules: function getRules(fieldMeta, action) {
+	        var actionRules = fieldMeta.validate.filter(function (item) {
+	          return !action || item.trigger.indexOf(action) >= 0;
+	        }).map(function (item) {
+	          return item.rules;
+	        });
+	        return (0, _utils.flattenArray)(actionRules);
+	      },
+	      setFields: function setFields(maybeNestedFields, callback) {
+	        var _this4 = this;
+	
+	        var fields = this.fieldsStore.flattenRegisteredFields(maybeNestedFields);
+	        this.fieldsStore.setFields(fields);
+	        if (onFieldsChange) {
+	          var changedFields = Object.keys(fields).reduce(function (acc, name) {
+	            return (0, _set2['default'])(acc, name, _this4.fieldsStore.getField(name));
+	          }, {});
+	          onFieldsChange((0, _extends6['default'])((0, _defineProperty3['default'])({}, formPropName, this.getForm()), this.props), changedFields, this.fieldsStore.getNestedAllFields());
+	        }
+	        this.forceUpdate(callback);
+	      },
+	      setFieldsValue: function setFieldsValue(changedValues, callback) {
+	        var fieldsMeta = this.fieldsStore.fieldsMeta;
+	
+	        var values = this.fieldsStore.flattenRegisteredFields(changedValues);
+	        var newFields = Object.keys(values).reduce(function (acc, name) {
+	          var isRegistered = fieldsMeta[name];
+	          if (process.env.NODE_ENV !== 'production') {
+	            (0, _warning2['default'])(isRegistered, 'Cannot use `setFieldsValue` until ' + 'you use `getFieldDecorator` or `getFieldProps` to register it.');
+	          }
+	          if (isRegistered) {
+	            var value = values[name];
+	            acc[name] = {
+	              value: value
+	            };
+	          }
+	          return acc;
+	        }, {});
+	        this.setFields(newFields, callback);
+	        if (onValuesChange) {
+	          var allValues = this.fieldsStore.getAllValues();
+	          onValuesChange((0, _extends6['default'])((0, _defineProperty3['default'])({}, formPropName, this.getForm()), this.props), changedValues, allValues);
+	        }
+	      },
+	      saveRef: function saveRef(name, _, component) {
+	        if (!component) {
+	          var _fieldMeta = this.fieldsStore.getFieldMeta(name);
+	          if (!_fieldMeta.preserve) {
+	            // after destroy, delete data
+	            this.clearedFieldMetaCache[name] = {
+	              field: this.fieldsStore.getField(name),
+	              meta: _fieldMeta
+	            };
+	            this.clearField(name);
+	          }
+	          delete this.domFields[name];
+	          return;
+	        }
+	        this.domFields[name] = true;
+	        this.recoverClearedField(name);
+	        var fieldMeta = this.fieldsStore.getFieldMeta(name);
+	        if (fieldMeta) {
+	          var ref = fieldMeta.ref;
+	          if (ref) {
+	            if (typeof ref === 'string') {
+	              throw new Error('can not set ref string for ' + name);
+	            } else if (typeof ref === 'function') {
+	              ref(component);
+	            } else if (Object.prototype.hasOwnProperty.call(ref, 'current')) {
+	              ref.current = component;
+	            }
+	          }
+	        }
+	        this.instances[name] = component;
+	      },
+	      cleanUpUselessFields: function cleanUpUselessFields() {
+	        var _this5 = this;
+	
+	        var fieldList = this.fieldsStore.getAllFieldsName();
+	        var removedList = fieldList.filter(function (field) {
+	          var fieldMeta = _this5.fieldsStore.getFieldMeta(field);
+	          return !_this5.renderFields[field] && !_this5.domFields[field] && !fieldMeta.preserve;
+	        });
+	        if (removedList.length) {
+	          removedList.forEach(this.clearField);
+	        }
+	        this.renderFields = {};
+	      },
+	      clearField: function clearField(name) {
+	        this.fieldsStore.clearField(name);
+	        delete this.instances[name];
+	        delete this.cachedBind[name];
+	      },
+	      resetFields: function resetFields(ns) {
+	        var _this6 = this;
+	
+	        var newFields = this.fieldsStore.resetFields(ns);
+	        if (Object.keys(newFields).length > 0) {
+	          this.setFields(newFields);
+	        }
+	        if (ns) {
+	          var names = Array.isArray(ns) ? ns : [ns];
+	          names.forEach(function (name) {
+	            return delete _this6.clearedFieldMetaCache[name];
+	          });
+	        } else {
+	          this.clearedFieldMetaCache = {};
+	        }
+	      },
+	      recoverClearedField: function recoverClearedField(name) {
+	        if (this.clearedFieldMetaCache[name]) {
+	          this.fieldsStore.setFields((0, _defineProperty3['default'])({}, name, this.clearedFieldMetaCache[name].field));
+	          this.fieldsStore.setFieldMeta(name, this.clearedFieldMetaCache[name].meta);
+	          delete this.clearedFieldMetaCache[name];
+	        }
+	      },
+	      validateFieldsInternal: function validateFieldsInternal(fields, _ref, callback) {
+	        var _this7 = this;
+	
+	        var fieldNames = _ref.fieldNames,
+	            action = _ref.action,
+	            _ref$options = _ref.options,
+	            options = _ref$options === undefined ? {} : _ref$options;
+	
+	        var allRules = {};
+	        var allValues = {};
+	        var allFields = {};
+	        var alreadyErrors = {};
+	        fields.forEach(function (field) {
+	          var name = field.name;
+	          if (options.force !== true && field.dirty === false) {
+	            if (field.errors) {
+	              (0, _set2['default'])(alreadyErrors, name, { errors: field.errors });
+	            }
+	            return;
+	          }
+	          var fieldMeta = _this7.fieldsStore.getFieldMeta(name);
+	          var newField = (0, _extends6['default'])({}, field);
+	          newField.errors = undefined;
+	          newField.validating = true;
+	          newField.dirty = true;
+	          allRules[name] = _this7.getRules(fieldMeta, action);
+	          allValues[name] = newField.value;
+	          allFields[name] = newField;
+	        });
+	        this.setFields(allFields);
+	        // in case normalize
+	        Object.keys(allValues).forEach(function (f) {
+	          allValues[f] = _this7.fieldsStore.getFieldValue(f);
+	        });
+	        if (callback && (0, _utils.isEmptyObject)(allFields)) {
+	          callback((0, _utils.isEmptyObject)(alreadyErrors) ? null : alreadyErrors, this.fieldsStore.getFieldsValue(fieldNames));
+	          return;
+	        }
+	        var validator = new _asyncValidator2['default'](allRules);
+	        if (validateMessages) {
+	          validator.messages(validateMessages);
+	        }
+	        validator.validate(allValues, options, function (errors) {
+	          var errorsGroup = (0, _extends6['default'])({}, alreadyErrors);
+	          if (errors && errors.length) {
+	            errors.forEach(function (e) {
+	              var errorFieldName = e.field;
+	              var fieldName = errorFieldName;
+	
+	              // Handle using array validation rule.
+	              // ref: https://github.com/ant-design/ant-design/issues/14275
+	              Object.keys(allRules).some(function (ruleFieldName) {
+	                var rules = allRules[ruleFieldName] || [];
+	
+	                // Exist if match rule
+	                if (ruleFieldName === errorFieldName) {
+	                  fieldName = ruleFieldName;
+	                  return true;
+	                }
+	
+	                // Skip if not match array type
+	                if (rules.every(function (_ref2) {
+	                  var type = _ref2.type;
+	                  return type !== 'array';
+	                }) && errorFieldName.indexOf(ruleFieldName) !== 0) {
+	                  return false;
+	                }
+	
+	                // Exist if match the field name
+	                var restPath = errorFieldName.slice(ruleFieldName.length + 1);
+	                if (/^\d+$/.test(restPath)) {
+	                  fieldName = ruleFieldName;
+	                  return true;
+	                }
+	
+	                return false;
+	              });
+	
+	              var field = (0, _get2['default'])(errorsGroup, fieldName);
+	              if (typeof field !== 'object' || Array.isArray(field)) {
+	                (0, _set2['default'])(errorsGroup, fieldName, { errors: [] });
+	              }
+	              var fieldErrors = (0, _get2['default'])(errorsGroup, fieldName.concat('.errors'));
+	              fieldErrors.push(e);
+	            });
+	          }
+	          var expired = [];
+	          var nowAllFields = {};
+	          Object.keys(allRules).forEach(function (name) {
+	            var fieldErrors = (0, _get2['default'])(errorsGroup, name);
+	            var nowField = _this7.fieldsStore.getField(name);
+	            // avoid concurrency problems
+	            if (!(0, _eq2['default'])(nowField.value, allValues[name])) {
+	              expired.push({
+	                name: name
+	              });
+	            } else {
+	              nowField.errors = fieldErrors && fieldErrors.errors;
+	              nowField.value = allValues[name];
+	              nowField.validating = false;
+	              nowField.dirty = false;
+	              nowAllFields[name] = nowField;
+	            }
+	          });
+	          _this7.setFields(nowAllFields);
+	          if (callback) {
+	            if (expired.length) {
+	              expired.forEach(function (_ref3) {
+	                var name = _ref3.name;
+	
+	                var fieldErrors = [{
+	                  message: name + ' need to revalidate',
+	                  field: name
+	                }];
+	                (0, _set2['default'])(errorsGroup, name, {
+	                  expired: true,
+	                  errors: fieldErrors
+	                });
+	              });
+	            }
+	
+	            callback((0, _utils.isEmptyObject)(errorsGroup) ? null : errorsGroup, _this7.fieldsStore.getFieldsValue(fieldNames));
+	          }
+	        });
+	      },
+	      validateFields: function validateFields(ns, opt, cb) {
+	        var _this8 = this;
+	
+	        var pending = new Promise(function (resolve, reject) {
+	          var _getParams = (0, _utils.getParams)(ns, opt, cb),
+	              names = _getParams.names,
+	              options = _getParams.options;
+	
+	          var _getParams2 = (0, _utils.getParams)(ns, opt, cb),
+	              callback = _getParams2.callback;
+	
+	          if (!callback || typeof callback === 'function') {
+	            var oldCb = callback;
+	            callback = function callback(errors, values) {
+	              if (oldCb) {
+	                oldCb(errors, values);
+	              } else if (errors) {
+	                reject({ errors: errors, values: values });
+	              } else {
+	                resolve(values);
+	              }
+	            };
+	          }
+	          var fieldNames = names ? _this8.fieldsStore.getValidFieldsFullName(names) : _this8.fieldsStore.getValidFieldsName();
+	          var fields = fieldNames.filter(function (name) {
+	            var fieldMeta = _this8.fieldsStore.getFieldMeta(name);
+	            return (0, _utils.hasRules)(fieldMeta.validate);
+	          }).map(function (name) {
+	            var field = _this8.fieldsStore.getField(name);
+	            field.value = _this8.fieldsStore.getFieldValue(name);
+	            return field;
+	          });
+	          if (!fields.length) {
+	            callback(null, _this8.fieldsStore.getFieldsValue(fieldNames));
+	            return;
+	          }
+	          if (!('firstFields' in options)) {
+	            options.firstFields = fieldNames.filter(function (name) {
+	              var fieldMeta = _this8.fieldsStore.getFieldMeta(name);
+	              return !!fieldMeta.validateFirst;
+	            });
+	          }
+	          _this8.validateFieldsInternal(fields, {
+	            fieldNames: fieldNames,
+	            options: options
+	          }, callback);
+	        });
+	        pending['catch'](function (e) {
+	          if (console.error && process.env.NODE_ENV !== 'production') {
+	            console.error(e);
+	          }
+	          return e;
+	        });
+	        return pending;
+	      },
+	      isSubmitting: function isSubmitting() {
+	        if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') {
+	          (0, _warning2['default'])(false, '`isSubmitting` is deprecated. ' + 'Actually, it\'s more convenient to handle submitting status by yourself.');
+	        }
+	        return this.state.submitting;
+	      },
+	      submit: function submit(callback) {
+	        var _this9 = this;
+	
+	        if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') {
+	          (0, _warning2['default'])(false, '`submit` is deprecated. ' + 'Actually, it\'s more convenient to handle submitting status by yourself.');
+	        }
+	        var fn = function fn() {
+	          _this9.setState({
+	            submitting: false
+	          });
+	        };
+	        this.setState({
+	          submitting: true
+	        });
+	        callback(fn);
+	      },
+	      render: function render() {
+	        var _props = this.props,
+	            wrappedComponentRef = _props.wrappedComponentRef,
+	            restProps = (0, _objectWithoutProperties3['default'])(_props, ['wrappedComponentRef']); // eslint-disable-line
+	
+	        var formProps = (0, _defineProperty3['default'])({}, formPropName, this.getForm());
+	        if (withRef) {
+	          if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') {
+	            (0, _warning2['default'])(false, '`withRef` is deprecated, please use `wrappedComponentRef` instead. ' + 'See: https://github.com/react-component/form#note-use-wrappedcomponentref-instead-of-withref-after-rc-form140');
+	          }
+	          formProps.ref = 'wrappedComponent';
+	        } else if (wrappedComponentRef) {
+	          formProps.ref = wrappedComponentRef;
+	        }
+	        var props = mapProps.call(this, (0, _extends6['default'])({}, formProps, restProps));
+	        return _react2['default'].createElement(WrappedComponent, props);
+	      }
+	    });
+	
+	    return (0, _utils.argumentContainer)(Form, WrappedComponent);
+	  };
+	}
+	
+	exports['default'] = createBaseForm;
+	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
+
+/***/ }),
+/* 389 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	exports.__esModule = true;
+	
+	var _from = __webpack_require__(390);
+	
+	var _from2 = _interopRequireDefault(_from);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = function (arr) {
+	  if (Array.isArray(arr)) {
+	    for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+	      arr2[i] = arr[i];
+	    }
+	
+	    return arr2;
+	  } else {
+	    return (0, _from2.default)(arr);
+	  }
+	};
+
+/***/ }),
+/* 390 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(391), __esModule: true };
+
+/***/ }),
+/* 391 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	__webpack_require__(283);
+	__webpack_require__(392);
+	module.exports = __webpack_require__(151).Array.from;
+
+
+/***/ }),
+/* 392 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var ctx = __webpack_require__(152);
+	var $export = __webpack_require__(149);
+	var toObject = __webpack_require__(183);
+	var call = __webpack_require__(393);
+	var isArrayIter = __webpack_require__(394);
+	var toLength = __webpack_require__(173);
+	var createProperty = __webpack_require__(395);
+	var getIterFn = __webpack_require__(396);
+	
+	$export($export.S + $export.F * !__webpack_require__(398)(function (iter) { Array.from(iter); }), 'Array', {
+	  // 22.1.2.1 Array.from(arrayLike, mapfn = undefined, thisArg = undefined)
+	  from: function from(arrayLike /* , mapfn = undefined, thisArg = undefined */) {
+	    var O = toObject(arrayLike);
+	    var C = typeof this == 'function' ? this : Array;
+	    var aLen = arguments.length;
+	    var mapfn = aLen > 1 ? arguments[1] : undefined;
+	    var mapping = mapfn !== undefined;
+	    var index = 0;
+	    var iterFn = getIterFn(O);
+	    var length, result, step, iterator;
+	    if (mapping) mapfn = ctx(mapfn, aLen > 2 ? arguments[2] : undefined, 2);
+	    // if object isn't iterable or it's array with default iterator - use simple case
+	    if (iterFn != undefined && !(C == Array && isArrayIter(iterFn))) {
+	      for (iterator = iterFn.call(O), result = new C(); !(step = iterator.next()).done; index++) {
+	        createProperty(result, index, mapping ? call(iterator, mapfn, [step.value, index], true) : step.value);
+	      }
+	    } else {
+	      length = toLength(O.length);
+	      for (result = new C(length); length > index; index++) {
+	        createProperty(result, index, mapping ? mapfn(O[index], index) : O[index]);
+	      }
+	    }
+	    result.length = index;
+	    return result;
+	  }
+	});
+
+
+/***/ }),
+/* 393 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	// call something on iterator step with safe closing on error
+	var anObject = __webpack_require__(156);
+	module.exports = function (iterator, fn, value, entries) {
+	  try {
+	    return entries ? fn(anObject(value)[0], value[1]) : fn(value);
+	  // 7.4.6 IteratorClose(iterator, completion)
+	  } catch (e) {
+	    var ret = iterator['return'];
+	    if (ret !== undefined) anObject(ret.call(iterator));
+	    throw e;
+	  }
+	};
+
+
+/***/ }),
+/* 394 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	// check on default Array iterator
+	var Iterators = __webpack_require__(287);
+	var ITERATOR = __webpack_require__(290)('iterator');
+	var ArrayProto = Array.prototype;
+	
+	module.exports = function (it) {
+	  return it !== undefined && (Iterators.Array === it || ArrayProto[ITERATOR] === it);
+	};
+
+
+/***/ }),
+/* 395 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $defineProperty = __webpack_require__(155);
+	var createDesc = __webpack_require__(163);
+	
+	module.exports = function (object, index, value) {
+	  if (index in object) $defineProperty.f(object, index, createDesc(0, value));
+	  else object[index] = value;
+	};
+
+
+/***/ }),
+/* 396 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var classof = __webpack_require__(397);
+	var ITERATOR = __webpack_require__(290)('iterator');
+	var Iterators = __webpack_require__(287);
+	module.exports = __webpack_require__(151).getIteratorMethod = function (it) {
+	  if (it != undefined) return it[ITERATOR]
+	    || it['@@iterator']
+	    || Iterators[classof(it)];
+	};
+
+
+/***/ }),
+/* 397 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	// getting tag from 19.1.3.6 Object.prototype.toString()
+	var cof = __webpack_require__(170);
+	var TAG = __webpack_require__(290)('toStringTag');
+	// ES3 wrong here
+	var ARG = cof(function () { return arguments; }()) == 'Arguments';
+	
+	// fallback for IE11 Script Access Denied error
+	var tryGet = function (it, key) {
+	  try {
+	    return it[key];
+	  } catch (e) { /* empty */ }
+	};
+	
+	module.exports = function (it) {
+	  var O, T, B;
+	  return it === undefined ? 'Undefined' : it === null ? 'Null'
+	    // @@toStringTag case
+	    : typeof (T = tryGet(O = Object(it), TAG)) == 'string' ? T
+	    // builtinTag case
+	    : ARG ? cof(O)
+	    // ES3 arguments fallback
+	    : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
+	};
+
+
+/***/ }),
+/* 398 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var ITERATOR = __webpack_require__(290)('iterator');
+	var SAFE_CLOSING = false;
+	
+	try {
+	  var riter = [7][ITERATOR]();
+	  riter['return'] = function () { SAFE_CLOSING = true; };
+	  // eslint-disable-next-line no-throw-literal
+	  Array.from(riter, function () { throw 2; });
+	} catch (e) { /* empty */ }
+	
+	module.exports = function (exec, skipClosing) {
+	  if (!skipClosing && !SAFE_CLOSING) return false;
+	  var safe = false;
+	  try {
+	    var arr = [7];
+	    var iter = arr[ITERATOR]();
+	    iter.next = function () { return { done: safe = true }; };
+	    arr[ITERATOR] = function () { return iter; };
+	    exec(arr);
+	  } catch (e) { /* empty */ }
+	  return safe;
+	};
+
+
+/***/ }),
+/* 399 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 *
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
+	 *
+	 */
+	
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	var factory = __webpack_require__(400);
+	
+	if (typeof React === 'undefined') {
+	  throw Error(
+	    'create-react-class could not find the React object. If you are using script tags, ' +
+	      'make sure that React is being loaded before create-react-class.'
+	  );
+	}
+	
+	// Hack to grab NoopUpdateQueue from isomorphic React
+	var ReactNoopUpdateQueue = new React.Component().updater;
+	
+	module.exports = factory(
+	  React.Component,
+	  React.isValidElement,
+	  ReactNoopUpdateQueue
+	);
+
+
+/***/ }),
+/* 400 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 *
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
+	 *
+	 */
+	
+	'use strict';
+	
+	var _assign = __webpack_require__(44);
+	
+	var emptyObject = __webpack_require__(401);
+	var _invariant = __webpack_require__(402);
+	
+	if (process.env.NODE_ENV !== 'production') {
+	  var warning = __webpack_require__(403);
+	}
+	
+	var MIXINS_KEY = 'mixins';
+	
+	// Helper function to allow the creation of anonymous functions which do not
+	// have .name set to the name of the variable being assigned to.
+	function identity(fn) {
+	  return fn;
+	}
+	
+	var ReactPropTypeLocationNames;
+	if (process.env.NODE_ENV !== 'production') {
+	  ReactPropTypeLocationNames = {
+	    prop: 'prop',
+	    context: 'context',
+	    childContext: 'child context'
+	  };
+	} else {
+	  ReactPropTypeLocationNames = {};
+	}
+	
+	function factory(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
+	  /**
+	   * Policies that describe methods in `ReactClassInterface`.
+	   */
+	
+	  var injectedMixins = [];
+	
+	  /**
+	   * Composite components are higher-level components that compose other composite
+	   * or host components.
+	   *
+	   * To create a new type of `ReactClass`, pass a specification of
+	   * your new class to `React.createClass`. The only requirement of your class
+	   * specification is that you implement a `render` method.
+	   *
+	   *   var MyComponent = React.createClass({
+	   *     render: function() {
+	   *       return <div>Hello World</div>;
+	   *     }
+	   *   });
+	   *
+	   * The class specification supports a specific protocol of methods that have
+	   * special meaning (e.g. `render`). See `ReactClassInterface` for
+	   * more the comprehensive protocol. Any other properties and methods in the
+	   * class specification will be available on the prototype.
+	   *
+	   * @interface ReactClassInterface
+	   * @internal
+	   */
+	  var ReactClassInterface = {
+	    /**
+	     * An array of Mixin objects to include when defining your component.
+	     *
+	     * @type {array}
+	     * @optional
+	     */
+	    mixins: 'DEFINE_MANY',
+	
+	    /**
+	     * An object containing properties and methods that should be defined on
+	     * the component's constructor instead of its prototype (static methods).
+	     *
+	     * @type {object}
+	     * @optional
+	     */
+	    statics: 'DEFINE_MANY',
+	
+	    /**
+	     * Definition of prop types for this component.
+	     *
+	     * @type {object}
+	     * @optional
+	     */
+	    propTypes: 'DEFINE_MANY',
+	
+	    /**
+	     * Definition of context types for this component.
+	     *
+	     * @type {object}
+	     * @optional
+	     */
+	    contextTypes: 'DEFINE_MANY',
+	
+	    /**
+	     * Definition of context types this component sets for its children.
+	     *
+	     * @type {object}
+	     * @optional
+	     */
+	    childContextTypes: 'DEFINE_MANY',
+	
+	    // ==== Definition methods ====
+	
+	    /**
+	     * Invoked when the component is mounted. Values in the mapping will be set on
+	     * `this.props` if that prop is not specified (i.e. using an `in` check).
+	     *
+	     * This method is invoked before `getInitialState` and therefore cannot rely
+	     * on `this.state` or use `this.setState`.
+	     *
+	     * @return {object}
+	     * @optional
+	     */
+	    getDefaultProps: 'DEFINE_MANY_MERGED',
+	
+	    /**
+	     * Invoked once before the component is mounted. The return value will be used
+	     * as the initial value of `this.state`.
+	     *
+	     *   getInitialState: function() {
+	     *     return {
+	     *       isOn: false,
+	     *       fooBaz: new BazFoo()
+	     *     }
+	     *   }
+	     *
+	     * @return {object}
+	     * @optional
+	     */
+	    getInitialState: 'DEFINE_MANY_MERGED',
+	
+	    /**
+	     * @return {object}
+	     * @optional
+	     */
+	    getChildContext: 'DEFINE_MANY_MERGED',
+	
+	    /**
+	     * Uses props from `this.props` and state from `this.state` to render the
+	     * structure of the component.
+	     *
+	     * No guarantees are made about when or how often this method is invoked, so
+	     * it must not have side effects.
+	     *
+	     *   render: function() {
+	     *     var name = this.props.name;
+	     *     return <div>Hello, {name}!</div>;
+	     *   }
+	     *
+	     * @return {ReactComponent}
+	     * @required
+	     */
+	    render: 'DEFINE_ONCE',
+	
+	    // ==== Delegate methods ====
+	
+	    /**
+	     * Invoked when the component is initially created and about to be mounted.
+	     * This may have side effects, but any external subscriptions or data created
+	     * by this method must be cleaned up in `componentWillUnmount`.
+	     *
+	     * @optional
+	     */
+	    componentWillMount: 'DEFINE_MANY',
+	
+	    /**
+	     * Invoked when the component has been mounted and has a DOM representation.
+	     * However, there is no guarantee that the DOM node is in the document.
+	     *
+	     * Use this as an opportunity to operate on the DOM when the component has
+	     * been mounted (initialized and rendered) for the first time.
+	     *
+	     * @param {DOMElement} rootNode DOM element representing the component.
+	     * @optional
+	     */
+	    componentDidMount: 'DEFINE_MANY',
+	
+	    /**
+	     * Invoked before the component receives new props.
+	     *
+	     * Use this as an opportunity to react to a prop transition by updating the
+	     * state using `this.setState`. Current props are accessed via `this.props`.
+	     *
+	     *   componentWillReceiveProps: function(nextProps, nextContext) {
+	     *     this.setState({
+	     *       likesIncreasing: nextProps.likeCount > this.props.likeCount
+	     *     });
+	     *   }
+	     *
+	     * NOTE: There is no equivalent `componentWillReceiveState`. An incoming prop
+	     * transition may cause a state change, but the opposite is not true. If you
+	     * need it, you are probably looking for `componentWillUpdate`.
+	     *
+	     * @param {object} nextProps
+	     * @optional
+	     */
+	    componentWillReceiveProps: 'DEFINE_MANY',
+	
+	    /**
+	     * Invoked while deciding if the component should be updated as a result of
+	     * receiving new props, state and/or context.
+	     *
+	     * Use this as an opportunity to `return false` when you're certain that the
+	     * transition to the new props/state/context will not require a component
+	     * update.
+	     *
+	     *   shouldComponentUpdate: function(nextProps, nextState, nextContext) {
+	     *     return !equal(nextProps, this.props) ||
+	     *       !equal(nextState, this.state) ||
+	     *       !equal(nextContext, this.context);
+	     *   }
+	     *
+	     * @param {object} nextProps
+	     * @param {?object} nextState
+	     * @param {?object} nextContext
+	     * @return {boolean} True if the component should update.
+	     * @optional
+	     */
+	    shouldComponentUpdate: 'DEFINE_ONCE',
+	
+	    /**
+	     * Invoked when the component is about to update due to a transition from
+	     * `this.props`, `this.state` and `this.context` to `nextProps`, `nextState`
+	     * and `nextContext`.
+	     *
+	     * Use this as an opportunity to perform preparation before an update occurs.
+	     *
+	     * NOTE: You **cannot** use `this.setState()` in this method.
+	     *
+	     * @param {object} nextProps
+	     * @param {?object} nextState
+	     * @param {?object} nextContext
+	     * @param {ReactReconcileTransaction} transaction
+	     * @optional
+	     */
+	    componentWillUpdate: 'DEFINE_MANY',
+	
+	    /**
+	     * Invoked when the component's DOM representation has been updated.
+	     *
+	     * Use this as an opportunity to operate on the DOM when the component has
+	     * been updated.
+	     *
+	     * @param {object} prevProps
+	     * @param {?object} prevState
+	     * @param {?object} prevContext
+	     * @param {DOMElement} rootNode DOM element representing the component.
+	     * @optional
+	     */
+	    componentDidUpdate: 'DEFINE_MANY',
+	
+	    /**
+	     * Invoked when the component is about to be removed from its parent and have
+	     * its DOM representation destroyed.
+	     *
+	     * Use this as an opportunity to deallocate any external resources.
+	     *
+	     * NOTE: There is no `componentDidUnmount` since your component will have been
+	     * destroyed by that point.
+	     *
+	     * @optional
+	     */
+	    componentWillUnmount: 'DEFINE_MANY',
+	
+	    /**
+	     * Replacement for (deprecated) `componentWillMount`.
+	     *
+	     * @optional
+	     */
+	    UNSAFE_componentWillMount: 'DEFINE_MANY',
+	
+	    /**
+	     * Replacement for (deprecated) `componentWillReceiveProps`.
+	     *
+	     * @optional
+	     */
+	    UNSAFE_componentWillReceiveProps: 'DEFINE_MANY',
+	
+	    /**
+	     * Replacement for (deprecated) `componentWillUpdate`.
+	     *
+	     * @optional
+	     */
+	    UNSAFE_componentWillUpdate: 'DEFINE_MANY',
+	
+	    // ==== Advanced methods ====
+	
+	    /**
+	     * Updates the component's currently mounted DOM representation.
+	     *
+	     * By default, this implements React's rendering and reconciliation algorithm.
+	     * Sophisticated clients may wish to override this.
+	     *
+	     * @param {ReactReconcileTransaction} transaction
+	     * @internal
+	     * @overridable
+	     */
+	    updateComponent: 'OVERRIDE_BASE'
+	  };
+	
+	  /**
+	   * Similar to ReactClassInterface but for static methods.
+	   */
+	  var ReactClassStaticInterface = {
+	    /**
+	     * This method is invoked after a component is instantiated and when it
+	     * receives new props. Return an object to update state in response to
+	     * prop changes. Return null to indicate no change to state.
+	     *
+	     * If an object is returned, its keys will be merged into the existing state.
+	     *
+	     * @return {object || null}
+	     * @optional
+	     */
+	    getDerivedStateFromProps: 'DEFINE_MANY_MERGED'
+	  };
+	
+	  /**
+	   * Mapping from class specification keys to special processing functions.
+	   *
+	   * Although these are declared like instance properties in the specification
+	   * when defining classes using `React.createClass`, they are actually static
+	   * and are accessible on the constructor instead of the prototype. Despite
+	   * being static, they must be defined outside of the "statics" key under
+	   * which all other static methods are defined.
+	   */
+	  var RESERVED_SPEC_KEYS = {
+	    displayName: function(Constructor, displayName) {
+	      Constructor.displayName = displayName;
+	    },
+	    mixins: function(Constructor, mixins) {
+	      if (mixins) {
+	        for (var i = 0; i < mixins.length; i++) {
+	          mixSpecIntoComponent(Constructor, mixins[i]);
+	        }
+	      }
+	    },
+	    childContextTypes: function(Constructor, childContextTypes) {
+	      if (process.env.NODE_ENV !== 'production') {
+	        validateTypeDef(Constructor, childContextTypes, 'childContext');
+	      }
+	      Constructor.childContextTypes = _assign(
+	        {},
+	        Constructor.childContextTypes,
+	        childContextTypes
+	      );
+	    },
+	    contextTypes: function(Constructor, contextTypes) {
+	      if (process.env.NODE_ENV !== 'production') {
+	        validateTypeDef(Constructor, contextTypes, 'context');
+	      }
+	      Constructor.contextTypes = _assign(
+	        {},
+	        Constructor.contextTypes,
+	        contextTypes
+	      );
+	    },
+	    /**
+	     * Special case getDefaultProps which should move into statics but requires
+	     * automatic merging.
+	     */
+	    getDefaultProps: function(Constructor, getDefaultProps) {
+	      if (Constructor.getDefaultProps) {
+	        Constructor.getDefaultProps = createMergedResultFunction(
+	          Constructor.getDefaultProps,
+	          getDefaultProps
+	        );
+	      } else {
+	        Constructor.getDefaultProps = getDefaultProps;
+	      }
+	    },
+	    propTypes: function(Constructor, propTypes) {
+	      if (process.env.NODE_ENV !== 'production') {
+	        validateTypeDef(Constructor, propTypes, 'prop');
+	      }
+	      Constructor.propTypes = _assign({}, Constructor.propTypes, propTypes);
+	    },
+	    statics: function(Constructor, statics) {
+	      mixStaticSpecIntoComponent(Constructor, statics);
+	    },
+	    autobind: function() {}
+	  };
+	
+	  function validateTypeDef(Constructor, typeDef, location) {
+	    for (var propName in typeDef) {
+	      if (typeDef.hasOwnProperty(propName)) {
+	        // use a warning instead of an _invariant so components
+	        // don't show up in prod but only in __DEV__
+	        if (process.env.NODE_ENV !== 'production') {
+	          warning(
+	            typeof typeDef[propName] === 'function',
+	            '%s: %s type `%s` is invalid; it must be a function, usually from ' +
+	              'React.PropTypes.',
+	            Constructor.displayName || 'ReactClass',
+	            ReactPropTypeLocationNames[location],
+	            propName
+	          );
+	        }
+	      }
+	    }
+	  }
+	
+	  function validateMethodOverride(isAlreadyDefined, name) {
+	    var specPolicy = ReactClassInterface.hasOwnProperty(name)
+	      ? ReactClassInterface[name]
+	      : null;
+	
+	    // Disallow overriding of base class methods unless explicitly allowed.
+	    if (ReactClassMixin.hasOwnProperty(name)) {
+	      _invariant(
+	        specPolicy === 'OVERRIDE_BASE',
+	        'ReactClassInterface: You are attempting to override ' +
+	          '`%s` from your class specification. Ensure that your method names ' +
+	          'do not overlap with React methods.',
+	        name
+	      );
+	    }
+	
+	    // Disallow defining methods more than once unless explicitly allowed.
+	    if (isAlreadyDefined) {
+	      _invariant(
+	        specPolicy === 'DEFINE_MANY' || specPolicy === 'DEFINE_MANY_MERGED',
+	        'ReactClassInterface: You are attempting to define ' +
+	          '`%s` on your component more than once. This conflict may be due ' +
+	          'to a mixin.',
+	        name
+	      );
+	    }
+	  }
+	
+	  /**
+	   * Mixin helper which handles policy validation and reserved
+	   * specification keys when building React classes.
+	   */
+	  function mixSpecIntoComponent(Constructor, spec) {
+	    if (!spec) {
+	      if (process.env.NODE_ENV !== 'production') {
+	        var typeofSpec = typeof spec;
+	        var isMixinValid = typeofSpec === 'object' && spec !== null;
+	
+	        if (process.env.NODE_ENV !== 'production') {
+	          warning(
+	            isMixinValid,
+	            "%s: You're attempting to include a mixin that is either null " +
+	              'or not an object. Check the mixins included by the component, ' +
+	              'as well as any mixins they include themselves. ' +
+	              'Expected object but got %s.',
+	            Constructor.displayName || 'ReactClass',
+	            spec === null ? null : typeofSpec
+	          );
+	        }
+	      }
+	
+	      return;
+	    }
+	
+	    _invariant(
+	      typeof spec !== 'function',
+	      "ReactClass: You're attempting to " +
+	        'use a component class or function as a mixin. Instead, just use a ' +
+	        'regular object.'
+	    );
+	    _invariant(
+	      !isValidElement(spec),
+	      "ReactClass: You're attempting to " +
+	        'use a component as a mixin. Instead, just use a regular object.'
+	    );
+	
+	    var proto = Constructor.prototype;
+	    var autoBindPairs = proto.__reactAutoBindPairs;
+	
+	    // By handling mixins before any other properties, we ensure the same
+	    // chaining order is applied to methods with DEFINE_MANY policy, whether
+	    // mixins are listed before or after these methods in the spec.
+	    if (spec.hasOwnProperty(MIXINS_KEY)) {
+	      RESERVED_SPEC_KEYS.mixins(Constructor, spec.mixins);
+	    }
+	
+	    for (var name in spec) {
+	      if (!spec.hasOwnProperty(name)) {
+	        continue;
+	      }
+	
+	      if (name === MIXINS_KEY) {
+	        // We have already handled mixins in a special case above.
+	        continue;
+	      }
+	
+	      var property = spec[name];
+	      var isAlreadyDefined = proto.hasOwnProperty(name);
+	      validateMethodOverride(isAlreadyDefined, name);
+	
+	      if (RESERVED_SPEC_KEYS.hasOwnProperty(name)) {
+	        RESERVED_SPEC_KEYS[name](Constructor, property);
+	      } else {
+	        // Setup methods on prototype:
+	        // The following member methods should not be automatically bound:
+	        // 1. Expected ReactClass methods (in the "interface").
+	        // 2. Overridden methods (that were mixed in).
+	        var isReactClassMethod = ReactClassInterface.hasOwnProperty(name);
+	        var isFunction = typeof property === 'function';
+	        var shouldAutoBind =
+	          isFunction &&
+	          !isReactClassMethod &&
+	          !isAlreadyDefined &&
+	          spec.autobind !== false;
+	
+	        if (shouldAutoBind) {
+	          autoBindPairs.push(name, property);
+	          proto[name] = property;
+	        } else {
+	          if (isAlreadyDefined) {
+	            var specPolicy = ReactClassInterface[name];
+	
+	            // These cases should already be caught by validateMethodOverride.
+	            _invariant(
+	              isReactClassMethod &&
+	                (specPolicy === 'DEFINE_MANY_MERGED' ||
+	                  specPolicy === 'DEFINE_MANY'),
+	              'ReactClass: Unexpected spec policy %s for key %s ' +
+	                'when mixing in component specs.',
+	              specPolicy,
+	              name
+	            );
+	
+	            // For methods which are defined more than once, call the existing
+	            // methods before calling the new property, merging if appropriate.
+	            if (specPolicy === 'DEFINE_MANY_MERGED') {
+	              proto[name] = createMergedResultFunction(proto[name], property);
+	            } else if (specPolicy === 'DEFINE_MANY') {
+	              proto[name] = createChainedFunction(proto[name], property);
+	            }
+	          } else {
+	            proto[name] = property;
+	            if (process.env.NODE_ENV !== 'production') {
+	              // Add verbose displayName to the function, which helps when looking
+	              // at profiling tools.
+	              if (typeof property === 'function' && spec.displayName) {
+	                proto[name].displayName = spec.displayName + '_' + name;
+	              }
+	            }
+	          }
+	        }
+	      }
+	    }
+	  }
+	
+	  function mixStaticSpecIntoComponent(Constructor, statics) {
+	    if (!statics) {
+	      return;
+	    }
+	
+	    for (var name in statics) {
+	      var property = statics[name];
+	      if (!statics.hasOwnProperty(name)) {
+	        continue;
+	      }
+	
+	      var isReserved = name in RESERVED_SPEC_KEYS;
+	      _invariant(
+	        !isReserved,
+	        'ReactClass: You are attempting to define a reserved ' +
+	          'property, `%s`, that shouldn\'t be on the "statics" key. Define it ' +
+	          'as an instance property instead; it will still be accessible on the ' +
+	          'constructor.',
+	        name
+	      );
+	
+	      var isAlreadyDefined = name in Constructor;
+	      if (isAlreadyDefined) {
+	        var specPolicy = ReactClassStaticInterface.hasOwnProperty(name)
+	          ? ReactClassStaticInterface[name]
+	          : null;
+	
+	        _invariant(
+	          specPolicy === 'DEFINE_MANY_MERGED',
+	          'ReactClass: You are attempting to define ' +
+	            '`%s` on your component more than once. This conflict may be ' +
+	            'due to a mixin.',
+	          name
+	        );
+	
+	        Constructor[name] = createMergedResultFunction(Constructor[name], property);
+	
+	        return;
+	      }
+	
+	      Constructor[name] = property;
+	    }
+	  }
+	
+	  /**
+	   * Merge two objects, but throw if both contain the same key.
+	   *
+	   * @param {object} one The first object, which is mutated.
+	   * @param {object} two The second object
+	   * @return {object} one after it has been mutated to contain everything in two.
+	   */
+	  function mergeIntoWithNoDuplicateKeys(one, two) {
+	    _invariant(
+	      one && two && typeof one === 'object' && typeof two === 'object',
+	      'mergeIntoWithNoDuplicateKeys(): Cannot merge non-objects.'
+	    );
+	
+	    for (var key in two) {
+	      if (two.hasOwnProperty(key)) {
+	        _invariant(
+	          one[key] === undefined,
+	          'mergeIntoWithNoDuplicateKeys(): ' +
+	            'Tried to merge two objects with the same key: `%s`. This conflict ' +
+	            'may be due to a mixin; in particular, this may be caused by two ' +
+	            'getInitialState() or getDefaultProps() methods returning objects ' +
+	            'with clashing keys.',
+	          key
+	        );
+	        one[key] = two[key];
+	      }
+	    }
+	    return one;
+	  }
+	
+	  /**
+	   * Creates a function that invokes two functions and merges their return values.
+	   *
+	   * @param {function} one Function to invoke first.
+	   * @param {function} two Function to invoke second.
+	   * @return {function} Function that invokes the two argument functions.
+	   * @private
+	   */
+	  function createMergedResultFunction(one, two) {
+	    return function mergedResult() {
+	      var a = one.apply(this, arguments);
+	      var b = two.apply(this, arguments);
+	      if (a == null) {
+	        return b;
+	      } else if (b == null) {
+	        return a;
+	      }
+	      var c = {};
+	      mergeIntoWithNoDuplicateKeys(c, a);
+	      mergeIntoWithNoDuplicateKeys(c, b);
+	      return c;
+	    };
+	  }
+	
+	  /**
+	   * Creates a function that invokes two functions and ignores their return vales.
+	   *
+	   * @param {function} one Function to invoke first.
+	   * @param {function} two Function to invoke second.
+	   * @return {function} Function that invokes the two argument functions.
+	   * @private
+	   */
+	  function createChainedFunction(one, two) {
+	    return function chainedFunction() {
+	      one.apply(this, arguments);
+	      two.apply(this, arguments);
+	    };
+	  }
+	
+	  /**
+	   * Binds a method to the component.
+	   *
+	   * @param {object} component Component whose method is going to be bound.
+	   * @param {function} method Method to be bound.
+	   * @return {function} The bound method.
+	   */
+	  function bindAutoBindMethod(component, method) {
+	    var boundMethod = method.bind(component);
+	    if (process.env.NODE_ENV !== 'production') {
+	      boundMethod.__reactBoundContext = component;
+	      boundMethod.__reactBoundMethod = method;
+	      boundMethod.__reactBoundArguments = null;
+	      var componentName = component.constructor.displayName;
+	      var _bind = boundMethod.bind;
+	      boundMethod.bind = function(newThis) {
+	        for (
+	          var _len = arguments.length,
+	            args = Array(_len > 1 ? _len - 1 : 0),
+	            _key = 1;
+	          _key < _len;
+	          _key++
+	        ) {
+	          args[_key - 1] = arguments[_key];
+	        }
+	
+	        // User is trying to bind() an autobound method; we effectively will
+	        // ignore the value of "this" that the user is trying to use, so
+	        // let's warn.
+	        if (newThis !== component && newThis !== null) {
+	          if (process.env.NODE_ENV !== 'production') {
+	            warning(
+	              false,
+	              'bind(): React component methods may only be bound to the ' +
+	                'component instance. See %s',
+	              componentName
+	            );
+	          }
+	        } else if (!args.length) {
+	          if (process.env.NODE_ENV !== 'production') {
+	            warning(
+	              false,
+	              'bind(): You are binding a component method to the component. ' +
+	                'React does this for you automatically in a high-performance ' +
+	                'way, so you can safely remove this call. See %s',
+	              componentName
+	            );
+	          }
+	          return boundMethod;
+	        }
+	        var reboundMethod = _bind.apply(boundMethod, arguments);
+	        reboundMethod.__reactBoundContext = component;
+	        reboundMethod.__reactBoundMethod = method;
+	        reboundMethod.__reactBoundArguments = args;
+	        return reboundMethod;
+	      };
+	    }
+	    return boundMethod;
+	  }
+	
+	  /**
+	   * Binds all auto-bound methods in a component.
+	   *
+	   * @param {object} component Component whose method is going to be bound.
+	   */
+	  function bindAutoBindMethods(component) {
+	    var pairs = component.__reactAutoBindPairs;
+	    for (var i = 0; i < pairs.length; i += 2) {
+	      var autoBindKey = pairs[i];
+	      var method = pairs[i + 1];
+	      component[autoBindKey] = bindAutoBindMethod(component, method);
+	    }
+	  }
+	
+	  var IsMountedPreMixin = {
+	    componentDidMount: function() {
+	      this.__isMounted = true;
+	    }
+	  };
+	
+	  var IsMountedPostMixin = {
+	    componentWillUnmount: function() {
+	      this.__isMounted = false;
+	    }
+	  };
+	
+	  /**
+	   * Add more to the ReactClass base class. These are all legacy features and
+	   * therefore not already part of the modern ReactComponent.
+	   */
+	  var ReactClassMixin = {
+	    /**
+	     * TODO: This will be deprecated because state should always keep a consistent
+	     * type signature and the only use case for this, is to avoid that.
+	     */
+	    replaceState: function(newState, callback) {
+	      this.updater.enqueueReplaceState(this, newState, callback);
+	    },
+	
+	    /**
+	     * Checks whether or not this composite component is mounted.
+	     * @return {boolean} True if mounted, false otherwise.
+	     * @protected
+	     * @final
+	     */
+	    isMounted: function() {
+	      if (process.env.NODE_ENV !== 'production') {
+	        warning(
+	          this.__didWarnIsMounted,
+	          '%s: isMounted is deprecated. Instead, make sure to clean up ' +
+	            'subscriptions and pending requests in componentWillUnmount to ' +
+	            'prevent memory leaks.',
+	          (this.constructor && this.constructor.displayName) ||
+	            this.name ||
+	            'Component'
+	        );
+	        this.__didWarnIsMounted = true;
+	      }
+	      return !!this.__isMounted;
+	    }
+	  };
+	
+	  var ReactClassComponent = function() {};
+	  _assign(
+	    ReactClassComponent.prototype,
+	    ReactComponent.prototype,
+	    ReactClassMixin
+	  );
+	
+	  /**
+	   * Creates a composite component class given a class specification.
+	   * See https://facebook.github.io/react/docs/top-level-api.html#react.createclass
+	   *
+	   * @param {object} spec Class specification (which must define `render`).
+	   * @return {function} Component constructor function.
+	   * @public
+	   */
+	  function createClass(spec) {
+	    // To keep our warnings more understandable, we'll use a little hack here to
+	    // ensure that Constructor.name !== 'Constructor'. This makes sure we don't
+	    // unnecessarily identify a class without displayName as 'Constructor'.
+	    var Constructor = identity(function(props, context, updater) {
+	      // This constructor gets overridden by mocks. The argument is used
+	      // by mocks to assert on what gets mounted.
+	
+	      if (process.env.NODE_ENV !== 'production') {
+	        warning(
+	          this instanceof Constructor,
+	          'Something is calling a React component directly. Use a factory or ' +
+	            'JSX instead. See: https://fb.me/react-legacyfactory'
+	        );
+	      }
+	
+	      // Wire up auto-binding
+	      if (this.__reactAutoBindPairs.length) {
+	        bindAutoBindMethods(this);
+	      }
+	
+	      this.props = props;
+	      this.context = context;
+	      this.refs = emptyObject;
+	      this.updater = updater || ReactNoopUpdateQueue;
+	
+	      this.state = null;
+	
+	      // ReactClasses doesn't have constructors. Instead, they use the
+	      // getInitialState and componentWillMount methods for initialization.
+	
+	      var initialState = this.getInitialState ? this.getInitialState() : null;
+	      if (process.env.NODE_ENV !== 'production') {
+	        // We allow auto-mocks to proceed as if they're returning null.
+	        if (
+	          initialState === undefined &&
+	          this.getInitialState._isMockFunction
+	        ) {
+	          // This is probably bad practice. Consider warning here and
+	          // deprecating this convenience.
+	          initialState = null;
+	        }
+	      }
+	      _invariant(
+	        typeof initialState === 'object' && !Array.isArray(initialState),
+	        '%s.getInitialState(): must return an object or null',
+	        Constructor.displayName || 'ReactCompositeComponent'
+	      );
+	
+	      this.state = initialState;
+	    });
+	    Constructor.prototype = new ReactClassComponent();
+	    Constructor.prototype.constructor = Constructor;
+	    Constructor.prototype.__reactAutoBindPairs = [];
+	
+	    injectedMixins.forEach(mixSpecIntoComponent.bind(null, Constructor));
+	
+	    mixSpecIntoComponent(Constructor, IsMountedPreMixin);
+	    mixSpecIntoComponent(Constructor, spec);
+	    mixSpecIntoComponent(Constructor, IsMountedPostMixin);
+	
+	    // Initialize the defaultProps property after all mixins have been merged.
+	    if (Constructor.getDefaultProps) {
+	      Constructor.defaultProps = Constructor.getDefaultProps();
+	    }
+	
+	    if (process.env.NODE_ENV !== 'production') {
+	      // This is a tag to indicate that the use of these method names is ok,
+	      // since it's used with createClass. If it's not, then it's likely a
+	      // mistake so we'll warn you to use the static property, property
+	      // initializer or constructor respectively.
+	      if (Constructor.getDefaultProps) {
+	        Constructor.getDefaultProps.isReactClassApproved = {};
+	      }
+	      if (Constructor.prototype.getInitialState) {
+	        Constructor.prototype.getInitialState.isReactClassApproved = {};
+	      }
+	    }
+	
+	    _invariant(
+	      Constructor.prototype.render,
+	      'createClass(...): Class specification must implement a `render` method.'
+	    );
+	
+	    if (process.env.NODE_ENV !== 'production') {
+	      warning(
+	        !Constructor.prototype.componentShouldUpdate,
+	        '%s has a method called ' +
+	          'componentShouldUpdate(). Did you mean shouldComponentUpdate()? ' +
+	          'The name is phrased as a question because the function is ' +
+	          'expected to return a value.',
+	        spec.displayName || 'A component'
+	      );
+	      warning(
+	        !Constructor.prototype.componentWillRecieveProps,
+	        '%s has a method called ' +
+	          'componentWillRecieveProps(). Did you mean componentWillReceiveProps()?',
+	        spec.displayName || 'A component'
+	      );
+	      warning(
+	        !Constructor.prototype.UNSAFE_componentWillRecieveProps,
+	        '%s has a method called UNSAFE_componentWillRecieveProps(). ' +
+	          'Did you mean UNSAFE_componentWillReceiveProps()?',
+	        spec.displayName || 'A component'
+	      );
+	    }
+	
+	    // Reduce time spent doing lookups by setting these on the prototype.
+	    for (var methodName in ReactClassInterface) {
+	      if (!Constructor.prototype[methodName]) {
+	        Constructor.prototype[methodName] = null;
+	      }
+	    }
+	
+	    return Constructor;
+	  }
+	
+	  return createClass;
+	}
+	
+	module.exports = factory;
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
+
+/***/ }),
+/* 401 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 *
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
+	 *
+	 */
+	
+	'use strict';
+	
+	var emptyObject = {};
+	
+	if (process.env.NODE_ENV !== 'production') {
+	  Object.freeze(emptyObject);
+	}
+	
+	module.exports = emptyObject;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
+
+/***/ }),
+/* 402 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 *
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
+	 *
+	 */
+	
+	'use strict';
+	
+	/**
+	 * Use invariant() to assert state which your program assumes to be true.
+	 *
+	 * Provide sprintf-style format (only %s is supported) and arguments
+	 * to provide information about what broke and what you were
+	 * expecting.
+	 *
+	 * The invariant message will be stripped in production, but the invariant
+	 * will remain to ensure logic does not differ in production.
+	 */
+	
+	var validateFormat = function validateFormat(format) {};
+	
+	if (process.env.NODE_ENV !== 'production') {
+	  validateFormat = function validateFormat(format) {
+	    if (format === undefined) {
+	      throw new Error('invariant requires an error message argument');
+	    }
+	  };
+	}
+	
+	function invariant(condition, format, a, b, c, d, e, f) {
+	  validateFormat(format);
+	
+	  if (!condition) {
+	    var error;
+	    if (format === undefined) {
+	      error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
+	    } else {
+	      var args = [a, b, c, d, e, f];
+	      var argIndex = 0;
+	      error = new Error(format.replace(/%s/g, function () {
+	        return args[argIndex++];
+	      }));
+	      error.name = 'Invariant Violation';
+	    }
+	
+	    error.framesToPop = 1; // we don't care about invariant's own frame
+	    throw error;
+	  }
+	}
+	
+	module.exports = invariant;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
+
+/***/ }),
+/* 403 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright (c) 2014-present, Facebook, Inc.
+	 *
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
+	 *
+	 */
+	
+	'use strict';
+	
+	var emptyFunction = __webpack_require__(404);
+	
+	/**
+	 * Similar to invariant but only logs a warning if the condition is not met.
+	 * This can be used to log issues in development environments in critical
+	 * paths. Removing the logging code for production environments will keep the
+	 * same logic and follow the same code paths.
+	 */
+	
+	var warning = emptyFunction;
+	
+	if (process.env.NODE_ENV !== 'production') {
+	  var printWarning = function printWarning(format) {
+	    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+	      args[_key - 1] = arguments[_key];
+	    }
+	
+	    var argIndex = 0;
+	    var message = 'Warning: ' + format.replace(/%s/g, function () {
+	      return args[argIndex++];
+	    });
+	    if (typeof console !== 'undefined') {
+	      console.error(message);
+	    }
+	    try {
+	      // --- Welcome to debugging React ---
+	      // This error was thrown as a convenience so that you can use this stack
+	      // to find the callsite that caused this warning to fire.
+	      throw new Error(message);
+	    } catch (x) {}
+	  };
+	
+	  warning = function warning(condition, format) {
+	    if (format === undefined) {
+	      throw new Error('`warning(condition, format, ...args)` requires a warning ' + 'message argument');
+	    }
+	
+	    if (format.indexOf('Failed Composite propType: ') === 0) {
+	      return; // Ignore CompositeComponent proptype check.
+	    }
+	
+	    if (!condition) {
+	      for (var _len2 = arguments.length, args = Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
+	        args[_key2 - 2] = arguments[_key2];
+	      }
+	
+	      printWarning.apply(undefined, [format].concat(args));
+	    }
+	  };
+	}
+	
+	module.exports = warning;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
+
+/***/ }),
+/* 404 */
+/***/ (function(module, exports) {
+
+	"use strict";
+	
+	/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 *
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
+	 *
+	 * 
+	 */
+	
+	function makeEmptyFunction(arg) {
+	  return function () {
+	    return arg;
+	  };
+	}
+	
+	/**
+	 * This function accepts and discards inputs; it has no side effects. This is
+	 * primarily useful idiomatically for overridable function endpoints which
+	 * always need to be callable, since JS lacks a null-call idiom ala Cocoa.
+	 */
+	var emptyFunction = function emptyFunction() {};
+	
+	emptyFunction.thatReturns = makeEmptyFunction;
+	emptyFunction.thatReturnsFalse = makeEmptyFunction(false);
+	emptyFunction.thatReturnsTrue = makeEmptyFunction(true);
+	emptyFunction.thatReturnsNull = makeEmptyFunction(null);
+	emptyFunction.thatReturnsThis = function () {
+	  return this;
+	};
+	emptyFunction.thatReturnsArgument = function (arg) {
+	  return arg;
+	};
+	
+	module.exports = emptyFunction;
+
+/***/ }),
+/* 405 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+	
+	var _util = __webpack_require__(406);
+	
+	var _validator = __webpack_require__(407);
+	
+	var _validator2 = _interopRequireDefault(_validator);
+	
+	var _messages2 = __webpack_require__(429);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	/**
+	 *  Encapsulates a validation schema.
+	 *
+	 *  @param descriptor An object declaring validation rules
+	 *  for this schema.
+	 */
+	function Schema(descriptor) {
+	  this.rules = null;
+	  this._messages = _messages2.messages;
+	  this.define(descriptor);
+	}
+	
+	Schema.prototype = {
+	  messages: function messages(_messages) {
+	    if (_messages) {
+	      this._messages = (0, _util.deepMerge)((0, _messages2.newMessages)(), _messages);
+	    }
+	    return this._messages;
+	  },
+	  define: function define(rules) {
+	    if (!rules) {
+	      throw new Error('Cannot configure a schema with no rules');
+	    }
+	    if ((typeof rules === 'undefined' ? 'undefined' : _typeof(rules)) !== 'object' || Array.isArray(rules)) {
+	      throw new Error('Rules must be an object');
+	    }
+	    this.rules = {};
+	    var z = void 0;
+	    var item = void 0;
+	    for (z in rules) {
+	      if (rules.hasOwnProperty(z)) {
+	        item = rules[z];
+	        this.rules[z] = Array.isArray(item) ? item : [item];
+	      }
+	    }
+	  },
+	  validate: function validate(source_) {
+	    var _this = this;
+	
+	    var o = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+	    var oc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
+	
+	    var source = source_;
+	    var options = o;
+	    var callback = oc;
+	    if (typeof options === 'function') {
+	      callback = options;
+	      options = {};
+	    }
+	    if (!this.rules || Object.keys(this.rules).length === 0) {
+	      if (callback) {
+	        callback();
+	      }
+	      return Promise.resolve();
+	    }
+	
+	    function complete(results) {
+	      var i = void 0;
+	      var errors = [];
+	      var fields = {};
+	
+	      function add(e) {
+	        if (Array.isArray(e)) {
+	          var _errors;
+	
+	          errors = (_errors = errors).concat.apply(_errors, e);
+	        } else {
+	          errors.push(e);
+	        }
+	      }
+	
+	      for (i = 0; i < results.length; i++) {
+	        add(results[i]);
+	      }
+	      if (!errors.length) {
+	        errors = null;
+	        fields = null;
+	      } else {
+	        fields = (0, _util.convertFieldsError)(errors);
+	      }
+	      callback(errors, fields);
+	    }
+	
+	    if (options.messages) {
+	      var messages = this.messages();
+	      if (messages === _messages2.messages) {
+	        messages = (0, _messages2.newMessages)();
+	      }
+	      (0, _util.deepMerge)(messages, options.messages);
+	      options.messages = messages;
+	    } else {
+	      options.messages = this.messages();
+	    }
+	    var arr = void 0;
+	    var value = void 0;
+	    var series = {};
+	    var keys = options.keys || Object.keys(this.rules);
+	    keys.forEach(function (z) {
+	      arr = _this.rules[z];
+	      value = source[z];
+	      arr.forEach(function (r) {
+	        var rule = r;
+	        if (typeof rule.transform === 'function') {
+	          if (source === source_) {
+	            source = _extends({}, source);
+	          }
+	          value = source[z] = rule.transform(value);
+	        }
+	        if (typeof rule === 'function') {
+	          rule = {
+	            validator: rule
+	          };
+	        } else {
+	          rule = _extends({}, rule);
+	        }
+	        rule.validator = _this.getValidationMethod(rule);
+	        rule.field = z;
+	        rule.fullField = rule.fullField || z;
+	        rule.type = _this.getType(rule);
+	        if (!rule.validator) {
+	          return;
+	        }
+	        series[z] = series[z] || [];
+	        series[z].push({
+	          rule: rule,
+	          value: value,
+	          source: source,
+	          field: z
+	        });
+	      });
+	    });
+	    var errorFields = {};
+	    return (0, _util.asyncMap)(series, options, function (data, doIt) {
+	      var rule = data.rule;
+	      var deep = (rule.type === 'object' || rule.type === 'array') && (_typeof(rule.fields) === 'object' || _typeof(rule.defaultField) === 'object');
+	      deep = deep && (rule.required || !rule.required && data.value);
+	      rule.field = data.field;
+	
+	      function addFullfield(key, schema) {
+	        return _extends({}, schema, {
+	          fullField: rule.fullField + '.' + key
+	        });
+	      }
+	
+	      function cb() {
+	        var e = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	
+	        var errors = e;
+	        if (!Array.isArray(errors)) {
+	          errors = [errors];
+	        }
+	        if (!options.suppressWarning && errors.length) {
+	          Schema.warning('async-validator:', errors);
+	        }
+	        if (errors.length && rule.message) {
+	          errors = [].concat(rule.message);
+	        }
+	
+	        errors = errors.map((0, _util.complementError)(rule));
+	
+	        if (options.first && errors.length) {
+	          errorFields[rule.field] = 1;
+	          return doIt(errors);
+	        }
+	        if (!deep) {
+	          doIt(errors);
+	        } else {
+	          // if rule is required but the target object
+	          // does not exist fail at the rule level and don't
+	          // go deeper
+	          if (rule.required && !data.value) {
+	            if (rule.message) {
+	              errors = [].concat(rule.message).map((0, _util.complementError)(rule));
+	            } else if (options.error) {
+	              errors = [options.error(rule, (0, _util.format)(options.messages.required, rule.field))];
+	            } else {
+	              errors = [];
+	            }
+	            return doIt(errors);
+	          }
+	
+	          var fieldsSchema = {};
+	          if (rule.defaultField) {
+	            for (var k in data.value) {
+	              if (data.value.hasOwnProperty(k)) {
+	                fieldsSchema[k] = rule.defaultField;
+	              }
+	            }
+	          }
+	          fieldsSchema = _extends({}, fieldsSchema, data.rule.fields);
+	          for (var f in fieldsSchema) {
+	            if (fieldsSchema.hasOwnProperty(f)) {
+	              var fieldSchema = Array.isArray(fieldsSchema[f]) ? fieldsSchema[f] : [fieldsSchema[f]];
+	              fieldsSchema[f] = fieldSchema.map(addFullfield.bind(null, f));
+	            }
+	          }
+	          var schema = new Schema(fieldsSchema);
+	          schema.messages(options.messages);
+	          if (data.rule.options) {
+	            data.rule.options.messages = options.messages;
+	            data.rule.options.error = options.error;
+	          }
+	          schema.validate(data.value, data.rule.options || options, function (errs) {
+	            var finalErrors = [];
+	            if (errors && errors.length) {
+	              finalErrors.push.apply(finalErrors, errors);
+	            }
+	            if (errs && errs.length) {
+	              finalErrors.push.apply(finalErrors, errs);
+	            }
+	            doIt(finalErrors.length ? finalErrors : null);
+	          });
+	        }
+	      }
+	
+	      var res = void 0;
+	      if (rule.asyncValidator) {
+	        res = rule.asyncValidator(rule, data.value, cb, data.source, options);
+	      } else if (rule.validator) {
+	        res = rule.validator(rule, data.value, cb, data.source, options);
+	        if (res === true) {
+	          cb();
+	        } else if (res === false) {
+	          cb(rule.message || rule.field + ' fails');
+	        } else if (res instanceof Array) {
+	          cb(res);
+	        } else if (res instanceof Error) {
+	          cb(res.message);
+	        }
+	      }
+	      if (res && res.then) {
+	        res.then(function () {
+	          return cb();
+	        }, function (e) {
+	          return cb(e);
+	        });
+	      }
+	    }, function (results) {
+	      complete(results);
+	    });
+	  },
+	  getType: function getType(rule) {
+	    if (rule.type === undefined && rule.pattern instanceof RegExp) {
+	      rule.type = 'pattern';
+	    }
+	    if (typeof rule.validator !== 'function' && rule.type && !_validator2['default'].hasOwnProperty(rule.type)) {
+	      throw new Error((0, _util.format)('Unknown rule type %s', rule.type));
+	    }
+	    return rule.type || 'string';
+	  },
+	  getValidationMethod: function getValidationMethod(rule) {
+	    if (typeof rule.validator === 'function') {
+	      return rule.validator;
+	    }
+	    var keys = Object.keys(rule);
+	    var messageIndex = keys.indexOf('message');
+	    if (messageIndex !== -1) {
+	      keys.splice(messageIndex, 1);
+	    }
+	    if (keys.length === 1 && keys[0] === 'required') {
+	      return _validator2['default'].required;
+	    }
+	    return _validator2['default'][this.getType(rule)] || false;
+	  }
+	};
+	
+	Schema.register = function register(type, validator) {
+	  if (typeof validator !== 'function') {
+	    throw new Error('Cannot register a validator by type, validator is not a function');
+	  }
+	  _validator2['default'][type] = validator;
+	};
+	
+	Schema.warning = _util.warning;
+	
+	Schema.messages = _messages2.messages;
+	
+	exports['default'] = Schema;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 406 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+	
+	exports.__esModule = true;
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+	
+	exports.convertFieldsError = convertFieldsError;
+	exports.format = format;
+	exports.isEmptyValue = isEmptyValue;
+	exports.isEmptyObject = isEmptyObject;
+	exports.asyncMap = asyncMap;
+	exports.complementError = complementError;
+	exports.deepMerge = deepMerge;
+	/* eslint no-console:0 */
+	
+	var formatRegExp = /%[sdj%]/g;
+	
+	var warning = exports.warning = function warning() {};
+	
+	// don't print warning message when in production env or node runtime
+	if (process.env.NODE_ENV !== 'production' && typeof window !== 'undefined' && typeof document !== 'undefined') {
+	  exports.warning = warning = function warning(type, errors) {
+	    if (typeof console !== 'undefined' && console.warn) {
+	      if (errors.every(function (e) {
+	        return typeof e === 'string';
+	      })) {
+	        console.warn(type, errors);
+	      }
+	    }
+	  };
+	}
+	
+	function convertFieldsError(errors) {
+	  if (!errors || !errors.length) return null;
+	  var fields = {};
+	  errors.forEach(function (error) {
+	    var field = error.field;
+	    fields[field] = fields[field] || [];
+	    fields[field].push(error);
+	  });
+	  return fields;
+	}
+	
+	function format() {
+	  for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	    args[_key] = arguments[_key];
+	  }
+	
+	  var i = 1;
+	  var f = args[0];
+	  var len = args.length;
+	  if (typeof f === 'function') {
+	    return f.apply(null, args.slice(1));
+	  }
+	  if (typeof f === 'string') {
+	    var str = String(f).replace(formatRegExp, function (x) {
+	      if (x === '%%') {
+	        return '%';
+	      }
+	      if (i >= len) {
+	        return x;
+	      }
+	      switch (x) {
+	        case '%s':
+	          return String(args[i++]);
+	        case '%d':
+	          return Number(args[i++]);
+	        case '%j':
+	          try {
+	            return JSON.stringify(args[i++]);
+	          } catch (_) {
+	            return '[Circular]';
+	          }
+	          break;
+	        default:
+	          return x;
+	      }
+	    });
+	    for (var arg = args[i]; i < len; arg = args[++i]) {
+	      str += ' ' + arg;
+	    }
+	    return str;
+	  }
+	  return f;
+	}
+	
+	function isNativeStringType(type) {
+	  return type === 'string' || type === 'url' || type === 'hex' || type === 'email' || type === 'pattern';
+	}
+	
+	function isEmptyValue(value, type) {
+	  if (value === undefined || value === null) {
+	    return true;
+	  }
+	  if (type === 'array' && Array.isArray(value) && !value.length) {
+	    return true;
+	  }
+	  if (isNativeStringType(type) && typeof value === 'string' && !value) {
+	    return true;
+	  }
+	  return false;
+	}
+	
+	function isEmptyObject(obj) {
+	  return Object.keys(obj).length === 0;
+	}
+	
+	function asyncParallelArray(arr, func, callback) {
+	  var results = [];
+	  var total = 0;
+	  var arrLength = arr.length;
+	
+	  function count(errors) {
+	    results.push.apply(results, errors);
+	    total++;
+	    if (total === arrLength) {
+	      callback(results);
+	    }
+	  }
+	
+	  arr.forEach(function (a) {
+	    func(a, count);
+	  });
+	}
+	
+	function asyncSerialArray(arr, func, callback) {
+	  var index = 0;
+	  var arrLength = arr.length;
+	
+	  function next(errors) {
+	    if (errors && errors.length) {
+	      callback(errors);
+	      return;
+	    }
+	    var original = index;
+	    index = index + 1;
+	    if (original < arrLength) {
+	      func(arr[original], next);
+	    } else {
+	      callback([]);
+	    }
+	  }
+	
+	  next([]);
+	}
+	
+	function flattenObjArr(objArr) {
+	  var ret = [];
+	  Object.keys(objArr).forEach(function (k) {
+	    ret.push.apply(ret, objArr[k]);
+	  });
+	  return ret;
+	}
+	
+	function asyncMap(objArr, option, func, callback) {
+	  if (option.first) {
+	    var flattenArr = flattenObjArr(objArr);
+	    return asyncSerialArray(flattenArr, func, callback);
+	  }
+	  var firstFields = option.firstFields || [];
+	  if (firstFields === true) {
+	    firstFields = Object.keys(objArr);
+	  }
+	  var objArrKeys = Object.keys(objArr);
+	  var objArrLength = objArrKeys.length;
+	  var total = 0;
+	  var results = [];
+	  var pending = new Promise(function (resolve, reject) {
+	    var next = function next(errors) {
+	      results.push.apply(results, errors);
+	      total++;
+	      if (total === objArrLength) {
+	        callback(results);
+	        return results.length ? reject({ errors: results, fields: convertFieldsError(results) }) : resolve();
+	      }
+	    };
+	    objArrKeys.forEach(function (key) {
+	      var arr = objArr[key];
+	      if (firstFields.indexOf(key) !== -1) {
+	        asyncSerialArray(arr, func, next);
+	      } else {
+	        asyncParallelArray(arr, func, next);
+	      }
+	    });
+	  });
+	  pending['catch'](function (e) {
+	    return e;
+	  });
+	  return pending;
+	}
+	
+	function complementError(rule) {
+	  return function (oe) {
+	    if (oe && oe.message) {
+	      oe.field = oe.field || rule.fullField;
+	      return oe;
+	    }
+	    return {
+	      message: typeof oe === 'function' ? oe() : oe,
+	      field: oe.field || rule.fullField
+	    };
+	  };
+	}
+	
+	function deepMerge(target, source) {
+	  if (source) {
+	    for (var s in source) {
+	      if (source.hasOwnProperty(s)) {
+	        var value = source[s];
+	        if ((typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' && _typeof(target[s]) === 'object') {
+	          target[s] = _extends({}, target[s], value);
+	        } else {
+	          target[s] = value;
+	        }
+	      }
+	    }
+	  }
+	  return target;
+	}
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
+
+/***/ }),
+/* 407 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _string = __webpack_require__(408);
+	
+	var _string2 = _interopRequireDefault(_string);
+	
+	var _method = __webpack_require__(416);
+	
+	var _method2 = _interopRequireDefault(_method);
+	
+	var _number = __webpack_require__(417);
+	
+	var _number2 = _interopRequireDefault(_number);
+	
+	var _boolean = __webpack_require__(418);
+	
+	var _boolean2 = _interopRequireDefault(_boolean);
+	
+	var _regexp = __webpack_require__(419);
+	
+	var _regexp2 = _interopRequireDefault(_regexp);
+	
+	var _integer = __webpack_require__(420);
+	
+	var _integer2 = _interopRequireDefault(_integer);
+	
+	var _float = __webpack_require__(421);
+	
+	var _float2 = _interopRequireDefault(_float);
+	
+	var _array = __webpack_require__(422);
+	
+	var _array2 = _interopRequireDefault(_array);
+	
+	var _object = __webpack_require__(423);
+	
+	var _object2 = _interopRequireDefault(_object);
+	
+	var _enum = __webpack_require__(424);
+	
+	var _enum2 = _interopRequireDefault(_enum);
+	
+	var _pattern = __webpack_require__(425);
+	
+	var _pattern2 = _interopRequireDefault(_pattern);
+	
+	var _date = __webpack_require__(426);
+	
+	var _date2 = _interopRequireDefault(_date);
+	
+	var _required = __webpack_require__(427);
+	
+	var _required2 = _interopRequireDefault(_required);
+	
+	var _type = __webpack_require__(428);
+	
+	var _type2 = _interopRequireDefault(_type);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	exports['default'] = {
+	  string: _string2['default'],
+	  method: _method2['default'],
+	  number: _number2['default'],
+	  boolean: _boolean2['default'],
+	  regexp: _regexp2['default'],
+	  integer: _integer2['default'],
+	  float: _float2['default'],
+	  array: _array2['default'],
+	  object: _object2['default'],
+	  'enum': _enum2['default'],
+	  pattern: _pattern2['default'],
+	  date: _date2['default'],
+	  url: _type2['default'],
+	  hex: _type2['default'],
+	  email: _type2['default'],
+	  required: _required2['default']
+	};
+	module.exports = exports['default'];
+
+/***/ }),
+/* 408 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _rule = __webpack_require__(409);
+	
+	var _rule2 = _interopRequireDefault(_rule);
+	
+	var _util = __webpack_require__(406);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	/**
+	 *  Performs validation for string types.
+	 *
+	 *  @param rule The validation rule.
+	 *  @param value The value of the field on the source object.
+	 *  @param callback The callback function.
+	 *  @param source The source object being validated.
+	 *  @param options The validation options.
+	 *  @param options.messages The validation messages.
+	 */
+	function string(rule, value, callback, source, options) {
+	  var errors = [];
+	  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+	  if (validate) {
+	    if ((0, _util.isEmptyValue)(value, 'string') && !rule.required) {
+	      return callback();
+	    }
+	    _rule2['default'].required(rule, value, source, errors, options, 'string');
+	    if (!(0, _util.isEmptyValue)(value, 'string')) {
+	      _rule2['default'].type(rule, value, source, errors, options);
+	      _rule2['default'].range(rule, value, source, errors, options);
+	      _rule2['default'].pattern(rule, value, source, errors, options);
+	      if (rule.whitespace === true) {
+	        _rule2['default'].whitespace(rule, value, source, errors, options);
+	      }
+	    }
+	  }
+	  callback(errors);
+	}
+	
+	exports['default'] = string;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 409 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _required = __webpack_require__(410);
+	
+	var _required2 = _interopRequireDefault(_required);
+	
+	var _whitespace = __webpack_require__(411);
+	
+	var _whitespace2 = _interopRequireDefault(_whitespace);
+	
+	var _type = __webpack_require__(412);
+	
+	var _type2 = _interopRequireDefault(_type);
+	
+	var _range = __webpack_require__(413);
+	
+	var _range2 = _interopRequireDefault(_range);
+	
+	var _enum = __webpack_require__(414);
+	
+	var _enum2 = _interopRequireDefault(_enum);
+	
+	var _pattern = __webpack_require__(415);
+	
+	var _pattern2 = _interopRequireDefault(_pattern);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	exports['default'] = {
+	  required: _required2['default'],
+	  whitespace: _whitespace2['default'],
+	  type: _type2['default'],
+	  range: _range2['default'],
+	  'enum': _enum2['default'],
+	  pattern: _pattern2['default']
+	};
+	module.exports = exports['default'];
+
+/***/ }),
+/* 410 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _util = __webpack_require__(406);
+	
+	var util = _interopRequireWildcard(_util);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+	
+	/**
+	 *  Rule for validating required fields.
+	 *
+	 *  @param rule The validation rule.
+	 *  @param value The value of the field on the source object.
+	 *  @param source The source object being validated.
+	 *  @param errors An array of errors that this rule may add
+	 *  validation errors to.
+	 *  @param options The validation options.
+	 *  @param options.messages The validation messages.
+	 */
+	function required(rule, value, source, errors, options, type) {
+	  if (rule.required && (!source.hasOwnProperty(rule.field) || util.isEmptyValue(value, type || rule.type))) {
+	    errors.push(util.format(options.messages.required, rule.fullField));
+	  }
+	}
+	
+	exports['default'] = required;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 411 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _util = __webpack_require__(406);
+	
+	var util = _interopRequireWildcard(_util);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+	
+	/**
+	 *  Rule for validating whitespace.
+	 *
+	 *  @param rule The validation rule.
+	 *  @param value The value of the field on the source object.
+	 *  @param source The source object being validated.
+	 *  @param errors An array of errors that this rule may add
+	 *  validation errors to.
+	 *  @param options The validation options.
+	 *  @param options.messages The validation messages.
+	 */
+	function whitespace(rule, value, source, errors, options) {
+	  if (/^\s+$/.test(value) || value === '') {
+	    errors.push(util.format(options.messages.whitespace, rule.fullField));
+	  }
+	}
+	
+	exports['default'] = whitespace;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 412 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+	
+	var _util = __webpack_require__(406);
+	
+	var util = _interopRequireWildcard(_util);
+	
+	var _required = __webpack_require__(410);
+	
+	var _required2 = _interopRequireDefault(_required);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+	
+	/* eslint max-len:0 */
+	
+	var pattern = {
+	  // http://emailregex.com/
+	  email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+	  url: new RegExp('^(?!mailto:)(?:(?:http|https|ftp)://|//)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$', 'i'),
+	  hex: /^#?([a-f0-9]{6}|[a-f0-9]{3})$/i
+	};
+	
+	var types = {
+	  integer: function integer(value) {
+	    return types.number(value) && parseInt(value, 10) === value;
+	  },
+	  float: function float(value) {
+	    return types.number(value) && !types.integer(value);
+	  },
+	  array: function array(value) {
+	    return Array.isArray(value);
+	  },
+	  regexp: function regexp(value) {
+	    if (value instanceof RegExp) {
+	      return true;
+	    }
+	    try {
+	      return !!new RegExp(value);
+	    } catch (e) {
+	      return false;
+	    }
+	  },
+	  date: function date(value) {
+	    return typeof value.getTime === 'function' && typeof value.getMonth === 'function' && typeof value.getYear === 'function';
+	  },
+	  number: function number(value) {
+	    if (isNaN(value)) {
+	      return false;
+	    }
+	    return typeof value === 'number';
+	  },
+	  object: function object(value) {
+	    return (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' && !types.array(value);
+	  },
+	  method: function method(value) {
+	    return typeof value === 'function';
+	  },
+	  email: function email(value) {
+	    return typeof value === 'string' && !!value.match(pattern.email) && value.length < 255;
+	  },
+	  url: function url(value) {
+	    return typeof value === 'string' && !!value.match(pattern.url);
+	  },
+	  hex: function hex(value) {
+	    return typeof value === 'string' && !!value.match(pattern.hex);
+	  }
+	};
+	
+	/**
+	 *  Rule for validating the type of a value.
+	 *
+	 *  @param rule The validation rule.
+	 *  @param value The value of the field on the source object.
+	 *  @param source The source object being validated.
+	 *  @param errors An array of errors that this rule may add
+	 *  validation errors to.
+	 *  @param options The validation options.
+	 *  @param options.messages The validation messages.
+	 */
+	function type(rule, value, source, errors, options) {
+	  if (rule.required && value === undefined) {
+	    (0, _required2['default'])(rule, value, source, errors, options);
+	    return;
+	  }
+	  var custom = ['integer', 'float', 'array', 'regexp', 'object', 'method', 'email', 'number', 'date', 'url', 'hex'];
+	  var ruleType = rule.type;
+	  if (custom.indexOf(ruleType) > -1) {
+	    if (!types[ruleType](value)) {
+	      errors.push(util.format(options.messages.types[ruleType], rule.fullField, rule.type));
+	    }
+	    // straight typeof check
+	  } else if (ruleType && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) !== rule.type) {
+	    errors.push(util.format(options.messages.types[ruleType], rule.fullField, rule.type));
+	  }
+	}
+	
+	exports['default'] = type;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 413 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _util = __webpack_require__(406);
+	
+	var util = _interopRequireWildcard(_util);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+	
+	/**
+	 *  Rule for validating minimum and maximum allowed values.
+	 *
+	 *  @param rule The validation rule.
+	 *  @param value The value of the field on the source object.
+	 *  @param source The source object being validated.
+	 *  @param errors An array of errors that this rule may add
+	 *  validation errors to.
+	 *  @param options The validation options.
+	 *  @param options.messages The validation messages.
+	 */
+	function range(rule, value, source, errors, options) {
+	  var len = typeof rule.len === 'number';
+	  var min = typeof rule.min === 'number';
+	  var max = typeof rule.max === 'number';
+	  // 正则匹配码点范围从U+010000一直到U+10FFFF的文字（补充平面Supplementary Plane）
+	  var spRegexp = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g;
+	  var val = value;
+	  var key = null;
+	  var num = typeof value === 'number';
+	  var str = typeof value === 'string';
+	  var arr = Array.isArray(value);
+	  if (num) {
+	    key = 'number';
+	  } else if (str) {
+	    key = 'string';
+	  } else if (arr) {
+	    key = 'array';
+	  }
+	  // if the value is not of a supported type for range validation
+	  // the validation rule rule should use the
+	  // type property to also test for a particular type
+	  if (!key) {
+	    return false;
+	  }
+	  if (arr) {
+	    val = value.length;
+	  }
+	  if (str) {
+	    // 处理码点大于U+010000的文字length属性不准确的bug，如"𠮷𠮷𠮷".lenght !== 3
+	    val = value.replace(spRegexp, '_').length;
+	  }
+	  if (len) {
+	    if (val !== rule.len) {
+	      errors.push(util.format(options.messages[key].len, rule.fullField, rule.len));
+	    }
+	  } else if (min && !max && val < rule.min) {
+	    errors.push(util.format(options.messages[key].min, rule.fullField, rule.min));
+	  } else if (max && !min && val > rule.max) {
+	    errors.push(util.format(options.messages[key].max, rule.fullField, rule.max));
+	  } else if (min && max && (val < rule.min || val > rule.max)) {
+	    errors.push(util.format(options.messages[key].range, rule.fullField, rule.min, rule.max));
+	  }
+	}
+	
+	exports['default'] = range;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 414 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _util = __webpack_require__(406);
+	
+	var util = _interopRequireWildcard(_util);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+	
+	var ENUM = 'enum';
+	
+	/**
+	 *  Rule for validating a value exists in an enumerable list.
+	 *
+	 *  @param rule The validation rule.
+	 *  @param value The value of the field on the source object.
+	 *  @param source The source object being validated.
+	 *  @param errors An array of errors that this rule may add
+	 *  validation errors to.
+	 *  @param options The validation options.
+	 *  @param options.messages The validation messages.
+	 */
+	function enumerable(rule, value, source, errors, options) {
+	  rule[ENUM] = Array.isArray(rule[ENUM]) ? rule[ENUM] : [];
+	  if (rule[ENUM].indexOf(value) === -1) {
+	    errors.push(util.format(options.messages[ENUM], rule.fullField, rule[ENUM].join(', ')));
+	  }
+	}
+	
+	exports['default'] = enumerable;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 415 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _util = __webpack_require__(406);
+	
+	var util = _interopRequireWildcard(_util);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+	
+	/**
+	 *  Rule for validating a regular expression pattern.
+	 *
+	 *  @param rule The validation rule.
+	 *  @param value The value of the field on the source object.
+	 *  @param source The source object being validated.
+	 *  @param errors An array of errors that this rule may add
+	 *  validation errors to.
+	 *  @param options The validation options.
+	 *  @param options.messages The validation messages.
+	 */
+	function pattern(rule, value, source, errors, options) {
+	  if (rule.pattern) {
+	    if (rule.pattern instanceof RegExp) {
+	      // if a RegExp instance is passed, reset `lastIndex` in case its `global`
+	      // flag is accidentally set to `true`, which in a validation scenario
+	      // is not necessary and the result might be misleading
+	      rule.pattern.lastIndex = 0;
+	      if (!rule.pattern.test(value)) {
+	        errors.push(util.format(options.messages.pattern.mismatch, rule.fullField, value, rule.pattern));
+	      }
+	    } else if (typeof rule.pattern === 'string') {
+	      var _pattern = new RegExp(rule.pattern);
+	      if (!_pattern.test(value)) {
+	        errors.push(util.format(options.messages.pattern.mismatch, rule.fullField, value, rule.pattern));
+	      }
+	    }
+	  }
+	}
+	
+	exports['default'] = pattern;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 416 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _rule = __webpack_require__(409);
+	
+	var _rule2 = _interopRequireDefault(_rule);
+	
+	var _util = __webpack_require__(406);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	/**
+	 *  Validates a function.
+	 *
+	 *  @param rule The validation rule.
+	 *  @param value The value of the field on the source object.
+	 *  @param callback The callback function.
+	 *  @param source The source object being validated.
+	 *  @param options The validation options.
+	 *  @param options.messages The validation messages.
+	 */
+	function method(rule, value, callback, source, options) {
+	  var errors = [];
+	  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+	  if (validate) {
+	    if ((0, _util.isEmptyValue)(value) && !rule.required) {
+	      return callback();
+	    }
+	    _rule2['default'].required(rule, value, source, errors, options);
+	    if (value !== undefined) {
+	      _rule2['default'].type(rule, value, source, errors, options);
+	    }
+	  }
+	  callback(errors);
+	}
+	
+	exports['default'] = method;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 417 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _rule = __webpack_require__(409);
+	
+	var _rule2 = _interopRequireDefault(_rule);
+	
+	var _util = __webpack_require__(406);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	/**
+	 *  Validates a number.
+	 *
+	 *  @param rule The validation rule.
+	 *  @param value The value of the field on the source object.
+	 *  @param callback The callback function.
+	 *  @param source The source object being validated.
+	 *  @param options The validation options.
+	 *  @param options.messages The validation messages.
+	 */
+	function number(rule, value, callback, source, options) {
+	  var errors = [];
+	  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+	  if (validate) {
+	    if (value === '') {
+	      value = undefined;
+	    }
+	    if ((0, _util.isEmptyValue)(value) && !rule.required) {
+	      return callback();
+	    }
+	    _rule2['default'].required(rule, value, source, errors, options);
+	    if (value !== undefined) {
+	      _rule2['default'].type(rule, value, source, errors, options);
+	      _rule2['default'].range(rule, value, source, errors, options);
+	    }
+	  }
+	  callback(errors);
+	}
+	
+	exports['default'] = number;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 418 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _util = __webpack_require__(406);
+	
+	var _rule = __webpack_require__(409);
+	
+	var _rule2 = _interopRequireDefault(_rule);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	/**
+	 *  Validates a boolean.
+	 *
+	 *  @param rule The validation rule.
+	 *  @param value The value of the field on the source object.
+	 *  @param callback The callback function.
+	 *  @param source The source object being validated.
+	 *  @param options The validation options.
+	 *  @param options.messages The validation messages.
+	 */
+	function boolean(rule, value, callback, source, options) {
+	  var errors = [];
+	  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+	  if (validate) {
+	    if ((0, _util.isEmptyValue)(value) && !rule.required) {
+	      return callback();
+	    }
+	    _rule2['default'].required(rule, value, source, errors, options);
+	    if (value !== undefined) {
+	      _rule2['default'].type(rule, value, source, errors, options);
+	    }
+	  }
+	  callback(errors);
+	}
+	
+	exports['default'] = boolean;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 419 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _rule = __webpack_require__(409);
+	
+	var _rule2 = _interopRequireDefault(_rule);
+	
+	var _util = __webpack_require__(406);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	/**
+	 *  Validates the regular expression type.
+	 *
+	 *  @param rule The validation rule.
+	 *  @param value The value of the field on the source object.
+	 *  @param callback The callback function.
+	 *  @param source The source object being validated.
+	 *  @param options The validation options.
+	 *  @param options.messages The validation messages.
+	 */
+	function regexp(rule, value, callback, source, options) {
+	  var errors = [];
+	  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+	  if (validate) {
+	    if ((0, _util.isEmptyValue)(value) && !rule.required) {
+	      return callback();
+	    }
+	    _rule2['default'].required(rule, value, source, errors, options);
+	    if (!(0, _util.isEmptyValue)(value)) {
+	      _rule2['default'].type(rule, value, source, errors, options);
+	    }
+	  }
+	  callback(errors);
+	}
+	
+	exports['default'] = regexp;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 420 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _rule = __webpack_require__(409);
+	
+	var _rule2 = _interopRequireDefault(_rule);
+	
+	var _util = __webpack_require__(406);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	/**
+	 *  Validates a number is an integer.
+	 *
+	 *  @param rule The validation rule.
+	 *  @param value The value of the field on the source object.
+	 *  @param callback The callback function.
+	 *  @param source The source object being validated.
+	 *  @param options The validation options.
+	 *  @param options.messages The validation messages.
+	 */
+	function integer(rule, value, callback, source, options) {
+	  var errors = [];
+	  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+	  if (validate) {
+	    if ((0, _util.isEmptyValue)(value) && !rule.required) {
+	      return callback();
+	    }
+	    _rule2['default'].required(rule, value, source, errors, options);
+	    if (value !== undefined) {
+	      _rule2['default'].type(rule, value, source, errors, options);
+	      _rule2['default'].range(rule, value, source, errors, options);
+	    }
+	  }
+	  callback(errors);
+	}
+	
+	exports['default'] = integer;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 421 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _rule = __webpack_require__(409);
+	
+	var _rule2 = _interopRequireDefault(_rule);
+	
+	var _util = __webpack_require__(406);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	/**
+	 *  Validates a number is a floating point number.
+	 *
+	 *  @param rule The validation rule.
+	 *  @param value The value of the field on the source object.
+	 *  @param callback The callback function.
+	 *  @param source The source object being validated.
+	 *  @param options The validation options.
+	 *  @param options.messages The validation messages.
+	 */
+	function floatFn(rule, value, callback, source, options) {
+	  var errors = [];
+	  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+	  if (validate) {
+	    if ((0, _util.isEmptyValue)(value) && !rule.required) {
+	      return callback();
+	    }
+	    _rule2['default'].required(rule, value, source, errors, options);
+	    if (value !== undefined) {
+	      _rule2['default'].type(rule, value, source, errors, options);
+	      _rule2['default'].range(rule, value, source, errors, options);
+	    }
+	  }
+	  callback(errors);
+	}
+	
+	exports['default'] = floatFn;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 422 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _rule = __webpack_require__(409);
+	
+	var _rule2 = _interopRequireDefault(_rule);
+	
+	var _util = __webpack_require__(406);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	/**
+	 *  Validates an array.
+	 *
+	 *  @param rule The validation rule.
+	 *  @param value The value of the field on the source object.
+	 *  @param callback The callback function.
+	 *  @param source The source object being validated.
+	 *  @param options The validation options.
+	 *  @param options.messages The validation messages.
+	 */
+	function array(rule, value, callback, source, options) {
+	  var errors = [];
+	  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+	  if (validate) {
+	    if ((0, _util.isEmptyValue)(value, 'array') && !rule.required) {
+	      return callback();
+	    }
+	    _rule2['default'].required(rule, value, source, errors, options, 'array');
+	    if (!(0, _util.isEmptyValue)(value, 'array')) {
+	      _rule2['default'].type(rule, value, source, errors, options);
+	      _rule2['default'].range(rule, value, source, errors, options);
+	    }
+	  }
+	  callback(errors);
+	}
+	
+	exports['default'] = array;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 423 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _rule = __webpack_require__(409);
+	
+	var _rule2 = _interopRequireDefault(_rule);
+	
+	var _util = __webpack_require__(406);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	/**
+	 *  Validates an object.
+	 *
+	 *  @param rule The validation rule.
+	 *  @param value The value of the field on the source object.
+	 *  @param callback The callback function.
+	 *  @param source The source object being validated.
+	 *  @param options The validation options.
+	 *  @param options.messages The validation messages.
+	 */
+	function object(rule, value, callback, source, options) {
+	  var errors = [];
+	  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+	  if (validate) {
+	    if ((0, _util.isEmptyValue)(value) && !rule.required) {
+	      return callback();
+	    }
+	    _rule2['default'].required(rule, value, source, errors, options);
+	    if (value !== undefined) {
+	      _rule2['default'].type(rule, value, source, errors, options);
+	    }
+	  }
+	  callback(errors);
+	}
+	
+	exports['default'] = object;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 424 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _rule = __webpack_require__(409);
+	
+	var _rule2 = _interopRequireDefault(_rule);
+	
+	var _util = __webpack_require__(406);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	var ENUM = 'enum';
+	
+	/**
+	 *  Validates an enumerable list.
+	 *
+	 *  @param rule The validation rule.
+	 *  @param value The value of the field on the source object.
+	 *  @param callback The callback function.
+	 *  @param source The source object being validated.
+	 *  @param options The validation options.
+	 *  @param options.messages The validation messages.
+	 */
+	function enumerable(rule, value, callback, source, options) {
+	  var errors = [];
+	  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+	  if (validate) {
+	    if ((0, _util.isEmptyValue)(value) && !rule.required) {
+	      return callback();
+	    }
+	    _rule2['default'].required(rule, value, source, errors, options);
+	    if (value) {
+	      _rule2['default'][ENUM](rule, value, source, errors, options);
+	    }
+	  }
+	  callback(errors);
+	}
+	
+	exports['default'] = enumerable;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 425 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _rule = __webpack_require__(409);
+	
+	var _rule2 = _interopRequireDefault(_rule);
+	
+	var _util = __webpack_require__(406);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	/**
+	 *  Validates a regular expression pattern.
+	 *
+	 *  Performs validation when a rule only contains
+	 *  a pattern property but is not declared as a string type.
+	 *
+	 *  @param rule The validation rule.
+	 *  @param value The value of the field on the source object.
+	 *  @param callback The callback function.
+	 *  @param source The source object being validated.
+	 *  @param options The validation options.
+	 *  @param options.messages The validation messages.
+	 */
+	function pattern(rule, value, callback, source, options) {
+	  var errors = [];
+	  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+	  if (validate) {
+	    if ((0, _util.isEmptyValue)(value, 'string') && !rule.required) {
+	      return callback();
+	    }
+	    _rule2['default'].required(rule, value, source, errors, options);
+	    if (!(0, _util.isEmptyValue)(value, 'string')) {
+	      _rule2['default'].pattern(rule, value, source, errors, options);
+	    }
+	  }
+	  callback(errors);
+	}
+	
+	exports['default'] = pattern;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 426 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _rule = __webpack_require__(409);
+	
+	var _rule2 = _interopRequireDefault(_rule);
+	
+	var _util = __webpack_require__(406);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function date(rule, value, callback, source, options) {
+	  // console.log('integer rule called %j', rule);
+	  var errors = [];
+	  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+	  // console.log('validate on %s value', value);
+	  if (validate) {
+	    if ((0, _util.isEmptyValue)(value) && !rule.required) {
+	      return callback();
+	    }
+	    _rule2['default'].required(rule, value, source, errors, options);
+	    if (!(0, _util.isEmptyValue)(value)) {
+	      var dateObject = void 0;
+	
+	      if (typeof value === 'number') {
+	        dateObject = new Date(value);
+	      } else {
+	        dateObject = value;
+	      }
+	
+	      _rule2['default'].type(rule, dateObject, source, errors, options);
+	      if (dateObject) {
+	        _rule2['default'].range(rule, dateObject.getTime(), source, errors, options);
+	      }
+	    }
+	  }
+	  callback(errors);
+	}
+	
+	exports['default'] = date;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 427 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+	
+	var _rule = __webpack_require__(409);
+	
+	var _rule2 = _interopRequireDefault(_rule);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function required(rule, value, callback, source, options) {
+	  var errors = [];
+	  var type = Array.isArray(value) ? 'array' : typeof value === 'undefined' ? 'undefined' : _typeof(value);
+	  _rule2['default'].required(rule, value, source, errors, options, type);
+	  callback(errors);
+	}
+	
+	exports['default'] = required;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 428 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _rule = __webpack_require__(409);
+	
+	var _rule2 = _interopRequireDefault(_rule);
+	
+	var _util = __webpack_require__(406);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function type(rule, value, callback, source, options) {
+	  var ruleType = rule.type;
+	  var errors = [];
+	  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+	  if (validate) {
+	    if ((0, _util.isEmptyValue)(value, ruleType) && !rule.required) {
+	      return callback();
+	    }
+	    _rule2['default'].required(rule, value, source, errors, options, ruleType);
+	    if (!(0, _util.isEmptyValue)(value, ruleType)) {
+	      _rule2['default'].type(rule, value, source, errors, options);
+	    }
+	  }
+	  callback(errors);
+	}
+	
+	exports['default'] = type;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 429 */
+/***/ (function(module, exports) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	exports.newMessages = newMessages;
+	function newMessages() {
+	  return {
+	    'default': 'Validation error on field %s',
+	    required: '%s is required',
+	    'enum': '%s must be one of %s',
+	    whitespace: '%s cannot be empty',
+	    date: {
+	      format: '%s date %s is invalid for format %s',
+	      parse: '%s date could not be parsed, %s is invalid ',
+	      invalid: '%s date %s is invalid'
+	    },
+	    types: {
+	      string: '%s is not a %s',
+	      method: '%s is not a %s (function)',
+	      array: '%s is not an %s',
+	      object: '%s is not an %s',
+	      number: '%s is not a %s',
+	      date: '%s is not a %s',
+	      boolean: '%s is not a %s',
+	      integer: '%s is not an %s',
+	      float: '%s is not a %s',
+	      regexp: '%s is not a valid %s',
+	      email: '%s is not a valid %s',
+	      url: '%s is not a valid %s',
+	      hex: '%s is not a valid %s'
+	    },
+	    string: {
+	      len: '%s must be exactly %s characters',
+	      min: '%s must be at least %s characters',
+	      max: '%s cannot be longer than %s characters',
+	      range: '%s must be between %s and %s characters'
+	    },
+	    number: {
+	      len: '%s must equal %s',
+	      min: '%s cannot be less than %s',
+	      max: '%s cannot be greater than %s',
+	      range: '%s must be between %s and %s'
+	    },
+	    array: {
+	      len: '%s must be exactly %s in length',
+	      min: '%s cannot be less than %s in length',
+	      max: '%s cannot be greater than %s in length',
+	      range: '%s must be between %s and %s in length'
+	    },
+	    pattern: {
+	      mismatch: '%s value %s does not match pattern %s'
+	    },
+	    clone: function clone() {
+	      var cloned = JSON.parse(JSON.stringify(this));
+	      cloned.clone = this.clone;
+	      return cloned;
+	    }
+	  };
+	}
+	
+	var messages = exports.messages = newMessages();
+
+/***/ }),
+/* 430 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var baseGet = __webpack_require__(431);
+	
+	/**
+	 * Gets the value at `path` of `object`. If the resolved value is
+	 * `undefined`, the `defaultValue` is returned in its place.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 3.7.0
+	 * @category Object
+	 * @param {Object} object The object to query.
+	 * @param {Array|string} path The path of the property to get.
+	 * @param {*} [defaultValue] The value returned for `undefined` resolved values.
+	 * @returns {*} Returns the resolved value.
+	 * @example
+	 *
+	 * var object = { 'a': [{ 'b': { 'c': 3 } }] };
+	 *
+	 * _.get(object, 'a[0].b.c');
+	 * // => 3
+	 *
+	 * _.get(object, ['a', '0', 'b', 'c']);
+	 * // => 3
+	 *
+	 * _.get(object, 'a.b.c', 'default');
+	 * // => 'default'
+	 */
+	function get(object, path, defaultValue) {
+	  var result = object == null ? undefined : baseGet(object, path);
+	  return result === undefined ? defaultValue : result;
+	}
+	
+	module.exports = get;
+
+
+/***/ }),
+/* 431 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var castPath = __webpack_require__(432),
+	    toKey = __webpack_require__(481);
+	
+	/**
+	 * The base implementation of `_.get` without support for default values.
+	 *
+	 * @private
+	 * @param {Object} object The object to query.
+	 * @param {Array|string} path The path of the property to get.
+	 * @returns {*} Returns the resolved value.
+	 */
+	function baseGet(object, path) {
+	  path = castPath(path, object);
+	
+	  var index = 0,
+	      length = path.length;
+	
+	  while (object != null && index < length) {
+	    object = object[toKey(path[index++])];
+	  }
+	  return (index && index == length) ? object : undefined;
+	}
+	
+	module.exports = baseGet;
+
+
+/***/ }),
+/* 432 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var isArray = __webpack_require__(433),
+	    isKey = __webpack_require__(434),
+	    stringToPath = __webpack_require__(443),
+	    toString = __webpack_require__(478);
+	
+	/**
+	 * Casts `value` to a path array if it's not one.
+	 *
+	 * @private
+	 * @param {*} value The value to inspect.
+	 * @param {Object} [object] The object to query keys on.
+	 * @returns {Array} Returns the cast property path array.
+	 */
+	function castPath(value, object) {
+	  if (isArray(value)) {
+	    return value;
+	  }
+	  return isKey(value, object) ? [value] : stringToPath(toString(value));
+	}
+	
+	module.exports = castPath;
+
+
+/***/ }),
+/* 433 */
+/***/ (function(module, exports) {
+
+	/**
+	 * Checks if `value` is classified as an `Array` object.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 0.1.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is an array, else `false`.
+	 * @example
+	 *
+	 * _.isArray([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isArray(document.body.children);
+	 * // => false
+	 *
+	 * _.isArray('abc');
+	 * // => false
+	 *
+	 * _.isArray(_.noop);
+	 * // => false
+	 */
+	var isArray = Array.isArray;
+	
+	module.exports = isArray;
+
+
+/***/ }),
+/* 434 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var isArray = __webpack_require__(433),
+	    isSymbol = __webpack_require__(435);
+	
+	/** Used to match property names within property paths. */
+	var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/,
+	    reIsPlainProp = /^\w*$/;
+	
+	/**
+	 * Checks if `value` is a property name and not a property path.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @param {Object} [object] The object to query keys on.
+	 * @returns {boolean} Returns `true` if `value` is a property name, else `false`.
+	 */
+	function isKey(value, object) {
+	  if (isArray(value)) {
+	    return false;
+	  }
+	  var type = typeof value;
+	  if (type == 'number' || type == 'symbol' || type == 'boolean' ||
+	      value == null || isSymbol(value)) {
+	    return true;
+	  }
+	  return reIsPlainProp.test(value) || !reIsDeepProp.test(value) ||
+	    (object != null && value in Object(object));
+	}
+	
+	module.exports = isKey;
+
+
+/***/ }),
+/* 435 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var baseGetTag = __webpack_require__(436),
+	    isObjectLike = __webpack_require__(442);
+	
+	/** `Object#toString` result references. */
+	var symbolTag = '[object Symbol]';
+	
+	/**
+	 * Checks if `value` is classified as a `Symbol` primitive or object.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 4.0.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
+	 * @example
+	 *
+	 * _.isSymbol(Symbol.iterator);
+	 * // => true
+	 *
+	 * _.isSymbol('abc');
+	 * // => false
+	 */
+	function isSymbol(value) {
+	  return typeof value == 'symbol' ||
+	    (isObjectLike(value) && baseGetTag(value) == symbolTag);
+	}
+	
+	module.exports = isSymbol;
+
+
+/***/ }),
+/* 436 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var Symbol = __webpack_require__(437),
+	    getRawTag = __webpack_require__(440),
+	    objectToString = __webpack_require__(441);
+	
+	/** `Object#toString` result references. */
+	var nullTag = '[object Null]',
+	    undefinedTag = '[object Undefined]';
+	
+	/** Built-in value references. */
+	var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
+	
+	/**
+	 * The base implementation of `getTag` without fallbacks for buggy environments.
+	 *
+	 * @private
+	 * @param {*} value The value to query.
+	 * @returns {string} Returns the `toStringTag`.
+	 */
+	function baseGetTag(value) {
+	  if (value == null) {
+	    return value === undefined ? undefinedTag : nullTag;
+	  }
+	  return (symToStringTag && symToStringTag in Object(value))
+	    ? getRawTag(value)
+	    : objectToString(value);
+	}
+	
+	module.exports = baseGetTag;
+
+
+/***/ }),
+/* 437 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var root = __webpack_require__(438);
+	
+	/** Built-in value references. */
+	var Symbol = root.Symbol;
+	
+	module.exports = Symbol;
+
+
+/***/ }),
+/* 438 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var freeGlobal = __webpack_require__(439);
+	
+	/** Detect free variable `self`. */
+	var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+	
+	/** Used as a reference to the global object. */
+	var root = freeGlobal || freeSelf || Function('return this')();
+	
+	module.exports = root;
+
+
+/***/ }),
+/* 439 */
+/***/ (function(module, exports) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {/** Detect free variable `global` from Node.js. */
+	var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
+	
+	module.exports = freeGlobal;
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ }),
+/* 440 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var Symbol = __webpack_require__(437);
+	
+	/** Used for built-in method references. */
+	var objectProto = Object.prototype;
+	
+	/** Used to check objects for own properties. */
+	var hasOwnProperty = objectProto.hasOwnProperty;
+	
+	/**
+	 * Used to resolve the
+	 * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+	 * of values.
+	 */
+	var nativeObjectToString = objectProto.toString;
+	
+	/** Built-in value references. */
+	var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
+	
+	/**
+	 * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
+	 *
+	 * @private
+	 * @param {*} value The value to query.
+	 * @returns {string} Returns the raw `toStringTag`.
+	 */
+	function getRawTag(value) {
+	  var isOwn = hasOwnProperty.call(value, symToStringTag),
+	      tag = value[symToStringTag];
+	
+	  try {
+	    value[symToStringTag] = undefined;
+	    var unmasked = true;
+	  } catch (e) {}
+	
+	  var result = nativeObjectToString.call(value);
+	  if (unmasked) {
+	    if (isOwn) {
+	      value[symToStringTag] = tag;
+	    } else {
+	      delete value[symToStringTag];
+	    }
+	  }
+	  return result;
+	}
+	
+	module.exports = getRawTag;
+
+
+/***/ }),
+/* 441 */
+/***/ (function(module, exports) {
+
+	/** Used for built-in method references. */
+	var objectProto = Object.prototype;
+	
+	/**
+	 * Used to resolve the
+	 * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+	 * of values.
+	 */
+	var nativeObjectToString = objectProto.toString;
+	
+	/**
+	 * Converts `value` to a string using `Object.prototype.toString`.
+	 *
+	 * @private
+	 * @param {*} value The value to convert.
+	 * @returns {string} Returns the converted string.
+	 */
+	function objectToString(value) {
+	  return nativeObjectToString.call(value);
+	}
+	
+	module.exports = objectToString;
+
+
+/***/ }),
+/* 442 */
+/***/ (function(module, exports) {
+
+	/**
+	 * Checks if `value` is object-like. A value is object-like if it's not `null`
+	 * and has a `typeof` result of "object".
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 4.0.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+	 * @example
+	 *
+	 * _.isObjectLike({});
+	 * // => true
+	 *
+	 * _.isObjectLike([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isObjectLike(_.noop);
+	 * // => false
+	 *
+	 * _.isObjectLike(null);
+	 * // => false
+	 */
+	function isObjectLike(value) {
+	  return value != null && typeof value == 'object';
+	}
+	
+	module.exports = isObjectLike;
+
+
+/***/ }),
+/* 443 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var memoizeCapped = __webpack_require__(444);
+	
+	/** Used to match property names within property paths. */
+	var rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
+	
+	/** Used to match backslashes in property paths. */
+	var reEscapeChar = /\\(\\)?/g;
+	
+	/**
+	 * Converts `string` to a property path array.
+	 *
+	 * @private
+	 * @param {string} string The string to convert.
+	 * @returns {Array} Returns the property path array.
+	 */
+	var stringToPath = memoizeCapped(function(string) {
+	  var result = [];
+	  if (string.charCodeAt(0) === 46 /* . */) {
+	    result.push('');
+	  }
+	  string.replace(rePropName, function(match, number, quote, subString) {
+	    result.push(quote ? subString.replace(reEscapeChar, '$1') : (number || match));
+	  });
+	  return result;
+	});
+	
+	module.exports = stringToPath;
+
+
+/***/ }),
+/* 444 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var memoize = __webpack_require__(445);
+	
+	/** Used as the maximum memoize cache size. */
+	var MAX_MEMOIZE_SIZE = 500;
+	
+	/**
+	 * A specialized version of `_.memoize` which clears the memoized function's
+	 * cache when it exceeds `MAX_MEMOIZE_SIZE`.
+	 *
+	 * @private
+	 * @param {Function} func The function to have its output memoized.
+	 * @returns {Function} Returns the new memoized function.
+	 */
+	function memoizeCapped(func) {
+	  var result = memoize(func, function(key) {
+	    if (cache.size === MAX_MEMOIZE_SIZE) {
+	      cache.clear();
+	    }
+	    return key;
+	  });
+	
+	  var cache = result.cache;
+	  return result;
+	}
+	
+	module.exports = memoizeCapped;
+
+
+/***/ }),
+/* 445 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var MapCache = __webpack_require__(446);
+	
+	/** Error message constants. */
+	var FUNC_ERROR_TEXT = 'Expected a function';
+	
+	/**
+	 * Creates a function that memoizes the result of `func`. If `resolver` is
+	 * provided, it determines the cache key for storing the result based on the
+	 * arguments provided to the memoized function. By default, the first argument
+	 * provided to the memoized function is used as the map cache key. The `func`
+	 * is invoked with the `this` binding of the memoized function.
+	 *
+	 * **Note:** The cache is exposed as the `cache` property on the memoized
+	 * function. Its creation may be customized by replacing the `_.memoize.Cache`
+	 * constructor with one whose instances implement the
+	 * [`Map`](http://ecma-international.org/ecma-262/7.0/#sec-properties-of-the-map-prototype-object)
+	 * method interface of `clear`, `delete`, `get`, `has`, and `set`.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 0.1.0
+	 * @category Function
+	 * @param {Function} func The function to have its output memoized.
+	 * @param {Function} [resolver] The function to resolve the cache key.
+	 * @returns {Function} Returns the new memoized function.
+	 * @example
+	 *
+	 * var object = { 'a': 1, 'b': 2 };
+	 * var other = { 'c': 3, 'd': 4 };
+	 *
+	 * var values = _.memoize(_.values);
+	 * values(object);
+	 * // => [1, 2]
+	 *
+	 * values(other);
+	 * // => [3, 4]
+	 *
+	 * object.a = 2;
+	 * values(object);
+	 * // => [1, 2]
+	 *
+	 * // Modify the result cache.
+	 * values.cache.set(object, ['a', 'b']);
+	 * values(object);
+	 * // => ['a', 'b']
+	 *
+	 * // Replace `_.memoize.Cache`.
+	 * _.memoize.Cache = WeakMap;
+	 */
+	function memoize(func, resolver) {
+	  if (typeof func != 'function' || (resolver != null && typeof resolver != 'function')) {
+	    throw new TypeError(FUNC_ERROR_TEXT);
+	  }
+	  var memoized = function() {
+	    var args = arguments,
+	        key = resolver ? resolver.apply(this, args) : args[0],
+	        cache = memoized.cache;
+	
+	    if (cache.has(key)) {
+	      return cache.get(key);
+	    }
+	    var result = func.apply(this, args);
+	    memoized.cache = cache.set(key, result) || cache;
+	    return result;
+	  };
+	  memoized.cache = new (memoize.Cache || MapCache);
+	  return memoized;
+	}
+	
+	// Expose `MapCache`.
+	memoize.Cache = MapCache;
+	
+	module.exports = memoize;
+
+
+/***/ }),
+/* 446 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var mapCacheClear = __webpack_require__(447),
+	    mapCacheDelete = __webpack_require__(472),
+	    mapCacheGet = __webpack_require__(475),
+	    mapCacheHas = __webpack_require__(476),
+	    mapCacheSet = __webpack_require__(477);
+	
+	/**
+	 * Creates a map cache object to store key-value pairs.
+	 *
+	 * @private
+	 * @constructor
+	 * @param {Array} [entries] The key-value pairs to cache.
+	 */
+	function MapCache(entries) {
+	  var index = -1,
+	      length = entries == null ? 0 : entries.length;
+	
+	  this.clear();
+	  while (++index < length) {
+	    var entry = entries[index];
+	    this.set(entry[0], entry[1]);
+	  }
+	}
+	
+	// Add methods to `MapCache`.
+	MapCache.prototype.clear = mapCacheClear;
+	MapCache.prototype['delete'] = mapCacheDelete;
+	MapCache.prototype.get = mapCacheGet;
+	MapCache.prototype.has = mapCacheHas;
+	MapCache.prototype.set = mapCacheSet;
+	
+	module.exports = MapCache;
+
+
+/***/ }),
+/* 447 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var Hash = __webpack_require__(448),
+	    ListCache = __webpack_require__(463),
+	    Map = __webpack_require__(471);
+	
+	/**
+	 * Removes all key-value entries from the map.
+	 *
+	 * @private
+	 * @name clear
+	 * @memberOf MapCache
+	 */
+	function mapCacheClear() {
+	  this.size = 0;
+	  this.__data__ = {
+	    'hash': new Hash,
+	    'map': new (Map || ListCache),
+	    'string': new Hash
+	  };
+	}
+	
+	module.exports = mapCacheClear;
+
+
+/***/ }),
+/* 448 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var hashClear = __webpack_require__(449),
+	    hashDelete = __webpack_require__(459),
+	    hashGet = __webpack_require__(460),
+	    hashHas = __webpack_require__(461),
+	    hashSet = __webpack_require__(462);
+	
+	/**
+	 * Creates a hash object.
+	 *
+	 * @private
+	 * @constructor
+	 * @param {Array} [entries] The key-value pairs to cache.
+	 */
+	function Hash(entries) {
+	  var index = -1,
+	      length = entries == null ? 0 : entries.length;
+	
+	  this.clear();
+	  while (++index < length) {
+	    var entry = entries[index];
+	    this.set(entry[0], entry[1]);
+	  }
+	}
+	
+	// Add methods to `Hash`.
+	Hash.prototype.clear = hashClear;
+	Hash.prototype['delete'] = hashDelete;
+	Hash.prototype.get = hashGet;
+	Hash.prototype.has = hashHas;
+	Hash.prototype.set = hashSet;
+	
+	module.exports = Hash;
+
+
+/***/ }),
+/* 449 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var nativeCreate = __webpack_require__(450);
+	
+	/**
+	 * Removes all key-value entries from the hash.
+	 *
+	 * @private
+	 * @name clear
+	 * @memberOf Hash
+	 */
+	function hashClear() {
+	  this.__data__ = nativeCreate ? nativeCreate(null) : {};
+	  this.size = 0;
+	}
+	
+	module.exports = hashClear;
+
+
+/***/ }),
+/* 450 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var getNative = __webpack_require__(451);
+	
+	/* Built-in method references that are verified to be native. */
+	var nativeCreate = getNative(Object, 'create');
+	
+	module.exports = nativeCreate;
+
+
+/***/ }),
+/* 451 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var baseIsNative = __webpack_require__(452),
+	    getValue = __webpack_require__(458);
+	
+	/**
+	 * Gets the native function at `key` of `object`.
+	 *
+	 * @private
+	 * @param {Object} object The object to query.
+	 * @param {string} key The key of the method to get.
+	 * @returns {*} Returns the function if it's native, else `undefined`.
+	 */
+	function getNative(object, key) {
+	  var value = getValue(object, key);
+	  return baseIsNative(value) ? value : undefined;
+	}
+	
+	module.exports = getNative;
+
+
+/***/ }),
+/* 452 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var isFunction = __webpack_require__(453),
+	    isMasked = __webpack_require__(455),
+	    isObject = __webpack_require__(454),
+	    toSource = __webpack_require__(457);
+	
+	/**
+	 * Used to match `RegExp`
+	 * [syntax characters](http://ecma-international.org/ecma-262/7.0/#sec-patterns).
+	 */
+	var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
+	
+	/** Used to detect host constructors (Safari). */
+	var reIsHostCtor = /^\[object .+?Constructor\]$/;
+	
+	/** Used for built-in method references. */
+	var funcProto = Function.prototype,
+	    objectProto = Object.prototype;
+	
+	/** Used to resolve the decompiled source of functions. */
+	var funcToString = funcProto.toString;
+	
+	/** Used to check objects for own properties. */
+	var hasOwnProperty = objectProto.hasOwnProperty;
+	
+	/** Used to detect if a method is native. */
+	var reIsNative = RegExp('^' +
+	  funcToString.call(hasOwnProperty).replace(reRegExpChar, '\\$&')
+	  .replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
+	);
+	
+	/**
+	 * The base implementation of `_.isNative` without bad shim checks.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a native function,
+	 *  else `false`.
+	 */
+	function baseIsNative(value) {
+	  if (!isObject(value) || isMasked(value)) {
+	    return false;
+	  }
+	  var pattern = isFunction(value) ? reIsNative : reIsHostCtor;
+	  return pattern.test(toSource(value));
+	}
+	
+	module.exports = baseIsNative;
+
+
+/***/ }),
+/* 453 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var baseGetTag = __webpack_require__(436),
+	    isObject = __webpack_require__(454);
+	
+	/** `Object#toString` result references. */
+	var asyncTag = '[object AsyncFunction]',
+	    funcTag = '[object Function]',
+	    genTag = '[object GeneratorFunction]',
+	    proxyTag = '[object Proxy]';
+	
+	/**
+	 * Checks if `value` is classified as a `Function` object.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 0.1.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a function, else `false`.
+	 * @example
+	 *
+	 * _.isFunction(_);
+	 * // => true
+	 *
+	 * _.isFunction(/abc/);
+	 * // => false
+	 */
+	function isFunction(value) {
+	  if (!isObject(value)) {
+	    return false;
+	  }
+	  // The use of `Object#toString` avoids issues with the `typeof` operator
+	  // in Safari 9 which returns 'object' for typed arrays and other constructors.
+	  var tag = baseGetTag(value);
+	  return tag == funcTag || tag == genTag || tag == asyncTag || tag == proxyTag;
+	}
+	
+	module.exports = isFunction;
+
+
+/***/ }),
+/* 454 */
+/***/ (function(module, exports) {
+
+	/**
+	 * Checks if `value` is the
+	 * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+	 * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 0.1.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+	 * @example
+	 *
+	 * _.isObject({});
+	 * // => true
+	 *
+	 * _.isObject([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isObject(_.noop);
+	 * // => true
+	 *
+	 * _.isObject(null);
+	 * // => false
+	 */
+	function isObject(value) {
+	  var type = typeof value;
+	  return value != null && (type == 'object' || type == 'function');
+	}
+	
+	module.exports = isObject;
+
+
+/***/ }),
+/* 455 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var coreJsData = __webpack_require__(456);
+	
+	/** Used to detect methods masquerading as native. */
+	var maskSrcKey = (function() {
+	  var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || '');
+	  return uid ? ('Symbol(src)_1.' + uid) : '';
+	}());
+	
+	/**
+	 * Checks if `func` has its source masked.
+	 *
+	 * @private
+	 * @param {Function} func The function to check.
+	 * @returns {boolean} Returns `true` if `func` is masked, else `false`.
+	 */
+	function isMasked(func) {
+	  return !!maskSrcKey && (maskSrcKey in func);
+	}
+	
+	module.exports = isMasked;
+
+
+/***/ }),
+/* 456 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var root = __webpack_require__(438);
+	
+	/** Used to detect overreaching core-js shims. */
+	var coreJsData = root['__core-js_shared__'];
+	
+	module.exports = coreJsData;
+
+
+/***/ }),
+/* 457 */
+/***/ (function(module, exports) {
+
+	/** Used for built-in method references. */
+	var funcProto = Function.prototype;
+	
+	/** Used to resolve the decompiled source of functions. */
+	var funcToString = funcProto.toString;
+	
+	/**
+	 * Converts `func` to its source code.
+	 *
+	 * @private
+	 * @param {Function} func The function to convert.
+	 * @returns {string} Returns the source code.
+	 */
+	function toSource(func) {
+	  if (func != null) {
+	    try {
+	      return funcToString.call(func);
+	    } catch (e) {}
+	    try {
+	      return (func + '');
+	    } catch (e) {}
+	  }
+	  return '';
+	}
+	
+	module.exports = toSource;
+
+
+/***/ }),
+/* 458 */
+/***/ (function(module, exports) {
+
+	/**
+	 * Gets the value at `key` of `object`.
+	 *
+	 * @private
+	 * @param {Object} [object] The object to query.
+	 * @param {string} key The key of the property to get.
+	 * @returns {*} Returns the property value.
+	 */
+	function getValue(object, key) {
+	  return object == null ? undefined : object[key];
+	}
+	
+	module.exports = getValue;
+
+
+/***/ }),
+/* 459 */
+/***/ (function(module, exports) {
+
+	/**
+	 * Removes `key` and its value from the hash.
+	 *
+	 * @private
+	 * @name delete
+	 * @memberOf Hash
+	 * @param {Object} hash The hash to modify.
+	 * @param {string} key The key of the value to remove.
+	 * @returns {boolean} Returns `true` if the entry was removed, else `false`.
+	 */
+	function hashDelete(key) {
+	  var result = this.has(key) && delete this.__data__[key];
+	  this.size -= result ? 1 : 0;
+	  return result;
+	}
+	
+	module.exports = hashDelete;
+
+
+/***/ }),
+/* 460 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var nativeCreate = __webpack_require__(450);
+	
+	/** Used to stand-in for `undefined` hash values. */
+	var HASH_UNDEFINED = '__lodash_hash_undefined__';
+	
+	/** Used for built-in method references. */
+	var objectProto = Object.prototype;
+	
+	/** Used to check objects for own properties. */
+	var hasOwnProperty = objectProto.hasOwnProperty;
+	
+	/**
+	 * Gets the hash value for `key`.
+	 *
+	 * @private
+	 * @name get
+	 * @memberOf Hash
+	 * @param {string} key The key of the value to get.
+	 * @returns {*} Returns the entry value.
+	 */
+	function hashGet(key) {
+	  var data = this.__data__;
+	  if (nativeCreate) {
+	    var result = data[key];
+	    return result === HASH_UNDEFINED ? undefined : result;
+	  }
+	  return hasOwnProperty.call(data, key) ? data[key] : undefined;
+	}
+	
+	module.exports = hashGet;
+
+
+/***/ }),
+/* 461 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var nativeCreate = __webpack_require__(450);
+	
+	/** Used for built-in method references. */
+	var objectProto = Object.prototype;
+	
+	/** Used to check objects for own properties. */
+	var hasOwnProperty = objectProto.hasOwnProperty;
+	
+	/**
+	 * Checks if a hash value for `key` exists.
+	 *
+	 * @private
+	 * @name has
+	 * @memberOf Hash
+	 * @param {string} key The key of the entry to check.
+	 * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+	 */
+	function hashHas(key) {
+	  var data = this.__data__;
+	  return nativeCreate ? (data[key] !== undefined) : hasOwnProperty.call(data, key);
+	}
+	
+	module.exports = hashHas;
+
+
+/***/ }),
+/* 462 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var nativeCreate = __webpack_require__(450);
+	
+	/** Used to stand-in for `undefined` hash values. */
+	var HASH_UNDEFINED = '__lodash_hash_undefined__';
+	
+	/**
+	 * Sets the hash `key` to `value`.
+	 *
+	 * @private
+	 * @name set
+	 * @memberOf Hash
+	 * @param {string} key The key of the value to set.
+	 * @param {*} value The value to set.
+	 * @returns {Object} Returns the hash instance.
+	 */
+	function hashSet(key, value) {
+	  var data = this.__data__;
+	  this.size += this.has(key) ? 0 : 1;
+	  data[key] = (nativeCreate && value === undefined) ? HASH_UNDEFINED : value;
+	  return this;
+	}
+	
+	module.exports = hashSet;
+
+
+/***/ }),
+/* 463 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var listCacheClear = __webpack_require__(464),
+	    listCacheDelete = __webpack_require__(465),
+	    listCacheGet = __webpack_require__(468),
+	    listCacheHas = __webpack_require__(469),
+	    listCacheSet = __webpack_require__(470);
+	
+	/**
+	 * Creates an list cache object.
+	 *
+	 * @private
+	 * @constructor
+	 * @param {Array} [entries] The key-value pairs to cache.
+	 */
+	function ListCache(entries) {
+	  var index = -1,
+	      length = entries == null ? 0 : entries.length;
+	
+	  this.clear();
+	  while (++index < length) {
+	    var entry = entries[index];
+	    this.set(entry[0], entry[1]);
+	  }
+	}
+	
+	// Add methods to `ListCache`.
+	ListCache.prototype.clear = listCacheClear;
+	ListCache.prototype['delete'] = listCacheDelete;
+	ListCache.prototype.get = listCacheGet;
+	ListCache.prototype.has = listCacheHas;
+	ListCache.prototype.set = listCacheSet;
+	
+	module.exports = ListCache;
+
+
+/***/ }),
+/* 464 */
+/***/ (function(module, exports) {
+
+	/**
+	 * Removes all key-value entries from the list cache.
+	 *
+	 * @private
+	 * @name clear
+	 * @memberOf ListCache
+	 */
+	function listCacheClear() {
+	  this.__data__ = [];
+	  this.size = 0;
+	}
+	
+	module.exports = listCacheClear;
+
+
+/***/ }),
+/* 465 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var assocIndexOf = __webpack_require__(466);
+	
+	/** Used for built-in method references. */
+	var arrayProto = Array.prototype;
+	
+	/** Built-in value references. */
+	var splice = arrayProto.splice;
+	
+	/**
+	 * Removes `key` and its value from the list cache.
+	 *
+	 * @private
+	 * @name delete
+	 * @memberOf ListCache
+	 * @param {string} key The key of the value to remove.
+	 * @returns {boolean} Returns `true` if the entry was removed, else `false`.
+	 */
+	function listCacheDelete(key) {
+	  var data = this.__data__,
+	      index = assocIndexOf(data, key);
+	
+	  if (index < 0) {
+	    return false;
+	  }
+	  var lastIndex = data.length - 1;
+	  if (index == lastIndex) {
+	    data.pop();
+	  } else {
+	    splice.call(data, index, 1);
+	  }
+	  --this.size;
+	  return true;
+	}
+	
+	module.exports = listCacheDelete;
+
+
+/***/ }),
+/* 466 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var eq = __webpack_require__(467);
+	
+	/**
+	 * Gets the index at which the `key` is found in `array` of key-value pairs.
+	 *
+	 * @private
+	 * @param {Array} array The array to inspect.
+	 * @param {*} key The key to search for.
+	 * @returns {number} Returns the index of the matched value, else `-1`.
+	 */
+	function assocIndexOf(array, key) {
+	  var length = array.length;
+	  while (length--) {
+	    if (eq(array[length][0], key)) {
+	      return length;
+	    }
+	  }
+	  return -1;
+	}
+	
+	module.exports = assocIndexOf;
+
+
+/***/ }),
+/* 467 */
+/***/ (function(module, exports) {
+
+	/**
+	 * Performs a
+	 * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+	 * comparison between two values to determine if they are equivalent.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 4.0.0
+	 * @category Lang
+	 * @param {*} value The value to compare.
+	 * @param {*} other The other value to compare.
+	 * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
+	 * @example
+	 *
+	 * var object = { 'a': 1 };
+	 * var other = { 'a': 1 };
+	 *
+	 * _.eq(object, object);
+	 * // => true
+	 *
+	 * _.eq(object, other);
+	 * // => false
+	 *
+	 * _.eq('a', 'a');
+	 * // => true
+	 *
+	 * _.eq('a', Object('a'));
+	 * // => false
+	 *
+	 * _.eq(NaN, NaN);
+	 * // => true
+	 */
+	function eq(value, other) {
+	  return value === other || (value !== value && other !== other);
+	}
+	
+	module.exports = eq;
+
+
+/***/ }),
+/* 468 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var assocIndexOf = __webpack_require__(466);
+	
+	/**
+	 * Gets the list cache value for `key`.
+	 *
+	 * @private
+	 * @name get
+	 * @memberOf ListCache
+	 * @param {string} key The key of the value to get.
+	 * @returns {*} Returns the entry value.
+	 */
+	function listCacheGet(key) {
+	  var data = this.__data__,
+	      index = assocIndexOf(data, key);
+	
+	  return index < 0 ? undefined : data[index][1];
+	}
+	
+	module.exports = listCacheGet;
+
+
+/***/ }),
+/* 469 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var assocIndexOf = __webpack_require__(466);
+	
+	/**
+	 * Checks if a list cache value for `key` exists.
+	 *
+	 * @private
+	 * @name has
+	 * @memberOf ListCache
+	 * @param {string} key The key of the entry to check.
+	 * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+	 */
+	function listCacheHas(key) {
+	  return assocIndexOf(this.__data__, key) > -1;
+	}
+	
+	module.exports = listCacheHas;
+
+
+/***/ }),
+/* 470 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var assocIndexOf = __webpack_require__(466);
+	
+	/**
+	 * Sets the list cache `key` to `value`.
+	 *
+	 * @private
+	 * @name set
+	 * @memberOf ListCache
+	 * @param {string} key The key of the value to set.
+	 * @param {*} value The value to set.
+	 * @returns {Object} Returns the list cache instance.
+	 */
+	function listCacheSet(key, value) {
+	  var data = this.__data__,
+	      index = assocIndexOf(data, key);
+	
+	  if (index < 0) {
+	    ++this.size;
+	    data.push([key, value]);
+	  } else {
+	    data[index][1] = value;
+	  }
+	  return this;
+	}
+	
+	module.exports = listCacheSet;
+
+
+/***/ }),
+/* 471 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var getNative = __webpack_require__(451),
+	    root = __webpack_require__(438);
+	
+	/* Built-in method references that are verified to be native. */
+	var Map = getNative(root, 'Map');
+	
+	module.exports = Map;
+
+
+/***/ }),
+/* 472 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var getMapData = __webpack_require__(473);
+	
+	/**
+	 * Removes `key` and its value from the map.
+	 *
+	 * @private
+	 * @name delete
+	 * @memberOf MapCache
+	 * @param {string} key The key of the value to remove.
+	 * @returns {boolean} Returns `true` if the entry was removed, else `false`.
+	 */
+	function mapCacheDelete(key) {
+	  var result = getMapData(this, key)['delete'](key);
+	  this.size -= result ? 1 : 0;
+	  return result;
+	}
+	
+	module.exports = mapCacheDelete;
+
+
+/***/ }),
+/* 473 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var isKeyable = __webpack_require__(474);
+	
+	/**
+	 * Gets the data for `map`.
+	 *
+	 * @private
+	 * @param {Object} map The map to query.
+	 * @param {string} key The reference key.
+	 * @returns {*} Returns the map data.
+	 */
+	function getMapData(map, key) {
+	  var data = map.__data__;
+	  return isKeyable(key)
+	    ? data[typeof key == 'string' ? 'string' : 'hash']
+	    : data.map;
+	}
+	
+	module.exports = getMapData;
+
+
+/***/ }),
+/* 474 */
+/***/ (function(module, exports) {
+
+	/**
+	 * Checks if `value` is suitable for use as unique object key.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is suitable, else `false`.
+	 */
+	function isKeyable(value) {
+	  var type = typeof value;
+	  return (type == 'string' || type == 'number' || type == 'symbol' || type == 'boolean')
+	    ? (value !== '__proto__')
+	    : (value === null);
+	}
+	
+	module.exports = isKeyable;
+
+
+/***/ }),
+/* 475 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var getMapData = __webpack_require__(473);
+	
+	/**
+	 * Gets the map value for `key`.
+	 *
+	 * @private
+	 * @name get
+	 * @memberOf MapCache
+	 * @param {string} key The key of the value to get.
+	 * @returns {*} Returns the entry value.
+	 */
+	function mapCacheGet(key) {
+	  return getMapData(this, key).get(key);
+	}
+	
+	module.exports = mapCacheGet;
+
+
+/***/ }),
+/* 476 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var getMapData = __webpack_require__(473);
+	
+	/**
+	 * Checks if a map value for `key` exists.
+	 *
+	 * @private
+	 * @name has
+	 * @memberOf MapCache
+	 * @param {string} key The key of the entry to check.
+	 * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+	 */
+	function mapCacheHas(key) {
+	  return getMapData(this, key).has(key);
+	}
+	
+	module.exports = mapCacheHas;
+
+
+/***/ }),
+/* 477 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var getMapData = __webpack_require__(473);
+	
+	/**
+	 * Sets the map `key` to `value`.
+	 *
+	 * @private
+	 * @name set
+	 * @memberOf MapCache
+	 * @param {string} key The key of the value to set.
+	 * @param {*} value The value to set.
+	 * @returns {Object} Returns the map cache instance.
+	 */
+	function mapCacheSet(key, value) {
+	  var data = getMapData(this, key),
+	      size = data.size;
+	
+	  data.set(key, value);
+	  this.size += data.size == size ? 0 : 1;
+	  return this;
+	}
+	
+	module.exports = mapCacheSet;
+
+
+/***/ }),
+/* 478 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var baseToString = __webpack_require__(479);
+	
+	/**
+	 * Converts `value` to a string. An empty string is returned for `null`
+	 * and `undefined` values. The sign of `-0` is preserved.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 4.0.0
+	 * @category Lang
+	 * @param {*} value The value to convert.
+	 * @returns {string} Returns the converted string.
+	 * @example
+	 *
+	 * _.toString(null);
+	 * // => ''
+	 *
+	 * _.toString(-0);
+	 * // => '-0'
+	 *
+	 * _.toString([1, 2, 3]);
+	 * // => '1,2,3'
+	 */
+	function toString(value) {
+	  return value == null ? '' : baseToString(value);
+	}
+	
+	module.exports = toString;
+
+
+/***/ }),
+/* 479 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var Symbol = __webpack_require__(437),
+	    arrayMap = __webpack_require__(480),
+	    isArray = __webpack_require__(433),
+	    isSymbol = __webpack_require__(435);
+	
+	/** Used as references for various `Number` constants. */
+	var INFINITY = 1 / 0;
+	
+	/** Used to convert symbols to primitives and strings. */
+	var symbolProto = Symbol ? Symbol.prototype : undefined,
+	    symbolToString = symbolProto ? symbolProto.toString : undefined;
+	
+	/**
+	 * The base implementation of `_.toString` which doesn't convert nullish
+	 * values to empty strings.
+	 *
+	 * @private
+	 * @param {*} value The value to process.
+	 * @returns {string} Returns the string.
+	 */
+	function baseToString(value) {
+	  // Exit early for strings to avoid a performance hit in some environments.
+	  if (typeof value == 'string') {
+	    return value;
+	  }
+	  if (isArray(value)) {
+	    // Recursively convert values (susceptible to call stack limits).
+	    return arrayMap(value, baseToString) + '';
+	  }
+	  if (isSymbol(value)) {
+	    return symbolToString ? symbolToString.call(value) : '';
+	  }
+	  var result = (value + '');
+	  return (result == '0' && (1 / value) == -INFINITY) ? '-0' : result;
+	}
+	
+	module.exports = baseToString;
+
+
+/***/ }),
+/* 480 */
+/***/ (function(module, exports) {
+
+	/**
+	 * A specialized version of `_.map` for arrays without support for iteratee
+	 * shorthands.
+	 *
+	 * @private
+	 * @param {Array} [array] The array to iterate over.
+	 * @param {Function} iteratee The function invoked per iteration.
+	 * @returns {Array} Returns the new mapped array.
+	 */
+	function arrayMap(array, iteratee) {
+	  var index = -1,
+	      length = array == null ? 0 : array.length,
+	      result = Array(length);
+	
+	  while (++index < length) {
+	    result[index] = iteratee(array[index], index, array);
+	  }
+	  return result;
+	}
+	
+	module.exports = arrayMap;
+
+
+/***/ }),
+/* 481 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var isSymbol = __webpack_require__(435);
+	
+	/** Used as references for various `Number` constants. */
+	var INFINITY = 1 / 0;
+	
+	/**
+	 * Converts `value` to a string key if it's not a string or symbol.
+	 *
+	 * @private
+	 * @param {*} value The value to inspect.
+	 * @returns {string|symbol} Returns the key.
+	 */
+	function toKey(value) {
+	  if (typeof value == 'string' || isSymbol(value)) {
+	    return value;
+	  }
+	  var result = (value + '');
+	  return (result == '0' && (1 / value) == -INFINITY) ? '-0' : result;
+	}
+	
+	module.exports = toKey;
+
+
+/***/ }),
+/* 482 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var baseSet = __webpack_require__(483);
+	
+	/**
+	 * Sets the value at `path` of `object`. If a portion of `path` doesn't exist,
+	 * it's created. Arrays are created for missing index properties while objects
+	 * are created for all other missing properties. Use `_.setWith` to customize
+	 * `path` creation.
+	 *
+	 * **Note:** This method mutates `object`.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 3.7.0
+	 * @category Object
+	 * @param {Object} object The object to modify.
+	 * @param {Array|string} path The path of the property to set.
+	 * @param {*} value The value to set.
+	 * @returns {Object} Returns `object`.
+	 * @example
+	 *
+	 * var object = { 'a': [{ 'b': { 'c': 3 } }] };
+	 *
+	 * _.set(object, 'a[0].b.c', 4);
+	 * console.log(object.a[0].b.c);
+	 * // => 4
+	 *
+	 * _.set(object, ['x', '0', 'y', 'z'], 5);
+	 * console.log(object.x[0].y.z);
+	 * // => 5
+	 */
+	function set(object, path, value) {
+	  return object == null ? object : baseSet(object, path, value);
+	}
+	
+	module.exports = set;
+
+
+/***/ }),
+/* 483 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var assignValue = __webpack_require__(484),
+	    castPath = __webpack_require__(432),
+	    isIndex = __webpack_require__(487),
+	    isObject = __webpack_require__(454),
+	    toKey = __webpack_require__(481);
+	
+	/**
+	 * The base implementation of `_.set`.
+	 *
+	 * @private
+	 * @param {Object} object The object to modify.
+	 * @param {Array|string} path The path of the property to set.
+	 * @param {*} value The value to set.
+	 * @param {Function} [customizer] The function to customize path creation.
+	 * @returns {Object} Returns `object`.
+	 */
+	function baseSet(object, path, value, customizer) {
+	  if (!isObject(object)) {
+	    return object;
+	  }
+	  path = castPath(path, object);
+	
+	  var index = -1,
+	      length = path.length,
+	      lastIndex = length - 1,
+	      nested = object;
+	
+	  while (nested != null && ++index < length) {
+	    var key = toKey(path[index]),
+	        newValue = value;
+	
+	    if (index != lastIndex) {
+	      var objValue = nested[key];
+	      newValue = customizer ? customizer(objValue, key, nested) : undefined;
+	      if (newValue === undefined) {
+	        newValue = isObject(objValue)
+	          ? objValue
+	          : (isIndex(path[index + 1]) ? [] : {});
+	      }
+	    }
+	    assignValue(nested, key, newValue);
+	    nested = nested[key];
+	  }
+	  return object;
+	}
+	
+	module.exports = baseSet;
+
+
+/***/ }),
+/* 484 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var baseAssignValue = __webpack_require__(485),
+	    eq = __webpack_require__(467);
+	
+	/** Used for built-in method references. */
+	var objectProto = Object.prototype;
+	
+	/** Used to check objects for own properties. */
+	var hasOwnProperty = objectProto.hasOwnProperty;
+	
+	/**
+	 * Assigns `value` to `key` of `object` if the existing value is not equivalent
+	 * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+	 * for equality comparisons.
+	 *
+	 * @private
+	 * @param {Object} object The object to modify.
+	 * @param {string} key The key of the property to assign.
+	 * @param {*} value The value to assign.
+	 */
+	function assignValue(object, key, value) {
+	  var objValue = object[key];
+	  if (!(hasOwnProperty.call(object, key) && eq(objValue, value)) ||
+	      (value === undefined && !(key in object))) {
+	    baseAssignValue(object, key, value);
+	  }
+	}
+	
+	module.exports = assignValue;
+
+
+/***/ }),
+/* 485 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var defineProperty = __webpack_require__(486);
+	
+	/**
+	 * The base implementation of `assignValue` and `assignMergeValue` without
+	 * value checks.
+	 *
+	 * @private
+	 * @param {Object} object The object to modify.
+	 * @param {string} key The key of the property to assign.
+	 * @param {*} value The value to assign.
+	 */
+	function baseAssignValue(object, key, value) {
+	  if (key == '__proto__' && defineProperty) {
+	    defineProperty(object, key, {
+	      'configurable': true,
+	      'enumerable': true,
+	      'value': value,
+	      'writable': true
+	    });
+	  } else {
+	    object[key] = value;
+	  }
+	}
+	
+	module.exports = baseAssignValue;
+
+
+/***/ }),
+/* 486 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var getNative = __webpack_require__(451);
+	
+	var defineProperty = (function() {
+	  try {
+	    var func = getNative(Object, 'defineProperty');
+	    func({}, '', {});
+	    return func;
+	  } catch (e) {}
+	}());
+	
+	module.exports = defineProperty;
+
+
+/***/ }),
+/* 487 */
+/***/ (function(module, exports) {
+
+	/** Used as references for various `Number` constants. */
+	var MAX_SAFE_INTEGER = 9007199254740991;
+	
+	/** Used to detect unsigned integer values. */
+	var reIsUint = /^(?:0|[1-9]\d*)$/;
+	
+	/**
+	 * Checks if `value` is a valid array-like index.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
+	 * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
+	 */
+	function isIndex(value, length) {
+	  var type = typeof value;
+	  length = length == null ? MAX_SAFE_INTEGER : length;
+	
+	  return !!length &&
+	    (type == 'number' ||
+	      (type != 'symbol' && reIsUint.test(value))) &&
+	        (value > -1 && value % 1 == 0 && value < length);
+	}
+	
+	module.exports = isIndex;
+
+
+/***/ }),
+/* 488 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _defineProperty2 = __webpack_require__(345);
+	
+	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+	
+	var _extends2 = __webpack_require__(275);
+	
+	var _extends3 = _interopRequireDefault(_extends2);
+	
+	var _classCallCheck2 = __webpack_require__(278);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _createClass2 = __webpack_require__(334);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
+	
+	exports['default'] = createFieldsStore;
+	
+	var _set = __webpack_require__(482);
+	
+	var _set2 = _interopRequireDefault(_set);
+	
+	var _createFormField = __webpack_require__(489);
+	
+	var _createFormField2 = _interopRequireDefault(_createFormField);
+	
+	var _utils = __webpack_require__(490);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function partOf(a, b) {
+	  return b.indexOf(a) === 0 && ['.', '['].indexOf(b[a.length]) !== -1;
+	}
+	
+	function internalFlattenFields(fields) {
+	  return (0, _utils.flattenFields)(fields, function (_, node) {
+	    return (0, _createFormField.isFormField)(node);
+	  }, 'You must wrap field data with `createFormField`.');
+	}
+	
+	var FieldsStore = function () {
+	  function FieldsStore(fields) {
+	    (0, _classCallCheck3['default'])(this, FieldsStore);
+	
+	    _initialiseProps.call(this);
+	
+	    this.fields = internalFlattenFields(fields);
+	    this.fieldsMeta = {};
+	  }
+	
+	  (0, _createClass3['default'])(FieldsStore, [{
+	    key: 'updateFields',
+	    value: function updateFields(fields) {
+	      this.fields = internalFlattenFields(fields);
+	    }
+	  }, {
+	    key: 'flattenRegisteredFields',
+	    value: function flattenRegisteredFields(fields) {
+	      var validFieldsName = this.getAllFieldsName();
+	      return (0, _utils.flattenFields)(fields, function (path) {
+	        return validFieldsName.indexOf(path) >= 0;
+	      }, 'You cannot set a form field before rendering a field associated with the value.');
+	    }
+	  }, {
+	    key: 'setFields',
+	    value: function setFields(fields) {
+	      var _this = this;
+	
+	      var fieldsMeta = this.fieldsMeta;
+	      var nowFields = (0, _extends3['default'])({}, this.fields, fields);
+	      var nowValues = {};
+	      Object.keys(fieldsMeta).forEach(function (f) {
+	        nowValues[f] = _this.getValueFromFields(f, nowFields);
+	      });
+	      Object.keys(nowValues).forEach(function (f) {
+	        var value = nowValues[f];
+	        var fieldMeta = _this.getFieldMeta(f);
+	        if (fieldMeta && fieldMeta.normalize) {
+	          var nowValue = fieldMeta.normalize(value, _this.getValueFromFields(f, _this.fields), nowValues);
+	          if (nowValue !== value) {
+	            nowFields[f] = (0, _extends3['default'])({}, nowFields[f], {
+	              value: nowValue
+	            });
+	          }
+	        }
+	      });
+	      this.fields = nowFields;
+	    }
+	  }, {
+	    key: 'resetFields',
+	    value: function resetFields(ns) {
+	      var fields = this.fields;
+	
+	      var names = ns ? this.getValidFieldsFullName(ns) : this.getAllFieldsName();
+	      return names.reduce(function (acc, name) {
+	        var field = fields[name];
+	        if (field && 'value' in field) {
+	          acc[name] = {};
+	        }
+	        return acc;
+	      }, {});
+	    }
+	  }, {
+	    key: 'setFieldMeta',
+	    value: function setFieldMeta(name, meta) {
+	      this.fieldsMeta[name] = meta;
+	    }
+	  }, {
+	    key: 'setFieldsAsDirty',
+	    value: function setFieldsAsDirty() {
+	      var _this2 = this;
+	
+	      Object.keys(this.fields).forEach(function (name) {
+	        var field = _this2.fields[name];
+	        var fieldMeta = _this2.fieldsMeta[name];
+	        if (field && fieldMeta && (0, _utils.hasRules)(fieldMeta.validate)) {
+	          _this2.fields[name] = (0, _extends3['default'])({}, field, {
+	            dirty: true
+	          });
+	        }
+	      });
+	    }
+	  }, {
+	    key: 'getFieldMeta',
+	    value: function getFieldMeta(name) {
+	      this.fieldsMeta[name] = this.fieldsMeta[name] || {};
+	      return this.fieldsMeta[name];
+	    }
+	  }, {
+	    key: 'getValueFromFields',
+	    value: function getValueFromFields(name, fields) {
+	      var field = fields[name];
+	      if (field && 'value' in field) {
+	        return field.value;
+	      }
+	      var fieldMeta = this.getFieldMeta(name);
+	      return fieldMeta && fieldMeta.initialValue;
+	    }
+	  }, {
+	    key: 'getValidFieldsName',
+	    value: function getValidFieldsName() {
+	      var _this3 = this;
+	
+	      var fieldsMeta = this.fieldsMeta;
+	
+	      return fieldsMeta ? Object.keys(fieldsMeta).filter(function (name) {
+	        return !_this3.getFieldMeta(name).hidden;
+	      }) : [];
+	    }
+	  }, {
+	    key: 'getAllFieldsName',
+	    value: function getAllFieldsName() {
+	      var fieldsMeta = this.fieldsMeta;
+	
+	      return fieldsMeta ? Object.keys(fieldsMeta) : [];
+	    }
+	  }, {
+	    key: 'getValidFieldsFullName',
+	    value: function getValidFieldsFullName(maybePartialName) {
+	      var maybePartialNames = Array.isArray(maybePartialName) ? maybePartialName : [maybePartialName];
+	      return this.getValidFieldsName().filter(function (fullName) {
+	        return maybePartialNames.some(function (partialName) {
+	          return fullName === partialName || (0, _utils.startsWith)(fullName, partialName) && ['.', '['].indexOf(fullName[partialName.length]) >= 0;
+	        });
+	      });
+	    }
+	  }, {
+	    key: 'getFieldValuePropValue',
+	    value: function getFieldValuePropValue(fieldMeta) {
+	      var name = fieldMeta.name,
+	          getValueProps = fieldMeta.getValueProps,
+	          valuePropName = fieldMeta.valuePropName;
+	
+	      var field = this.getField(name);
+	      var fieldValue = 'value' in field ? field.value : fieldMeta.initialValue;
+	      if (getValueProps) {
+	        return getValueProps(fieldValue);
+	      }
+	      return (0, _defineProperty3['default'])({}, valuePropName, fieldValue);
+	    }
+	  }, {
+	    key: 'getField',
+	    value: function getField(name) {
+	      return (0, _extends3['default'])({}, this.fields[name], {
+	        name: name
+	      });
+	    }
+	  }, {
+	    key: 'getNotCollectedFields',
+	    value: function getNotCollectedFields() {
+	      var _this4 = this;
+	
+	      var fieldsName = this.getValidFieldsName();
+	      return fieldsName.filter(function (name) {
+	        return !_this4.fields[name];
+	      }).map(function (name) {
+	        return {
+	          name: name,
+	          dirty: false,
+	          value: _this4.getFieldMeta(name).initialValue
+	        };
+	      }).reduce(function (acc, field) {
+	        return (0, _set2['default'])(acc, field.name, (0, _createFormField2['default'])(field));
+	      }, {});
+	    }
+	  }, {
+	    key: 'getNestedAllFields',
+	    value: function getNestedAllFields() {
+	      var _this5 = this;
+	
+	      return Object.keys(this.fields).reduce(function (acc, name) {
+	        return (0, _set2['default'])(acc, name, (0, _createFormField2['default'])(_this5.fields[name]));
+	      }, this.getNotCollectedFields());
+	    }
+	  }, {
+	    key: 'getFieldMember',
+	    value: function getFieldMember(name, member) {
+	      return this.getField(name)[member];
+	    }
+	  }, {
+	    key: 'getNestedFields',
+	    value: function getNestedFields(names, getter) {
+	      var fields = names || this.getValidFieldsName();
+	      return fields.reduce(function (acc, f) {
+	        return (0, _set2['default'])(acc, f, getter(f));
+	      }, {});
+	    }
+	  }, {
+	    key: 'getNestedField',
+	    value: function getNestedField(name, getter) {
+	      var fullNames = this.getValidFieldsFullName(name);
+	      if (fullNames.length === 0 || // Not registered
+	      fullNames.length === 1 && fullNames[0] === name // Name already is full name.
+	      ) {
+	          return getter(name);
+	        }
+	      var isArrayValue = fullNames[0][name.length] === '[';
+	      var suffixNameStartIndex = isArrayValue ? name.length : name.length + 1;
+	      return fullNames.reduce(function (acc, fullName) {
+	        return (0, _set2['default'])(acc, fullName.slice(suffixNameStartIndex), getter(fullName));
+	      }, isArrayValue ? [] : {});
+	    }
+	  }, {
+	    key: 'isValidNestedFieldName',
+	
+	
+	    // @private
+	    // BG: `a` and `a.b` cannot be use in the same form
+	    value: function isValidNestedFieldName(name) {
+	      var names = this.getAllFieldsName();
+	      return names.every(function (n) {
+	        return !partOf(n, name) && !partOf(name, n);
+	      });
+	    }
+	  }, {
+	    key: 'clearField',
+	    value: function clearField(name) {
+	      delete this.fields[name];
+	      delete this.fieldsMeta[name];
+	    }
+	  }]);
+	  return FieldsStore;
+	}();
+	
+	var _initialiseProps = function _initialiseProps() {
+	  var _this6 = this;
+	
+	  this.setFieldsInitialValue = function (initialValues) {
+	    var flattenedInitialValues = _this6.flattenRegisteredFields(initialValues);
+	    var fieldsMeta = _this6.fieldsMeta;
+	    Object.keys(flattenedInitialValues).forEach(function (name) {
+	      if (fieldsMeta[name]) {
+	        _this6.setFieldMeta(name, (0, _extends3['default'])({}, _this6.getFieldMeta(name), {
+	          initialValue: flattenedInitialValues[name]
+	        }));
+	      }
+	    });
+	  };
+	
+	  this.getAllValues = function () {
+	    var fieldsMeta = _this6.fieldsMeta,
+	        fields = _this6.fields;
+	
+	    return Object.keys(fieldsMeta).reduce(function (acc, name) {
+	      return (0, _set2['default'])(acc, name, _this6.getValueFromFields(name, fields));
+	    }, {});
+	  };
+	
+	  this.getFieldsValue = function (names) {
+	    return _this6.getNestedFields(names, _this6.getFieldValue);
+	  };
+	
+	  this.getFieldValue = function (name) {
+	    var fields = _this6.fields;
+	
+	    return _this6.getNestedField(name, function (fullName) {
+	      return _this6.getValueFromFields(fullName, fields);
+	    });
+	  };
+	
+	  this.getFieldsError = function (names) {
+	    return _this6.getNestedFields(names, _this6.getFieldError);
+	  };
+	
+	  this.getFieldError = function (name) {
+	    return _this6.getNestedField(name, function (fullName) {
+	      return (0, _utils.getErrorStrs)(_this6.getFieldMember(fullName, 'errors'));
+	    });
+	  };
+	
+	  this.isFieldValidating = function (name) {
+	    return _this6.getFieldMember(name, 'validating');
+	  };
+	
+	  this.isFieldsValidating = function (ns) {
+	    var names = ns || _this6.getValidFieldsName();
+	    return names.some(function (n) {
+	      return _this6.isFieldValidating(n);
+	    });
+	  };
+	
+	  this.isFieldTouched = function (name) {
+	    return _this6.getFieldMember(name, 'touched');
+	  };
+	
+	  this.isFieldsTouched = function (ns) {
+	    var names = ns || _this6.getValidFieldsName();
+	    return names.some(function (n) {
+	      return _this6.isFieldTouched(n);
+	    });
+	  };
+	};
+	
+	function createFieldsStore(fields) {
+	  return new FieldsStore(fields);
+	}
+	module.exports = exports['default'];
+
+/***/ }),
+/* 489 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends2 = __webpack_require__(275);
+	
+	var _extends3 = _interopRequireDefault(_extends2);
+	
+	var _classCallCheck2 = __webpack_require__(278);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	exports.isFormField = isFormField;
+	exports["default"] = createFormField;
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	var Field = function Field(fields) {
+	  (0, _classCallCheck3["default"])(this, Field);
+	
+	  (0, _extends3["default"])(this, fields);
+	};
+	
+	function isFormField(obj) {
+	  return obj instanceof Field;
+	}
+	
+	function createFormField(field) {
+	  if (isFormField(field)) {
+	    return field;
+	  }
+	  return new Field(field);
+	}
+
+/***/ }),
+/* 490 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends2 = __webpack_require__(275);
+	
+	var _extends3 = _interopRequireDefault(_extends2);
+	
+	exports.argumentContainer = argumentContainer;
+	exports.identity = identity;
+	exports.flattenArray = flattenArray;
+	exports.treeTraverse = treeTraverse;
+	exports.flattenFields = flattenFields;
+	exports.normalizeValidateRules = normalizeValidateRules;
+	exports.getValidateTriggers = getValidateTriggers;
+	exports.getValueFromEvent = getValueFromEvent;
+	exports.getErrorStrs = getErrorStrs;
+	exports.getParams = getParams;
+	exports.isEmptyObject = isEmptyObject;
+	exports.hasRules = hasRules;
+	exports.startsWith = startsWith;
+	
+	var _hoistNonReactStatics = __webpack_require__(212);
+	
+	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
+	
+	var _warning = __webpack_require__(32);
+	
+	var _warning2 = _interopRequireDefault(_warning);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function getDisplayName(WrappedComponent) {
+	  return WrappedComponent.displayName || WrappedComponent.name || 'WrappedComponent';
+	}
+	
+	function argumentContainer(Container, WrappedComponent) {
+	  /* eslint no-param-reassign:0 */
+	  Container.displayName = 'Form(' + getDisplayName(WrappedComponent) + ')';
+	  Container.WrappedComponent = WrappedComponent;
+	  return (0, _hoistNonReactStatics2['default'])(Container, WrappedComponent);
+	}
+	
+	function identity(obj) {
+	  return obj;
+	}
+	
+	function flattenArray(arr) {
+	  return Array.prototype.concat.apply([], arr);
+	}
+	
+	function treeTraverse() {
+	  var path = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+	  var tree = arguments[1];
+	  var isLeafNode = arguments[2];
+	  var errorMessage = arguments[3];
+	  var callback = arguments[4];
+	
+	  if (isLeafNode(path, tree)) {
+	    callback(path, tree);
+	  } else if (tree === undefined || tree === null) {
+	    // Do nothing
+	  } else if (Array.isArray(tree)) {
+	    tree.forEach(function (subTree, index) {
+	      return treeTraverse(path + '[' + index + ']', subTree, isLeafNode, errorMessage, callback);
+	    });
+	  } else {
+	    // It's object and not a leaf node
+	    if (typeof tree !== 'object') {
+	      (0, _warning2['default'])(false, errorMessage);
+	      return;
+	    }
+	    Object.keys(tree).forEach(function (subTreeKey) {
+	      var subTree = tree[subTreeKey];
+	      treeTraverse('' + path + (path ? '.' : '') + subTreeKey, subTree, isLeafNode, errorMessage, callback);
+	    });
+	  }
+	}
+	
+	function flattenFields(maybeNestedFields, isLeafNode, errorMessage) {
+	  var fields = {};
+	  treeTraverse(undefined, maybeNestedFields, isLeafNode, errorMessage, function (path, node) {
+	    fields[path] = node;
+	  });
+	  return fields;
+	}
+	
+	function normalizeValidateRules(validate, rules, validateTrigger) {
+	  var validateRules = validate.map(function (item) {
+	    var newItem = (0, _extends3['default'])({}, item, {
+	      trigger: item.trigger || []
+	    });
+	    if (typeof newItem.trigger === 'string') {
+	      newItem.trigger = [newItem.trigger];
+	    }
+	    return newItem;
+	  });
+	  if (rules) {
+	    validateRules.push({
+	      trigger: validateTrigger ? [].concat(validateTrigger) : [],
+	      rules: rules
+	    });
+	  }
+	  return validateRules;
+	}
+	
+	function getValidateTriggers(validateRules) {
+	  return validateRules.filter(function (item) {
+	    return !!item.rules && item.rules.length;
+	  }).map(function (item) {
+	    return item.trigger;
+	  }).reduce(function (pre, curr) {
+	    return pre.concat(curr);
+	  }, []);
+	}
+	
+	function getValueFromEvent(e) {
+	  // To support custom element
+	  if (!e || !e.target) {
+	    return e;
+	  }
+	  var target = e.target;
+	
+	  return target.type === 'checkbox' ? target.checked : target.value;
+	}
+	
+	function getErrorStrs(errors) {
+	  if (errors) {
+	    return errors.map(function (e) {
+	      if (e && e.message) {
+	        return e.message;
+	      }
+	      return e;
+	    });
+	  }
+	  return errors;
+	}
+	
+	function getParams(ns, opt, cb) {
+	  var names = ns;
+	  var options = opt;
+	  var callback = cb;
+	  if (cb === undefined) {
+	    if (typeof names === 'function') {
+	      callback = names;
+	      options = {};
+	      names = undefined;
+	    } else if (Array.isArray(names)) {
+	      if (typeof options === 'function') {
+	        callback = options;
+	        options = {};
+	      } else {
+	        options = options || {};
+	      }
+	    } else {
+	      callback = options;
+	      options = names || {};
+	      names = undefined;
+	    }
+	  }
+	  return {
+	    names: names,
+	    options: options,
+	    callback: callback
+	  };
+	}
+	
+	function isEmptyObject(obj) {
+	  return Object.keys(obj).length === 0;
+	}
+	
+	function hasRules(validate) {
+	  if (validate) {
+	    return validate.some(function (item) {
+	      return item.rules && item.rules.length;
+	    });
+	  }
+	  return false;
+	}
+	
+	function startsWith(str, prefix) {
+	  return str.lastIndexOf(prefix, 0) === 0;
+	}
+
+/***/ }),
+/* 491 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _propTypes = __webpack_require__(6);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	var formShape = _propTypes2['default'].shape({
+	  getFieldsValue: _propTypes2['default'].func,
+	  getFieldValue: _propTypes2['default'].func,
+	  getFieldInstance: _propTypes2['default'].func,
+	  setFieldsValue: _propTypes2['default'].func,
+	  setFields: _propTypes2['default'].func,
+	  setFieldsInitialValue: _propTypes2['default'].func,
+	  getFieldDecorator: _propTypes2['default'].func,
+	  getFieldProps: _propTypes2['default'].func,
+	  getFieldsError: _propTypes2['default'].func,
+	  getFieldError: _propTypes2['default'].func,
+	  isFieldValidating: _propTypes2['default'].func,
+	  isFieldsValidating: _propTypes2['default'].func,
+	  isFieldsTouched: _propTypes2['default'].func,
+	  isFieldTouched: _propTypes2['default'].func,
+	  isSubmitting: _propTypes2['default'].func,
+	  submit: _propTypes2['default'].func,
+	  validateFields: _propTypes2['default'].func,
+	  resetFields: _propTypes2['default'].func
+	});
+	
+	exports['default'] = formShape;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 492 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(2);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	var _propTypes = __webpack_require__(6);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+	
+	var propTypes = {
+	    prefixCls: _propTypes2["default"].string
+	};
+	var defaultProps = {
+	    prefixCls: 'u-form'
+	};
+	
+	var FormItem = function (_Component) {
+	    _inherits(FormItem, _Component);
+	
+	    function FormItem(props) {
+	        _classCallCheck(this, FormItem);
+	
+	        return _possibleConstructorReturn(this, _Component.call(this, props));
+	    }
+	
+	    FormItem.prototype.render = function render() {
+	        var _props = this.props,
+	            children = _props.children,
+	            _props$className = _props.className,
+	            className = _props$className === undefined ? '' : _props$className,
+	            prefixCls = _props.prefixCls,
+	            style = _props.style;
+	
+	        return _react2["default"].createElement(
+	            'div',
+	            { className: prefixCls + '-item' + ' ' + className, style: style },
+	            children
+	        );
+	    };
+	
+	    return FormItem;
+	}(_react.Component);
+	
+	;
+	FormItem.propTypes = propTypes;
+	FormItem.defaultProps = defaultProps;
+	exports["default"] = FormItem;
 	module.exports = exports['default'];
 
 /***/ })
