@@ -262,6 +262,7 @@ class CitySelect extends Component {
     };
     render() {
         let { provinceData, cities, areas } = this.state;
+        const { notFoundContent } = this.props;
 
         const provinceOptions = provinceData.map((province, index) => {
             if (province.disabled) {
@@ -291,6 +292,7 @@ class CitySelect extends Component {
                     value={this.state.province}
                     className="province"
                     disabled={this.props.disabled}
+                    notFoundContent={notFoundContent}
                     allowClear = {this.state.province && this.props.allowClear}
                     onChange={(value) => this.handleProvinceChange(value)}>
                     {provinceOptions}
@@ -298,6 +300,7 @@ class CitySelect extends Component {
                 <Select
                     value={this.state.secondCity}
                     disabled={this.props.disabled}
+                    notFoundContent={notFoundContent}
                     allowClear = {this.state.secondCity && this.props.allowClear}
                     className="city"
                     onChange={(value) => this.handleCityChange(value)}>
@@ -308,6 +311,7 @@ class CitySelect extends Component {
                     className="area"
                     allowClear = {this.state.secondArea && this.props.allowClear}
                     disabled={this.props.disabled}
+                    notFoundContent={notFoundContent}
                     onChange={(value) => this.onSecondAreaChange(value)}>
                     {areaOptions}
                 </Select>

@@ -203,6 +203,7 @@ var CitySelect = function (_Component) {
             provinceData = _state.provinceData,
             cities = _state.cities,
             areas = _state.areas;
+        var notFoundContent = this.props.notFoundContent;
 
 
         var provinceOptions = provinceData.map(function (province, index) {
@@ -260,6 +261,7 @@ var CitySelect = function (_Component) {
                     value: this.state.province,
                     className: 'province',
                     disabled: this.props.disabled,
+                    notFoundContent: notFoundContent,
                     allowClear: this.state.province && this.props.allowClear,
                     onChange: function onChange(value) {
                         return _this2.handleProvinceChange(value);
@@ -271,6 +273,7 @@ var CitySelect = function (_Component) {
                 {
                     value: this.state.secondCity,
                     disabled: this.props.disabled,
+                    notFoundContent: notFoundContent,
                     allowClear: this.state.secondCity && this.props.allowClear,
                     className: 'city',
                     onChange: function onChange(value) {
@@ -285,6 +288,7 @@ var CitySelect = function (_Component) {
                     className: 'area',
                     allowClear: this.state.secondArea && this.props.allowClear,
                     disabled: this.props.disabled,
+                    notFoundContent: notFoundContent,
                     onChange: function onChange(value) {
                         return _this2.onSecondAreaChange(value);
                     } },
