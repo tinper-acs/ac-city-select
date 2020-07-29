@@ -37691,8 +37691,8 @@
 	        return newArr;
 	    };
 	
-	    this.getIndex = function (type, name, provinceIndex) {
-	        var provinceData = _this3.state.provinceData;
+	    this.getIndex = function (type, name, provinceIndex, targetData) {
+	        var provinceData = targetData || _this3.state.provinceData;
 	        var provinceI = provinceIndex || _this3.state.provinceIndex;
 	        provinceI = provinceI < 0 ? 0 : provinceI;
 	        switch (type) {
@@ -37729,15 +37729,20 @@
 	                area = areaValue ? areaValue : areasInitData[0].name;
 	            }
 	        }
+	        // 切换语种后，默认显示value要自动切换
+	        var newValue = _this3.translateValue(value, cityValue, areaValue);
+	        var newProvince = newValue ? newValue.province : value;
+	        var newCity = newValue ? newValue.city : city;
+	        var newArea = newValue ? newValue.area : area;
 	        _this3.setState({
-	            province: value,
+	            province: newProvince,
 	            cities: citesInitArr,
-	            secondCity: city,
+	            secondCity: newCity,
 	            provinceIndex: index,
 	            areas: areasInitData,
-	            secondArea: area
+	            secondArea: newArea
 	        });
-	        _this3.onChange(value, city, area);
+	        _this3.onChange(newProvince, newCity, newArea);
 	    };
 	
 	    this.handleCityChange = function (value) {
@@ -37786,6 +37791,39 @@
 	            city: city,
 	            area: area
 	        });
+	    };
+	
+	    this.translateValue = function (province, secondCity, secondArea) {
+	        var _props4 = _this3.props,
+	            preLang = _props4.preLang,
+	            lang = _props4.lang;
+	        var provinceData = _this3.state.provinceData;
+	
+	        var lastData = void 0;
+	        if (preLang && preLang !== lang) {
+	            if (preLang === 'zh_TW') {
+	                lastData = _provinceData.tw.provinceData;
+	            } else if (preLang === 'en_US') {
+	                lastData = _provinceData.en.provinceData;
+	            } else if (preLang === 'zh_CN') {
+	                lastData = _provinceData.zh.provinceData;
+	            }
+	            var provinceIndex = _this3.getIndex('province', province, undefined, lastData);
+	            var cityIndex = _this3.getIndex('city', secondCity, provinceIndex, lastData);
+	            if (provinceIndex > -1 && cityIndex > -1) {
+	                var areaIndex = (0, _lodash2['default'])(lastData[provinceIndex].city[cityIndex].area, function (item) {
+	                    return item === secondArea;
+	                });
+	                if (areaIndex < 0) return;
+	                var newProvince = provinceData[provinceIndex];
+	                var newCity = newProvince.city[cityIndex];
+	                return {
+	                    province: newProvince.name,
+	                    city: newCity.name,
+	                    area: newCity.area[areaIndex]
+	                };
+	            }
+	        }
 	    };
 	};
 	

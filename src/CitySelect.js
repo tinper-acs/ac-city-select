@@ -180,8 +180,8 @@ class CitySelect extends Component {
         return newArr;
     };
 
-    getIndex = (type, name, provinceIndex) => {
-        let provinceData = this.state.provinceData;
+    getIndex = (type, name, provinceIndex, targetData) => {
+        let provinceData = targetData || this.state.provinceData;
         let provinceI = provinceIndex || this.state.provinceIndex;
         provinceI = provinceI < 0 ? 0 : provinceI;
         switch (type) {
@@ -213,15 +213,20 @@ class CitySelect extends Component {
                 area = areaValue ? areaValue : areasInitData[0].name;
             }
         }
+        // 切换语种后，默认显示value要自动切换
+        let newValue = this.translateValue(value, cityValue, areaValue);
+        let newProvince = newValue ? newValue.province : value;
+        let newCity = newValue ? newValue.city : city;
+        let newArea = newValue ? newValue.area : area;
         this.setState({
-            province: value,
+            province: newProvince,
             cities: citesInitArr,
-            secondCity: city,
+            secondCity: newCity,
             provinceIndex: index,
             areas: areasInitData,
-            secondArea: area,
+            secondArea: newArea,
         });
-        this.onChange(value, city, area);
+        this.onChange(newProvince, newCity, newArea);
     };
     handleCityChange = (value) => {
         value = (value) ? value : '';
@@ -260,6 +265,35 @@ class CitySelect extends Component {
             area: area
         })
     };
+    translateValue = (province, secondCity, secondArea) => {
+        const { preLang, lang } = this.props;
+        let { provinceData } = this.state;
+        let lastData;
+        if (preLang && preLang !== lang) {
+            if (preLang === 'zh_TW') {
+                lastData = tw.provinceData;
+            } else if (preLang === 'en_US') {
+                lastData = en.provinceData;
+            } else if (preLang === 'zh_CN') {
+                lastData = zh.provinceData;
+            }
+            let provinceIndex = this.getIndex('province', province, undefined, lastData);
+            let cityIndex = this.getIndex('city', secondCity, provinceIndex, lastData);
+            if (provinceIndex > -1 && cityIndex > -1) {
+                let areaIndex = findIndex(lastData[provinceIndex].city[cityIndex].area, function (item) {
+                    return item === secondArea;
+                });
+                if (areaIndex < 0) return
+                const newProvince = provinceData[provinceIndex];
+                const newCity = newProvince.city[cityIndex];
+                return {
+                    province: newProvince.name,
+                    city: newCity.name,
+                    area: newCity.area[areaIndex]
+                }
+            }
+        }
+    }
     render() {
         let { provinceData, cities, areas } = this.state;
         const { notFoundContent } = this.props;
