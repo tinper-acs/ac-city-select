@@ -37490,20 +37490,19 @@
 	            province = _nextProps$value.province,
 	            city = _nextProps$value.city,
 	            area = _nextProps$value.area;
-	        // if(province !== oldProvince || city !== oldCity || area !== oldArea) {
-	        //     this.setState({
-	        //         province,
-	        //         secondCity: city,
-	        //         secondArea: area
-	        //     });
-	        //     this.handleProvinceChange(province, city, area);
-	        // }
+	        var preLang = nextProps.preLang,
+	            lang = nextProps.lang;
 	
 	        if (province !== oldProvince) {
+	            var _getCurrentValue = this.getCurrentValue(province, city, area, preLang, lang),
+	                newProvince = _getCurrentValue.newProvince,
+	                newCity = _getCurrentValue.newCity,
+	                newArea = _getCurrentValue.newArea;
+	
 	            this.setState({
-	                province: province
+	                province: newProvince
 	            });
-	            return this.handleProvinceChange(province, city, area);
+	            return this.handleProvinceChange(newProvince, newCity, newArea);
 	        }
 	        if (city !== oldCity) {
 	            this.setState({
@@ -37517,6 +37516,22 @@
 	            });
 	            this.onSecondAreaChange(area);
 	        }
+	    };
+	
+	    CitySelect.prototype.getCurrentValue = function getCurrentValue(province, city, area, preLang, lang) {
+	        var result = {
+	            newProvince: province,
+	            newCity: city,
+	            newArea: area
+	        };
+	        if (!preLang || preLang === lang) return result;
+	        var newValue = this.translateValue(province, city, area, preLang);
+	        if (newValue) {
+	            result.newProvince = newValue.province;
+	            result.newCity = newValue.city;
+	            result.newArea = newValue.area;
+	        }
+	        return result;
 	    };
 	
 	    /**
@@ -37715,13 +37730,16 @@
 	            citesInitArr = [],
 	            areasInitData = [];
 	        if (value !== '') {
-	            var provinceData = _this3.state.provinceData;
+	            var _state2 = _this3.state,
+	                provinceData = _state2.provinceData,
+	                provinceIndex = _state2.provinceIndex;
 	            var _props2 = _this3.props,
 	                disabledCityArr = _props2.disabledCityArr,
 	                disabledAreaObj = _props2.disabledAreaObj,
 	                lang = _props2.lang;
 	
 	            index = _this3.getIndex('province', value);
+	            if (index === provinceIndex) return;
 	            if (index > -1) {
 	                citesInitArr = _this3.buildInitDataArr(provinceData[index].city, disabledCityArr, lang);
 	                areasInitData = _this3.buildAreaInitData(citesInitArr[0].area, citesInitArr[0].name, disabledAreaObj, lang);
@@ -37729,20 +37747,15 @@
 	                area = areaValue ? areaValue : areasInitData[0].name;
 	            }
 	        }
-	        // 切换语种后，默认显示value要自动切换
-	        var newValue = _this3.translateValue(value, cityValue, areaValue);
-	        var newProvince = newValue ? newValue.province : value;
-	        var newCity = newValue ? newValue.city : city;
-	        var newArea = newValue ? newValue.area : area;
 	        _this3.setState({
-	            province: newProvince,
+	            province: value,
 	            cities: citesInitArr,
-	            secondCity: newCity,
+	            secondCity: city,
 	            provinceIndex: index,
 	            areas: areasInitData,
-	            secondArea: newArea
+	            secondArea: area
 	        });
-	        _this3.onChange(newProvince, newCity, newArea);
+	        _this3.onChange(value, city, area);
 	    };
 	
 	    this.handleCityChange = function (value) {
@@ -37750,15 +37763,17 @@
 	        var index = '',
 	            area = '',
 	            areasInitData = [];
-	        var _state2 = _this3.state,
-	            province = _state2.province,
-	            cities = _state2.cities;
+	        var _state3 = _this3.state,
+	            province = _state3.province,
+	            cities = _state3.cities,
+	            cityIndex = _state3.cityIndex;
 	        var _props3 = _this3.props,
 	            disabledAreaObj = _props3.disabledAreaObj,
 	            lang = _props3.lang;
 	
 	        if (value !== '') {
 	            index = _this3.getIndex('city', value);
+	            if (index === cityIndex) return;
 	            if (index > -1) {
 	                areasInitData = _this3.buildAreaInitData(cities[index].area, cities[index].name, disabledAreaObj, lang);
 	                area = areasInitData[0].name;
@@ -37775,9 +37790,9 @@
 	
 	    this.onSecondAreaChange = function (value) {
 	        value = value ? value : '';
-	        var _state3 = _this3.state,
-	            province = _state3.province,
-	            secondCity = _state3.secondCity;
+	        var _state4 = _this3.state,
+	            province = _state4.province,
+	            secondCity = _state4.secondCity;
 	
 	        _this3.setState({
 	            secondArea: value
@@ -37793,36 +37808,31 @@
 	        });
 	    };
 	
-	    this.translateValue = function (province, secondCity, secondArea) {
-	        var _props4 = _this3.props,
-	            preLang = _props4.preLang,
-	            lang = _props4.lang;
+	    this.translateValue = function (province, secondCity, secondArea, preLang) {
 	        var provinceData = _this3.state.provinceData;
 	
 	        var lastData = void 0;
-	        if (preLang && preLang !== lang) {
-	            if (preLang === 'zh_TW') {
-	                lastData = _provinceData.tw.provinceData;
-	            } else if (preLang === 'en_US') {
-	                lastData = _provinceData.en.provinceData;
-	            } else if (preLang === 'zh_CN') {
-	                lastData = _provinceData.zh.provinceData;
-	            }
-	            var provinceIndex = _this3.getIndex('province', province, undefined, lastData);
-	            var cityIndex = _this3.getIndex('city', secondCity, provinceIndex, lastData);
-	            if (provinceIndex > -1 && cityIndex > -1) {
-	                var areaIndex = (0, _lodash2['default'])(lastData[provinceIndex].city[cityIndex].area, function (item) {
-	                    return item === secondArea;
-	                });
-	                if (areaIndex < 0) return;
-	                var newProvince = provinceData[provinceIndex];
-	                var newCity = newProvince.city[cityIndex];
-	                return {
-	                    province: newProvince.name,
-	                    city: newCity.name,
-	                    area: newCity.area[areaIndex]
-	                };
-	            }
+	        if (preLang === 'zh_TW') {
+	            lastData = _provinceData.tw.provinceData;
+	        } else if (preLang === 'en_US') {
+	            lastData = _provinceData.en.provinceData;
+	        } else if (preLang === 'zh_CN') {
+	            lastData = _provinceData.zh.provinceData;
+	        }
+	        var provinceIndex = _this3.getIndex('province', province, undefined, lastData);
+	        var cityIndex = _this3.getIndex('city', secondCity, provinceIndex, lastData);
+	        if (provinceIndex > -1 && cityIndex > -1) {
+	            var areaIndex = (0, _lodash2['default'])(lastData[provinceIndex].city[cityIndex].area, function (item) {
+	                return item === secondArea;
+	            });
+	            if (areaIndex < 0) return;
+	            var newProvince = provinceData[provinceIndex];
+	            var newCity = newProvince.city[cityIndex];
+	            return {
+	                province: newProvince.name,
+	                city: newCity.name,
+	                area: newCity.area[areaIndex]
+	            };
 	        }
 	    };
 	};
