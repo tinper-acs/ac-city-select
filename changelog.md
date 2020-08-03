@@ -1,3 +1,12 @@
+## [0.1.1](https://github.com/tinper-bee/ac-city-select/compare/v0.1.0...v0.1.1) (2020-08-03)
+
+
+### Bug Fixes
+
+* 切换语种后，要自动翻译value ([b1f5468](https://github.com/tinper-bee/ac-city-select/commit/b1f5468688eedf02a0eefe4d7da277fce151e7a5))
+
+
+
 ## [0.0.7](https://github.com/tinper-bee/ac-city-select/compare/v0.0.6...v0.0.7) (2020-07-09)
 
 
