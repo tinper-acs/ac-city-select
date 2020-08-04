@@ -100,16 +100,18 @@ class CitySelect extends Component {
             return this.handleProvinceChange(newProvince, newCity, newArea);
         }
         if(city !== oldCity) {
+            const { newCity, newArea } = this.getCurrentValue(province, city, area, preLang, lang);
             this.setState({
-                secondCity: city,
+                secondCity: newCity,
             });
-            return this.handleCityChange(city);
+            return this.handleCityChange(newCity, newArea);
         }
         if(area !== oldArea) {
+            const { newArea } = this.getCurrentValue(province, city, area, preLang, lang);
             this.setState({
-                secondArea: area
+                secondArea: newArea
             });
-            this.onSecondAreaChange(area);
+            this.onSecondAreaChange(newArea);
         }
     }
     // 切换语种后，要自动翻译value
@@ -216,7 +218,6 @@ class CitySelect extends Component {
             let { provinceData,provinceIndex } = this.state;
             let { disabledCityArr, disabledAreaObj, lang } = this.props;
             index = this.getIndex('province', value);
-            if (index === provinceIndex) return;
             if(index > -1){
                 citesInitArr = this.buildInitDataArr(provinceData[index].city, disabledCityArr, lang);
                 areasInitData = this.buildAreaInitData(citesInitArr[0].area, citesInitArr[0].name, disabledAreaObj, lang);
@@ -234,7 +235,7 @@ class CitySelect extends Component {
         });
         this.onChange(value, city, area);
     };
-    handleCityChange = (value) => {
+    handleCityChange = (value, areaValue) => {
         value = (value) ? value : '';
         let index = '',
             area = '',
@@ -243,10 +244,9 @@ class CitySelect extends Component {
         let { disabledAreaObj, lang } = this.props;
         if(value !== ''){
             index = this.getIndex('city', value);
-            if (index === cityIndex) return;
             if(index > -1){
                 areasInitData = this.buildAreaInitData(cities[index].area, cities[index].name, disabledAreaObj, lang);
-                area = areasInitData[0].name;
+                area = areaValue ? areaValue : areasInitData[0].name;
             }
         }
         this.setState({

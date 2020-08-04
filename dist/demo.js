@@ -37505,18 +37505,27 @@
 	            return this.handleProvinceChange(newProvince, newCity, newArea);
 	        }
 	        if (city !== oldCity) {
+	            var _getCurrentValue2 = this.getCurrentValue(province, city, area, preLang, lang),
+	                _newCity = _getCurrentValue2.newCity,
+	                _newArea = _getCurrentValue2.newArea;
+	
 	            this.setState({
-	                secondCity: city
+	                secondCity: _newCity
 	            });
-	            return this.handleCityChange(city);
+	            return this.handleCityChange(_newCity, _newArea);
 	        }
 	        if (area !== oldArea) {
+	            var _getCurrentValue3 = this.getCurrentValue(province, city, area, preLang, lang),
+	                _newArea2 = _getCurrentValue3.newArea;
+	
 	            this.setState({
-	                secondArea: area
+	                secondArea: _newArea2
 	            });
-	            this.onSecondAreaChange(area);
+	            this.onSecondAreaChange(_newArea2);
 	        }
 	    };
+	    // 切换语种后，要自动翻译value
+	
 	
 	    CitySelect.prototype.getCurrentValue = function getCurrentValue(province, city, area, preLang, lang) {
 	        var result = {
@@ -37739,7 +37748,6 @@
 	                lang = _props2.lang;
 	
 	            index = _this3.getIndex('province', value);
-	            if (index === provinceIndex) return;
 	            if (index > -1) {
 	                citesInitArr = _this3.buildInitDataArr(provinceData[index].city, disabledCityArr, lang);
 	                areasInitData = _this3.buildAreaInitData(citesInitArr[0].area, citesInitArr[0].name, disabledAreaObj, lang);
@@ -37758,7 +37766,7 @@
 	        _this3.onChange(value, city, area);
 	    };
 	
-	    this.handleCityChange = function (value) {
+	    this.handleCityChange = function (value, areaValue) {
 	        value = value ? value : '';
 	        var index = '',
 	            area = '',
@@ -37773,10 +37781,9 @@
 	
 	        if (value !== '') {
 	            index = _this3.getIndex('city', value);
-	            if (index === cityIndex) return;
 	            if (index > -1) {
 	                areasInitData = _this3.buildAreaInitData(cities[index].area, cities[index].name, disabledAreaObj, lang);
-	                area = areasInitData[0].name;
+	                area = areaValue ? areaValue : areasInitData[0].name;
 	            }
 	        }
 	        _this3.setState({
