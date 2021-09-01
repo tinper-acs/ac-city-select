@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Select from 'bee-select';
+import {Select} from '@tinper/next-ui';
 import findIndex from 'lodash.findindex';
 import { zh, en, tw } from './provinceData';
 const Option = Select.Option;
@@ -325,7 +325,7 @@ class CitySelect extends Component {
             }
         });
         return (
-            <div className={classNames("u-city-select", this.props.className)}>
+            <div className={classNames("wui-city-select", this.props.className)}>
                 <Select
                     value={this.state.province}
                     className="province"
