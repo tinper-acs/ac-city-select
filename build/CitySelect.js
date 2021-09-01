@@ -16,9 +16,7 @@ var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _beeSelect = require('bee-select');
-
-var _beeSelect2 = _interopRequireDefault(_beeSelect);
+var _nextUi = require('@tinper/next-ui');
 
 var _lodash = require('lodash.findindex');
 
@@ -36,7 +34,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 
-var Option = _beeSelect2["default"].Option;
+var Option = _nextUi.Select.Option;
 
 var propTypes = {
     defaultValue: _propTypes2["default"].object,
@@ -278,9 +276,9 @@ var CitySelect = function (_Component) {
         });
         return _react2["default"].createElement(
             'div',
-            { className: (0, _classnames2["default"])("u-city-select", this.props.className) },
+            { className: (0, _classnames2["default"])("wui-city-select", this.props.className) },
             _react2["default"].createElement(
-                _beeSelect2["default"],
+                _nextUi.Select,
                 {
                     value: this.state.province,
                     className: 'province',
@@ -293,7 +291,7 @@ var CitySelect = function (_Component) {
                 provinceOptions
             ),
             _react2["default"].createElement(
-                _beeSelect2["default"],
+                _nextUi.Select,
                 {
                     value: this.state.secondCity,
                     disabled: this.props.disabled,
@@ -306,7 +304,7 @@ var CitySelect = function (_Component) {
                 cityOptions
             ),
             _react2["default"].createElement(
-                _beeSelect2["default"],
+                _nextUi.Select,
                 {
                     value: this.state.secondArea,
                     className: 'area',
