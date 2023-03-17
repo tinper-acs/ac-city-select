@@ -276,7 +276,7 @@ var CitySelect = function (_Component) {
         });
         return _react2["default"].createElement(
             'div',
-            { className: (0, _classnames2["default"])("wui-city-select", this.props.className) },
+            { className: (0, _classnames2["default"])("ac-city-select", this.props.className) },
             _react2["default"].createElement(
                 _nextUi.Select,
                 {

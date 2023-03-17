@@ -325,7 +325,7 @@ class CitySelect extends Component {
             }
         });
         return (
-            <div className={classNames("wui-city-select", this.props.className)}>
+            <div className={classNames("ac-city-select", this.props.className)}>
                 <Select
                     value={this.state.province}
                     className="province"
